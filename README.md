@@ -1,1 +1,1 @@
-# poo-simulation
+# POO: Simulation des particules
