@@ -6,10 +6,10 @@
 - Cedric: qqchose
 
 
-| Tâche                 | Durée   |
-| --------------------- | ------- |
-| [ ] créer le JOURNAL  | ??      |
-| [ ] etc.              | ??      |
+| Tâche                   | Durée | fait? |
+| ---------------------   | ----- | ----- |
+| créer le JOURNAL        | ??    |  oui  |
+| etc.                    | ??    |       |
 
 
 ## Semaine 1
