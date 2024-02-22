@@ -52,7 +52,7 @@ $(RELEASE_EXE): $(RELEASE_OBJS)
 $(RELEASE_DIR)/%.o: %.cc 
 	$(CXX) $(CXXFLAGS) $(RELEASE_CXXFLAGS) -c $< -o $@
 
-rep: 
+prep: 
 	@mkdir -p $(DEBUG_DIR) $(TEST_DIR) $(RELEASE_DIR)
 
 remake: clean all
