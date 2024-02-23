@@ -8,7 +8,7 @@
 
 | Tâche                   | Durée | fait? |
 | ---------------------   | ----- | ----- |
-| créer le JOURNAL        | ??    |  oui  |
+| créer le JOURNAL        | 00:10 |  oui  |
 | etc.                    | ??    |       |
 
 
