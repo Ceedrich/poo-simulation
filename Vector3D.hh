@@ -13,11 +13,9 @@ class Vector3D {
 
   // Methods that change the vector
   void set_coords(double x, double y, double z);
-  void add(const Vector3D &other);
 
   // Readonly Methods
   std::string to_string() const;
-  void print() const;
   bool is_equal(Vector3D const &other) const;
 
   double dot_prod(const Vector3D &other) const;
@@ -32,6 +30,8 @@ class Vector3D {
   Vector3D &operator+=(Vector3D const &other);
   Vector3D &operator-=(Vector3D const &other);
   Vector3D &operator*=(double scalar);
+  // Cross product
+  Vector3D &operator^=(Vector3D const &other);
   bool operator==(Vector3D const& other) const;
   Vector3D operator-() const;
 };
@@ -41,4 +41,8 @@ const Vector3D operator+(Vector3D vec1, Vector3D const &vec2);
 const Vector3D operator-(Vector3D vec1, Vector3D const &vec2);
 const Vector3D operator*(Vector3D vec, double scalar);
 const Vector3D operator*(double scalar, Vector3D vec);
+// Dot product
+double operator*(Vector3D const &vec1, Vector3D const &vec2);
+// Cross product
+const Vector3D operator^(Vector3D vec1, Vector3D const &vec2);
 std::ostream &operator<<(std::ostream &stream, Vector3D const &);
