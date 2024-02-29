@@ -31,5 +31,8 @@
 *.out
 *.app
 
+# QTCreator
+CMakeLists.txt.user
+
 /debug
 /build
