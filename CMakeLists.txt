@@ -10,4 +10,7 @@ add_compile_options(-Wall -Wextra -Wpedantic)
 
 add_executable(simulation main.cc Vector3D.hh Vector3D.cc)
 
+# Tests
+add_executable(Vector3D test_Vector3D.cc Vector3D.cc Vector3D.hh)
+
 include(GNUInstallDirs)
