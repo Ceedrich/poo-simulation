@@ -5,11 +5,16 @@
 
 class Vector3D {
  private:
-  double x, y, z;
+  double x_, y_, z_;
 
  public:
   Vector3D(double x, double y, double z);
   Vector3D();
+
+  // Accessors
+  double x() const { return x_; }
+  double y() const { return y_; }
+  double z() const { return z_; }
 
   // Methods that change the vector
   void set_coords(double x, double y, double z);

@@ -15,6 +15,9 @@ int main() {
     Vector3D v2(3.14, 2.17, 42.0);
     cout << "V2(" << v2 << ")" << endl;
 
+    // Accessors
+    cout << "V2(" << v2 << ") has components: x=" << v2.x() << ", y=" << v2.y() << ", z=" << v2.z() << endl;
+
     // set_coords
     cout << "Set Coords: " << endl;
     v1.set_coords(200.0, 300.0, 600.0);

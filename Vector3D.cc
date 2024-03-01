@@ -5,26 +5,26 @@
 #include <sstream>
 
 // Constructors
-Vector3D::Vector3D(double x, double y, double z) : x(x), y(y), z(z) {}
+Vector3D::Vector3D(double x, double y, double z) : x_(x), y_(y), z_(z) {}
 Vector3D::Vector3D() : Vector3D(0.0, 0.0, 0.0) {}
 
 bool Vector3D::is_equal(const Vector3D& other) const { return *this == other; }
 
 std::string Vector3D::to_string() const {
   std::ostringstream strs;
-  strs << x << " " << y << " " << z;
+  strs << x_ << " " << y_ << " " << z_;
   return strs.str();
 }
 
 
 void Vector3D::set_coords(double x, double y, double z) {
-  this->x = x;
-  this->y = y;
-  this->z = z;
+  this->x_ = x;
+  this->y_ = y;
+  this->z_ = z;
 }
 
 double Vector3D::dot_prod(const Vector3D &other) const {
-    return (x * other.x + y * other.y +  z * other.z);
+    return (x_ * other.x_ + y_ * other.y_ +  z_ * other.z_);
 }
 
 Vector3D Vector3D::cross_prod(const Vector3D &other) const {
@@ -32,7 +32,7 @@ Vector3D Vector3D::cross_prod(const Vector3D &other) const {
 }
 
 double Vector3D::norm2() const {
-    return (x * x + y * y + z * z);
+    return (x_ * x_ + y_ * y_ + z_ * z_);
 }
 
 double Vector3D::norm() const {
@@ -46,30 +46,30 @@ Vector3D Vector3D::normalize() const {
 }
 
 // Operateurs
-Vector3D Vector3D::operator-() const { return Vector3D(-x, -y, -z); }
+Vector3D Vector3D::operator-() const { return Vector3D(-x_, -y_, -z_); }
 Vector3D& Vector3D::operator+=(Vector3D const& other) {
-  x += other.x;
-  y += other.y;
-  z += other.z;
+  x_ += other.x_;
+  y_ += other.y_;
+  z_ += other.z_;
   return *this;
 }
 Vector3D& Vector3D::operator-=(Vector3D const& other) {
   return *this += (-other);
 }
 Vector3D& Vector3D::operator*=(double scalar) {
-  x *= scalar;
-  y *= scalar;
-  z *= scalar;
+  x_ *= scalar;
+  y_ *= scalar;
+  z_ *= scalar;
   return *this;
 }
 Vector3D& Vector3D::operator^=(Vector3D const& other) {
-    double x_,y_,z_;
-    x_ = y * other.z - z * other.y;
-    y_ = z * other.x - x * other.z;
-    z_ = x * other.y - y * other.x;
-    x = x_;
-    y = y_;
-    z = z_;
+    double _x , _y , _z;
+    _x = y_ * other.z_ - z_ * other.y_;
+    _y = z_ * other.x_ - x_ * other.z_;
+    _z = x_ * other.y_ - y_ * other.x_;
+    x_ = _x;
+    y_ = _y;
+    z_ = _z;
     return *this;
 }
 
@@ -82,9 +82,9 @@ const Vector3D operator^(Vector3D vec1, Vector3D const& vec2) {
 
 bool Vector3D::operator==(const Vector3D &other) const {
     return (
-                std::abs(x - other.x) < 1e-10 &&
-                std::abs(y - other.y) < 1e-10 &&
-                std::abs(z - other.z) < 1e-10
+                std::abs(x_ - other.x_) < 1e-10 &&
+                std::abs(y_ - other.y_) < 1e-10 &&
+                std::abs(z_ - other.z_) < 1e-10
    );
 }
 
