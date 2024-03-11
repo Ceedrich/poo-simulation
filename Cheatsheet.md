@@ -40,8 +40,8 @@ Classe& operator++(int inutile);
 const Classe operator-() const;
 
 // SURCHARGE EXTERNE
-const Classe operator+(Classe, Classe const&);
-const Classe operator-(Classe, Classe const&);
+const Classe operator+(Classe x, Classe const& y) { return x += y; }
+const Classe operator-(Classe x, Classe const& y) { return x -= y; }
 
 ostream& operator<<(ostream&, Classe const&);
 const Classe operator*(autre_type, Classe const&);
@@ -63,5 +63,37 @@ using A::A;
 ```
 **Attention: Constructeur de copie doit aussi copier les éléments dynamiquement alloués!**
 - Faire une copie profonde (copie les objects, pas seulement les pointeurs)
-- Aussi redefinir `Classe operator=(Classe const other&);
+- Aussi redefinir `Classe operator=(Classe const other&);`
 - `Classe(Classe &const) = delete;`
+
+## Polymorphisme
+
+### Définitions
+- **surcharge**: même nom, mais paramètres différents
+- **masquage**: entités de mêmes noms mais des portées différentes
+  - Démasquer: (si la classe `B` hérite de `A`): `B b; b.A::f()`
+- **substitution** des méthodes virtuelles -> résolution dynamique
+
+### Methodes Virtuelles
+- **Toujours définir les destructeurs comme virtuels!**
+- Toujours utiliser `override` et `final` si possible
+- Les méthodes virtuelles sont ignorées dans les constructeurs
+
+Si on déclare une méthode comme *virtuelle*, le programme affiche la méthode propre du types (ça marche seulement si on a des références): 
+
+```c++
+class Base {
+  virtual afficher() const { cout << "Base << endl; }
+};
+class Enfant : Base {
+  afficher() const { cout << "Enfant" << endl; }
+};
+
+void afficher(vector<const Base&> const &vec) {
+  for (auto e : vec) { vec.afficher(); }
+}
+```
+
+### Classes Abstraites
+
+Prototype des méthodes virtuelles pures: `virtual Type methode(...) = 0;`
