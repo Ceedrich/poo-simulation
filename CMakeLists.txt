@@ -12,5 +12,7 @@ add_executable(simulation main.cc Vector3D.hh Vector3D.cc)
 
 # Tests
 add_executable(Vector3D test_Vector3D.cc Vector3D.cc Vector3D.hh)
+add_executable(Enclosure test_Enclosure.cc Enclosure.hh Enclosure.cc)
+
 
 include(GNUInstallDirs)
