@@ -39,6 +39,8 @@ public:
   Vector3D &operator^=(Vector3D const &other);
   bool operator==(Vector3D const &other) const;
   Vector3D operator-() const;
+  // Unitvector
+  Vector3D operator~() const { return normalize(); }
 };
 
 // External operator overloads
