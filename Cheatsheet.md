@@ -47,6 +47,8 @@ ostream& operator<<(ostream&, Classe const&);
 const Classe operator*(autre_type, Classe const&);
 ```
 
+Eviter de faire une conversion implicite: `explicit`
+
 ## Héritage
 **Toujours appeller le constructeur de copie de la superclasse**
 
