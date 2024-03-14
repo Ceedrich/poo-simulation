@@ -56,7 +56,7 @@ int main() {
   // Scalar multiplication
   double s1(7), s2(1.0 / 100.0);
   cout << "V2(" << v2 << ") * " << s1 << " = (" << v2 * s1 << ")" << endl;
-  cout << s2 << " * V1(" << v1 << ") = (" << v1 * s2 << ")" << endl;
+  cout << s2 << " * V1(" << v1 << ") = (" << s2 * v1 << ")" << endl;
 
   // Inverse
   cout << "Inverse of V1(" << v1 << "): (" << -v1 << ")" << endl;
