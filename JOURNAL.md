@@ -23,7 +23,7 @@
 | crée `Vector3D`                                   | 03:00 |  oui  |
 | crée `Particle`                                   | 01:00 |  oui  |
 | crée `Enclosure`                                  | 00:10 |  oui  |
-| crée `Différents gaz`                             |       |  non  |
+| fait "Différents gaz"                             | 01:30 |  non  |
 
 
 
@@ -44,5 +44,7 @@ Cedric a implementé la classe `Enceinte` (nomée `Enclosure`) et commencée a f
 
 ## Semaine 5
 Anna a fait la classe particule (particle) et Cedric a fini la classe enceinte (enclosure). Il n'a pas des questions auquel il faut répondre cette semaine.
+
+Cedric a fait l'exercice "Différents gaz" en utilisant un peu de polymorphisme.
 
 
