@@ -1,7 +1,10 @@
 #pragma once
 #include <ostream>
 
-class Enclosure {
+#include "Drawable.hh"
+#include "DrawingFrame.hh"
+
+class Enclosure : public Drawable {
 private:
   double length_, width_, height_;
 
@@ -47,6 +50,13 @@ public:
    * @return The height of the enclosure.
    */
   double height() const { return height_; }
+
+  /**
+   * @brief Draws the enclosure on the given DrawingFrame.
+   * 
+   * @param support The DrawingFrame to draw on.
+   */
+  virtual void draw_on(DrawingFrame &support) override { support.draw(*this); }
 };
 
 /**

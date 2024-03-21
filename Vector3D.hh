@@ -3,12 +3,15 @@
 #include <ostream>
 #include <string>
 
+#include "Drawable.hh"
+#include "DrawingFrame.hh"
+
 /**
  * @brief Represents a 3D vector in Cartesian coordinates.
  * 
  * The Vector3D class inherits from the Drawable class and provides methods for vector operations.
  */
-class Vector3D {
+class Vector3D : public Drawable {
 private:
   double x_, y_, z_;
 
@@ -166,6 +169,13 @@ public:
    * @return The unit vector.
    */
   Vector3D operator~() const { return normalize(); }
+
+  /**
+   * @brief Draws the vector on a DrawingFrame object.
+   * 
+   * @param support The DrawingFrame object to draw on.
+   */
+  virtual void draw_on(DrawingFrame &support) override { support.draw(*this); }
 };
 
 // External operator overloads
