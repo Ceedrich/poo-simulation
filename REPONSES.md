@@ -44,6 +44,22 @@ On a intruduit les opérateurs suivantes:
 La méthode `dessine_sur(SupportADessin&)` (on l'a nommé `draw_on(DrawingFrame&)` en anglais) est une méthode virtuelle pure de la super-classe (abstraite) `Dessinable` (nommée `Drawable`) qui force les enfants de cette classe a implementer la une méthode permettant de dessiner l'objet en question sur un `DrawingFrame`.
 
 
+###[Question P8.1] A quoi faut-il faire attention pour les classes contenant des pointeurs ? Quelle(s) solution(s) est/sont envisageable(s) ?
+
+
+###[Question P8.2] Comment représentez vous la classe Systeme ?
+Expliquez votre conception (attributs, interface, ...).
+Notre classe Systeme est construit d'une enceinte(space) et d'une vecteur contenue des pointeurs de particules. Le vecteur est necessaire pour pouvoir avoir multiple particule dans la même system. On a un vecteur de pointeurs pour rendre possible le polymorphisme et dans ce cas utiliser les méthodes virtuelles propre de particule.
+Tous les méthodes sont publique, comme ca on peut changer la system.
+
+
+###[Question P8.3] Comment empêchez-vous cela (copie et affectation) ?
+Pour l'affectation on fait un surcharge de l'opérateur = qui rendre l'affectation impossible (avec un delete) pour la copie on fait la même chose avec le constructeur du copie.
+```c++
+System(System const&) = delete;
+System` operator=(System const&) = delete;
+```
+
 
 
 

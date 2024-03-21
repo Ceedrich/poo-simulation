@@ -24,6 +24,7 @@
 | crée `Particle`                                   | 01:00 |  oui  |
 | crée `Enclosure`                                  | 00:10 |  oui  |
 | fait "Différents gaz"                             | 01:30 |  non  |
+| crée `System`                                     | 01:30 |  oui  |
 
 
 
@@ -44,7 +45,10 @@ Cedric a implementé la classe `Enceinte` (nomée `Enclosure`) et commencée a f
 
 ## Semaine 5
 Anna a fait la classe particule (particle) et Cedric a fini la classe enceinte (enclosure). Il n'a pas des questions auquel il faut répondre cette semaine.
+On a fini la classe System et à répondu aux questions.
 
 Cedric a fait l'exercice "Différents gaz" en utilisant un peu de polymorphisme.
+
+
 
 
