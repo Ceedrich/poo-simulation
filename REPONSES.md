@@ -41,19 +41,20 @@ On a intruduit les opérateurs suivantes:
 ## Semaine 06
 
 ### [Question P7.1] En termes de POO, quelle est donc la nature de la méthode dessine_sur() ?
-La méthode `dessine_sur(SupportADessin&)` (on l'a nommé `draw_on(DrawingFrame&)` en anglais) est une méthode virtuelle pure de la super-classe (abstraite) `Dessinable` (nommée `Drawable`) qui force les enfants de cette classe a implementer la une méthode permettant de dessiner l'objet en question sur un `DrawingFrame`.
+La méthode `dessine_sur(SupportADessin&)` (on l'a nommé `draw_on(DrawingFrame&)` en anglais) est une méthode virtuelle pure de la super-classe (abstraite) `Dessinable` (nommée `Drawable`) qui force les enfants de cette classe à implementer une méthode permettant de dessiner l'objet en question sur un `DrawingFrame`.
 
 
-###[Question P8.1] A quoi faut-il faire attention pour les classes contenant des pointeurs ? Quelle(s) solution(s) est/sont envisageable(s) ?
+### [Question P8.1] A quoi faut-il faire attention pour les classes contenant des pointeurs ? Quelle(s) solution(s) est/sont envisageable(s) ?
+En utilisant des pointeurs, il faut toujours faire attention de ne pas détruire l'objet pointée plusieurs fois ou avoir une addresse qui point sur un endroit dans la mémoire qui est invalide (puisqu'on a p.ex. déja détruit l'objet).
+On a minimé ce problème en utilisant des `unique_ptr` qui admettent q'une seule pointeur sur un objet.
 
 
-###[Question P8.2] Comment représentez vous la classe Systeme ?
-Expliquez votre conception (attributs, interface, ...).
+### [Question P8.2] Comment représentez vous la classe Systeme ? Expliquez votre conception (attributs, interface, ...).
 Notre classe Systeme est construit d'une enceinte(space) et d'une vecteur contenue des pointeurs de particules. Le vecteur est necessaire pour pouvoir avoir multiple particule dans la même system. On a un vecteur de pointeurs pour rendre possible le polymorphisme et dans ce cas utiliser les méthodes virtuelles propre de particule.
 Tous les méthodes sont publique, comme ca on peut changer la system.
 
 
-###[Question P8.3] Comment empêchez-vous cela (copie et affectation) ?
+### [Question P8.3] Comment empêchez-vous cela (copie et affectation) ?
 Pour l'affectation on fait un surcharge de l'opérateur = qui rendre l'affectation impossible (avec un delete) pour la copie on fait la même chose avec le constructeur du copie.
 ```c++
 System(System const&) = delete;
