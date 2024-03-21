@@ -16,14 +16,18 @@
 
 ### Tâches
 
-- anna: Particule, Système, JOURNAL, REPONSES, README
-- cedric: Enceinte, Différents gaz
+- anna: Système, JOURNAL, REPONSES, README
+- cedric: Différents gaz, questions modularisation
 
 | Tâche                                             | Durée | fait? |
 | ------------------------------------------------- | ----- | ----- |
 | créé le JOURNAL                                   | 00:10 |  oui  |
 | mis en place QTCreator et CMakeLists.txt          | 00:30 |  oui  | 
-| créé `Vector3D`                                   | 03:00 |  oui  |
+| crée `Vector3D`                                   | 03:00 |  oui  |
+| crée `Particle`                                   | 01:00 |  oui  |
+| crée `Enclosure`                                  | 00:10 |  oui  |
+| crée `Différents gaz`                             |       |  non  |
+
 
 
 ## Semaine 1
@@ -42,7 +46,10 @@ Nous avons travailler sur les classes Particules et Enceinte.
 
 
 
-## Semaine 4
+## Semaine 5
+Anna a fait la classe particule (particle) et Cedric a fini la classe enceinte (enclosure). Il n'a pas des questions auquel il faut répondre cette semaine.
+
+
 
 
 
