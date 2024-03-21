@@ -33,6 +33,6 @@ Cedric a deja implementé une premier version de `Vector3D` qu'il va augmenter l
 Cedric a fini la classe `Vecteur3D` avec tous les surcharges d'opérateurs et constructeurs.
 
 ## Semaine 4
-
+Cedric a implementé la classe `Enceinte` (nomée `Enclosure`) et commencée a faire L'exercice P7. C'était difficile a faire, puisqu'il y a beaucoup des places où on peut oublier un `#include` etc.
 
 
