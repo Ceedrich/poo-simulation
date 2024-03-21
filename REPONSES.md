@@ -1,7 +1,7 @@
 # Reponses
 Ce fichier contient les reponses aux questions posées dans les énoncés d'exercices.
 
-## Semaine 01
+## Semaine 02
 ### [Question P1.1] Comment représentez-vous ces vecteurs ? Comment sont-ils organisés : quels attributs ? quelles méthodes ? quels droits d'accès ?
 La classe vecteur contient les coordonnées cardinales (x, y, z) comme attributs privées et quelques méthodes publiques qui permettent de modifier/calculer avec des vecteurs.
 
@@ -9,10 +9,7 @@ Les méthodes `to_string`, `print`, et `operator<<` donnent/affichent le vecteur
 
 En général, on préfère l'utilisation des operateurs standards (`+(=)`, `-(=)`, `==`, `<<` et `*(=)` pour multiplication par un scalaire) pour faciliter l'interface.
 
-## Semaine 02
-
-
-## Semaine 03
+## Semaine 04
 ### [Question P4.1] Avez-vous ajouté un constructeur de copie ? Pourquoi (justifiez votre choix) ?
 Ouais, on n'a pas implementé un constructeur de copie, mais il existe, ajouté par le compilateur. Un `Vector3D` est une classe relativement simple ne contenant que trois attributs. C'est donc pas très chèr de faire une copie.
 

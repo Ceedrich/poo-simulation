@@ -1,101 +1,89 @@
 #include "Vector3D.hh"
 
-#include <iostream>
 #include <cmath>
+#include <iostream>
 #include <sstream>
 
-// Constructors
-Vector3D::Vector3D(double x, double y, double z) : x(x), y(y), z(z) {}
-Vector3D::Vector3D() : Vector3D(0.0, 0.0, 0.0) {}
-
-bool Vector3D::is_equal(const Vector3D& other) const { return *this == other; }
+bool Vector3D::is_equal(const Vector3D &other) const { return *this == other; }
 
 std::string Vector3D::to_string() const {
   std::ostringstream strs;
-  strs << x << " " << y << " " << z;
+  strs << x_ << " " << y_ << " " << z_;
   return strs.str();
 }
 
-
 void Vector3D::set_coords(double x, double y, double z) {
-  this->x = x;
-  this->y = y;
-  this->z = z;
+  this->x_ = x;
+  this->y_ = y;
+  this->z_ = z;
 }
 
 double Vector3D::dot_prod(const Vector3D &other) const {
-    return (x * other.x + y * other.y +  z * other.z);
+  return (x_ * other.x_ + y_ * other.y_ + z_ * other.z_);
 }
 
 Vector3D Vector3D::cross_prod(const Vector3D &other) const {
-    return ((*this) ^ other);
+  return ((*this) ^ other);
 }
 
-double Vector3D::norm2() const {
-    return (x * x + y * y + z * z);
-}
+double Vector3D::norm2() const { return (x_ * x_ + y_ * y_ + z_ * z_); }
 
-double Vector3D::norm() const {
-    return std::sqrt(this->norm2());
-}
+double Vector3D::norm() const { return std::sqrt(this->norm2()); }
 
 Vector3D Vector3D::normalize() const {
-    Vector3D vec = *this;
-    vec *= 1/this->norm();
-    return vec;
+  Vector3D vec = *this;
+  vec *= 1 / this->norm();
+  return vec;
 }
 
 // Operateurs
-Vector3D Vector3D::operator-() const { return Vector3D(-x, -y, -z); }
-Vector3D& Vector3D::operator+=(Vector3D const& other) {
-  x += other.x;
-  y += other.y;
-  z += other.z;
+Vector3D Vector3D::operator-() const { return Vector3D(-x_, -y_, -z_); }
+Vector3D &Vector3D::operator+=(Vector3D const &other) {
+  x_ += other.x_;
+  y_ += other.y_;
+  z_ += other.z_;
   return *this;
 }
-Vector3D& Vector3D::operator-=(Vector3D const& other) {
+Vector3D &Vector3D::operator-=(Vector3D const &other) {
   return *this += (-other);
 }
-Vector3D& Vector3D::operator*=(double scalar) {
-  x *= scalar;
-  y *= scalar;
-  z *= scalar;
+Vector3D &Vector3D::operator*=(double scalar) {
+  x_ *= scalar;
+  y_ *= scalar;
+  z_ *= scalar;
   return *this;
 }
-Vector3D& Vector3D::operator^=(Vector3D const& other) {
-    double x_,y_,z_;
-    x_ = y * other.z - z * other.y;
-    y_ = z * other.x - x * other.z;
-    z_ = x * other.y - y * other.x;
-    x = x_;
-    y = y_;
-    z = z_;
-    return *this;
+Vector3D &Vector3D::operator^=(Vector3D const &other) {
+  double _x, _y, _z;
+  _x = y_ * other.z_ - z_ * other.y_;
+  _y = z_ * other.x_ - x_ * other.z_;
+  _z = x_ * other.y_ - y_ * other.x_;
+  x_ = _x;
+  y_ = _y;
+  z_ = _z;
+  return *this;
 }
 
-double operator*(Vector3D const& vec1, Vector3D const& vec2) {
-    return vec1.dot_prod(vec2);
+double operator*(Vector3D const &vec1, Vector3D const &vec2) {
+  return vec1.dot_prod(vec2);
 }
-const Vector3D operator^(Vector3D vec1, Vector3D const& vec2) {
-    return (vec1 ^= vec2);
+const Vector3D operator^(Vector3D vec1, Vector3D const &vec2) {
+  return (vec1 ^= vec2);
 }
 
 bool Vector3D::operator==(const Vector3D &other) const {
-    return (
-                std::abs(x - other.x) < 1e-10 &&
-                std::abs(y - other.y) < 1e-10 &&
-                std::abs(z - other.z) < 1e-10
-   );
+  return (std::abs(x_ - other.x_) < 1e-10 && std::abs(y_ - other.y_) < 1e-10 &&
+          std::abs(z_ - other.z_) < 1e-10);
 }
 
-const Vector3D operator+(Vector3D vec1, Vector3D const& vec2) {
+const Vector3D operator+(Vector3D vec1, Vector3D const &vec2) {
   return (vec1 += vec2);
 }
-const Vector3D operator-(Vector3D vec1, Vector3D const& vec2) {
+const Vector3D operator-(Vector3D vec1, Vector3D const &vec2) {
   return (vec1 -= vec2);
 }
 const Vector3D operator*(Vector3D vec, double scalar) { return vec *= scalar; }
 const Vector3D operator*(double scalar, Vector3D vec) { return vec *= scalar; }
-std::ostream& operator<<(std::ostream& stream, Vector3D const& vec) {
+std::ostream &operator<<(std::ostream &stream, Vector3D const &vec) {
   return stream << vec.to_string();
 }

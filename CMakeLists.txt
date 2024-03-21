@@ -16,5 +16,6 @@ add_executable(Particle
     test_Particle.cc Particle.cc Particle.hh
     Vector3D.cc Vector3D.hh
 )
+add_executable(Enclosure test_Enclosure.cc Enclosure.hh Enclosure.cc)
 
 include(GNUInstallDirs)
