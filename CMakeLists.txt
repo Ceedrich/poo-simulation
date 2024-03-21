@@ -17,5 +17,16 @@ add_executable(Particle
     Vector3D.cc Vector3D.hh
 )
 add_executable(Enclosure test_Enclosure.cc Enclosure.hh Enclosure.cc)
+add_executable(Exercice7 Exercice7.cc
+    Enclosure.cc Enclosure.hh
+    TextViewer.cc TextViewer.hh
+    Drawable.hh
+    DrawingFrame.hh
+
+    Vector3D.cc Vector3D.hh
+    Particle.cc Particle.hh
+    Neon.cc Neon.hh
+    Argon.cc Argon.hh
+)
 
 include(GNUInstallDirs)

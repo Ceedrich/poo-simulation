@@ -1,14 +1,18 @@
+#include "Argon.hh"
 #include "Enclosure.hh"
+#include "Neon.hh"
 #include "TextViewer.hh"
 #include "Vector3D.hh"
+#include <iostream>
 
 int main() {
   TextViewer textViewer;
-  Vector3D v1(3, 4, 5);
-  Vector3D v2;
-  Enclosure e(40, 10, 2);
+  Neon neon(Vector3D(1, 2, 3), Vector3D(), 3.12);
+  Argon argon(Vector3D(1, 0, 0), Vector3D(0, 0, 1), 4.4);
 
-  textViewer.draw(v1);
-  textViewer.draw(v2);
+  Enclosure e;
+
+  textViewer.draw(neon);
+  textViewer.draw(argon);
   textViewer.draw(e);
 }
