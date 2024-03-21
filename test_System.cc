@@ -1,22 +1,30 @@
-#include "System.hh"
-#include "Particle.hh"
-#include "Helium.hh"
 #include "Argon.hh"
+#include "Helium.hh"
 #include "Neon.hh"
+#include "Particle.hh"
+#include "System.hh"
 #include <iostream>
 
 using namespace std;
 
 int main() {
-    System system1;
-    System system2(5.0, 2.3, 1.0);
-    system1.add_particle(Particle(Vector3D(1.2,2.3,3.4), Vector3D(2.4,1.5,2.0), 2.2));
-    system2.add_particle(Particle(Vector3D(4,3,2), Vector3D(2,3,4), 55));
-    system2.add_particle(Particle(Vector3D(), Vector3D(2.0,2.0,2.0), 5.7));
-    system1.add_particle(Helium(Vector3D(1,2,3), Vector3D(), 39.123));
+  System system1;
+  System system2(5.0, 2.3, 1.0);
+  system1.add_particle(
+      std::make_unique<Helium>(Vector3D(1, 1, 1), Vector3D(), 4.002602));
+  system1.add_particle(std::make_unique<Neon>(Vector3D(1, 18.5, 1),
+                                              Vector3D(0, 0.2, 0), 20.1797));
+  system1.add_particle(std::make_unique<Argon>(Vector3D(1, 1, 3.1),
+                                               Vector3D(0, 0, -0.5), 39.948));
 
-    cout << system1 << endl;
-    cout<<system2<<endl;
-    system1.delete_particles();
-    cout<<system1<<endl;
+  std::unique_ptr<Particle> neon =
+      std::make_unique<Neon>(Vector3D(), Vector3D(), 5);
+
+  system2.add_particle(std::make_unique<Particle>(Vector3D(), Vector3D(), 123));
+  system2.add_particle(std::move(neon));
+
+  cout << system1 << endl;
+  cout << system2 << endl;
+  system1.delete_particles();
+  cout << system1 << endl;
 }

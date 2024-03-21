@@ -1,24 +1,27 @@
 #pragma once
-#include "Particle.hh"
 #include "Enclosure.hh"
+#include "Particle.hh"
+#include <memory>
 #include <vector>
 
-class System
-{
+class System {
 public:
-       System() = default;
-       System(double width, double length, double height)
-           :space(width, length, height) {}
-       void print(std::ostream&) const;
-       void add_particle(Particle particle);
-       void delete_particles();
+  System() = default;
+  System(double width, double length, double height)
+      : space(width, length, height) {}
+  ~System() { delete_particles(); }
 
+  // Pas possible de copier le systeme
+  System(System const &) = delete;
+  System operator=(System const &) = delete;
 
+  void print(std::ostream &) const;
+  void add_particle(std::unique_ptr<Particle> particle);
+  void delete_particles();
 
 private:
-       Enclosure space;
-       std::vector<Particle> elements;
-
+  Enclosure space;
+  std::vector<std::unique_ptr<Particle>> elements;
 };
 
-std::ostream& operator<<(std::ostream &out, System const& system);
+std::ostream &operator<<(std::ostream &out, System const &system);
