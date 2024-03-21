@@ -3,7 +3,7 @@
 ## A faire:
 
 - Anna: reponses week 4 Particules, particules, Système, reponses Système, journal updaten
-- Cedric: Reponses week 4 enceinte, Différents gaz, Reponses différents gaz, journal updaten
+- Cedric: Reponses différents gaz, journal updaten
 
 ### Responsabilités
 
