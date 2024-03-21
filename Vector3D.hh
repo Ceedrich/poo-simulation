@@ -20,12 +20,12 @@ public:
    * @param y The y-coordinate of the vector.
    * @param z The z-coordinate of the vector.
    */
-  Vector3D(double x, double y, double z);
+  Vector3D(double x, double y, double z) : x_(x), y_(y), z_(z) {}
 
   /**
    * @brief Constructs a Vector3D object with default coordinates (0, 0, 0).
    */
-  Vector3D();
+  Vector3D() : Vector3D(0.0, 0.0, 0.0) {}
 
   // Accessors
   /**

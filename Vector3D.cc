@@ -4,10 +4,6 @@
 #include <iostream>
 #include <sstream>
 
-// Constructors
-Vector3D::Vector3D(double x, double y, double z) : x_(x), y_(y), z_(z) {}
-Vector3D::Vector3D() : Vector3D(0.0, 0.0, 0.0) {}
-
 bool Vector3D::is_equal(const Vector3D &other) const { return *this == other; }
 
 std::string Vector3D::to_string() const {
