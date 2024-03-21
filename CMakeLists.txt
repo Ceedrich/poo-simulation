@@ -29,4 +29,13 @@ add_executable(Exercice7 Exercice7.cc
     Argon.cc Argon.hh
 )
 
+add_executable(System test_System.cc System.cc System.hh
+    Particle.cc Particle.hh
+    Enclosure.cc Enclosure.hh
+    Vector3D.cc Vector3D.hh
+    Argon.cc Argon.hh
+    Helium.cc Helium.hh
+    Neon.cc Neon.hh
+)
+
 include(GNUInstallDirs)
