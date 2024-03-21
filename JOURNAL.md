@@ -2,6 +2,9 @@
 
 ## A faire:
 
+- Anna: reponses week 4 Particules, particules, Système, reponses Système, journal updaten
+- Cedric: modularisation week 3 in journal, Reponses week 4 enceinte, Différents gaz, Reponses différents gaz, journal updaten
+
 ### Responsabilités
 
 **Anna**
@@ -30,7 +33,14 @@ Cedric a deja implementé une premier version de `Vector3D` qu'il va augmenter l
 
 
 ## Semaine 2
-Cedric a fini la classe `Vecteur3D` avec tous les surcharges d'opérateurs et constructeurs.
+Cedric a fini la classe `Vecteur3D` avec tous les surcharges d'opérateurs et constructeurs. Donc déjà au niveau de semaine quatre.
+//modularisation?
+
+## Semaine 4
+Nous avons decider comment avancer d'ici et avons distribuer les taches des semaines 5 et 6. (Cedric va faire l'Enceinte et les Différents Gaz et Anna va faire les particules et le système). 
+Nous avons travailler sur les classes Particules et Enceinte.
+
+
 
 ## Semaine 4
 Cedric a implementé la classe `Enceinte` (nomée `Enclosure`) et commencée a faire L'exercice P7. C'était difficile a faire, puisqu'il y a beaucoup des places où on peut oublier un `#include` etc.
