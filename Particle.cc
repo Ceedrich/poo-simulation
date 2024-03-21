@@ -4,19 +4,11 @@
 
 using namespace std;
 
+void Particle::print(ostream &out) const {
+  out << "pos : " << position << "; v : " << speed << "; m : " << mass;
+}
 
-
-  void Particle::print(ostream& out) const{
-          out <<"pos : "<< position <<"; v : "<< speed <<"; m : "<< mass << endl;
-          }
-
-
-
-  ostream& operator<<(ostream& out, Particle element){
-      element.print(out);
-      return out;
-  }
-
-
-
-
+ostream &operator<<(ostream &out, Particle const &element) {
+  element.print(out);
+  return out;
+}

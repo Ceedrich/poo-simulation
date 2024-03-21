@@ -38,3 +38,44 @@ On a intruduit les opérateurs suivantes:
 - Le produit scalaire `*` et le produit vectoriel `^`
 - L'opérateur pour l'affichage `<<`
 
+## Semaine 06
+
+### [Question P7.1] En termes de POO, quelle est donc la nature de la méthode dessine_sur() ?
+La méthode `dessine_sur(SupportADessin&)` (on l'a nommé `draw_on(DrawingFrame&)` en anglais) est une méthode virtuelle pure de la super-classe (abstraite) `Dessinable` (nommée `Drawable`) qui force les enfants de cette classe a implementer la une méthode permettant de dessiner l'objet en question sur un `DrawingFrame`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
