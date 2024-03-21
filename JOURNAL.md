@@ -20,7 +20,11 @@
 | ------------------------------------------------- | ----- | ----- |
 | créé le JOURNAL                                   | 00:10 |  oui  |
 | mis en place QTCreator et CMakeLists.txt          | 00:30 |  oui  | 
-| créé `Vector3D`                                   | 03:00 |  oui  |
+| crée `Vector3D`                                   | 03:00 |  oui  |
+| crée `Particle`                                   | 01:00 |  oui  |
+| crée `Enclosure`                                  | 00:10 |  oui  |
+| crée `Différents gaz`                             |       |  non  |
+
 
 
 ## Semaine 1
@@ -36,9 +40,9 @@ Cedric a fini la classe `Vecteur3D` avec tous les surcharges d'opérateurs et co
 Nous avons decider comment avancer d'ici et avons distribuer les taches des semaines 5 et 6. (Cedric va faire l'Enceinte et les Différents Gaz et Anna va faire les particules et le système). 
 Nous avons travailler sur les classes Particules et Enceinte.
 
-
-
-## Semaine 4
 Cedric a implementé la classe `Enceinte` (nomée `Enclosure`) et commencée a faire L'exercice P7. C'était difficile a faire, puisqu'il y a beaucoup des places où on peut oublier un `#include` etc.
+
+## Semaine 5
+Anna a fait la classe particule (particle) et Cedric a fini la classe enceinte (enclosure). Il n'a pas des questions auquel il faut répondre cette semaine.
 
 
