@@ -9,7 +9,6 @@ public:
   System() = default;
   System(double width, double length, double height)
       : enclosure(width, length, height) {}
-      : random_draw(random_seed), enclosure(width, length, height) {}
   ~System() { delete_particles(); }
 
   // Pas possible de copier le systeme
