@@ -3,10 +3,13 @@
 
 #include "Drawable.hh"
 #include "DrawingFrame.hh"
+#include "Vector3D.hh"
 
 class Enclosure : public Drawable {
 private:
-  double length_, width_, height_;
+  double width_;  // x
+  double length_; // y
+  double height_; // z
 
 public:
   /**
@@ -16,7 +19,7 @@ public:
    * @param l The length of the enclosure.
    * @param h The height of the enclosure.
    */
-  Enclosure(double w, double l, double h) : length_(l), width_(w), height_(h) {}
+  Enclosure(double w, double l, double h) : width_(w), length_(l), height_(h) {}
 
   /**
    * @brief Constructs a square Enclosure object with the given side length.
