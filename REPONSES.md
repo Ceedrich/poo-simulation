@@ -61,8 +61,13 @@ System(System const&) = delete;
 System` operator=(System const&) = delete;
 ```
 
+## Semaine 07
 
+### [Question P9.1] Comment (et à quel(s) endroit(s)) intégrez vous ces deux aspects ?
+// TODO
 
+### [Question P9.2] Quelle est la complexité de l'algorithme de simulation lorsqu'il utilise cette méthode pour savoir si deux particules se rencontrent ?
+En utilisant cet algorithme, il faut itérer sur tous les particules pour chaqu'une des particules. Il faut donc faire deux boucles "for". Cette méthode ajoute donc la complexité temporale $\Theta(n^2)$ où n est la nombre des particules.
 
 
 
