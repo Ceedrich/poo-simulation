@@ -8,7 +8,8 @@ class System {
 public:
   System() = default;
   System(double width, double length, double height)
-      : space(width, length, height) {}
+      : enclosure(width, length, height) {}
+      : random_draw(random_seed), enclosure(width, length, height) {}
   ~System() { delete_particles(); }
 
   // Pas possible de copier le systeme
@@ -20,8 +21,8 @@ public:
   void delete_particles();
 
 private:
-  Enclosure space;
-  std::vector<std::unique_ptr<Particle>> elements;
+  Enclosure enclosure;
+  std::vector<std::unique_ptr<Particle>> particles;
 };
 
 std::ostream &operator<<(std::ostream &out, System const &system);
