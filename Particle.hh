@@ -3,6 +3,7 @@
 #include "Drawable.hh"
 #include "Vector3D.hh"
 #include <iostream>
+#include <memory>
 
 /**
  * @brief Represents a particle in a simulation.
@@ -35,6 +36,8 @@ public:
    * @param support The DrawingFrame object to draw on.
    */
   virtual void draw_on(DrawingFrame &support) override { support.draw(*this); }
+
+  virtual std::unique_ptr<Particle> copy_as_unique_ptr() const = 0;
 
 private:
   Vector3D position; ///< The position of the particle.
