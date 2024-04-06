@@ -13,7 +13,7 @@ add_executable(simulation main.cc Vector3D.hh Vector3D.cc)
 # Tests
 add_executable(Vector3D test_Vector3D.cc Vector3D.cc Vector3D.hh)
 add_executable(Particle
-    test_Particle.cc Particle.cc Particle.hh
+    test_Particle.cc Particle.cc Particle.hh Neon.hh Neon.cc
     Vector3D.cc Vector3D.hh
 )
 add_executable(Enclosure test_Enclosure.cc Enclosure.hh Enclosure.cc)
