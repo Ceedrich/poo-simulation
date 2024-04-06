@@ -10,8 +10,8 @@ void System::print(ostream &out) const {
   }
 }
 
-void System::add_particle(unique_ptr<Particle> particle) {
-  particles.push_back(std::move(particle));
+void System::add_particle(Particle const &particle) {
+  particles.push_back((particle.copy_as_unique_ptr()));
 }
 
 void System::delete_particles() { particles.clear(); }
