@@ -14,14 +14,36 @@
 class Particle : public Drawable {
 public:
   /**
-   * @brief Constructs a Particle object with the given position, speed, and mass.
+   * @brief Constructs a Particle object with the given position, speed, and
+   * mass.
    * 
    * @param pos The position of the particle.
    * @param v The speed of the particle.
    * @param m The mass of the particle.
    */
   Particle(Vector3D pos, Vector3D v, double m)
-      : position(pos), speed(v), mass(m) {}
+      : position_(pos), velocity_(v), mass_(m) {}
+
+  /**
+   * @brief Returns the position of the particle.
+   *
+   * @return The position of the particle.
+   */
+  Vector3D const &position() const { return position_; }
+
+  /**
+   * @brief Returns the velocity of the particle.
+   *
+   * @return The velocity of the particle.
+   */
+  Vector3D const &velocity() const { return velocity_; }
+
+  /**
+   * @brief Returns the mass of the particle.
+   *
+   * @return The mass of the particle.
+   */
+  double mass() const { return mass_; }
 
   /**
    * @brief Prints the particle's information to the output stream.
@@ -40,13 +62,14 @@ public:
   virtual std::unique_ptr<Particle> copy_as_unique_ptr() const = 0;
 
 private:
-  Vector3D position; ///< The position of the particle.
-  Vector3D speed;    ///< The speed of the particle.
-  double mass;       ///< The mass of the particle.
+  Vector3D position_; ///< The position of the particle.
+  Vector3D velocity_; ///< The speed of the particle.
+  double mass_;       ///< The mass of the particle.
 };
 
 /**
- * @brief Overloads the << operator to print the particle's information to the output stream.
+ * @brief Overloads the << operator to print the particle's information to the
+ * output stream.
  * 
  * @param out The output stream to print to.
  * @param element The particle object to print.
