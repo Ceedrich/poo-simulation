@@ -1,13 +1,14 @@
 #pragma once
 
 #include "Drawable.hh"
+#include "NumberGenerator.hh"
 #include "Vector3D.hh"
 #include <iostream>
 #include <memory>
 
 /**
  * @brief Represents a particle in a simulation.
- * 
+ *
  * The Particle class inherits from the Drawable class and represents a particle
  * with a position, speed, and mass.
  */
@@ -16,7 +17,7 @@ public:
   /**
    * @brief Constructs a Particle object with the given position, speed, and
    * mass.
-   * 
+   *
    * @param pos The position of the particle.
    * @param v The speed of the particle.
    * @param m The mass of the particle.
@@ -47,18 +48,67 @@ public:
 
   /**
    * @brief Prints the particle's information to the output stream.
-   * 
+   *
    * @param out The output stream to print to.
    */
   virtual void print(std::ostream &out) const;
 
   /**
    * @brief Draws the particle on a DrawingFrame object.
-   * 
+   *
    * @param support The DrawingFrame object to draw on.
    */
   virtual void draw_on(DrawingFrame &support) override { support.draw(*this); }
 
+  /**
+   * @brief Evolves the particle's position based on its velocity over a given
+   * time interval.
+   *
+   * @param dt The time interval for which the particle's position will be
+   * evolved.
+   */
+  void evolve(double dt) { position_ += velocity_ * dt; }
+
+  /**
+   * @brief Collides the current particle with another particle.
+   *
+   * This function updates the state of the current particle and the other
+   * particle based on the collision. The collision behavior is determined by
+   * the implementation of this function.
+   *
+   * @param other The particle to collide with.
+   * @param random_generator The random number generator used for any random
+   * behavior during the collision.
+   */
+  void collide(Particle &other,
+               std::unique_ptr<NumberGenerator> &random_generator);
+
+  /**
+   * @brief Collides the particle with the given enclosure.
+   *
+   * This function updates the state of the particle after colliding with the
+   * enclosure.
+   *
+   * @param enclosure The enclosure to collide with.
+   */
+  void collide(Enclosure const &enclosure);
+
+  /**
+   * @brief Checks if the particle encounters another particle within a given
+   * distance.
+   *
+   * @param other The other particle to check against.
+   * @param EPSILON The distance threshold for the encounter.
+   * @return True if the particle encounters the other particle, false
+   * otherwise.
+   */
+  bool encounters(Particle const &other, double const EPSILON = 1) const;
+
+  /**
+   * @brief Creates a copy of the particle as a unique pointer.
+   *
+   * @return A unique pointer to the copied particle.
+   */
   virtual std::unique_ptr<Particle> copy_as_unique_ptr() const = 0;
 
 private:
@@ -70,7 +120,7 @@ private:
 /**
  * @brief Overloads the << operator to print the particle's information to the
  * output stream.
- * 
+ *
  * @param out The output stream to print to.
  * @param element The particle object to print.
  * @return The output stream after printing the particle's information.

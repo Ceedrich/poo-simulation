@@ -38,4 +38,17 @@ add_executable(System test_System.cc System.cc System.hh
     Neon.cc Neon.hh
 )
 
+add_executable(Exercice9 Exercice9.cc
+    NumberGenerator.hh
+    Ex9NumberGenerator.hh
+    RandomGenerator.hh
+    Particle.cc Particle.hh
+    System.cc System.hh
+    Enclosure.cc Enclosure.hh
+    Vector3D.cc Vector3D.hh
+    Argon.cc Argon.hh
+    Neon.cc Neon.hh
+    Helium.cc Helium.hh
+)
+
 include(GNUInstallDirs)
