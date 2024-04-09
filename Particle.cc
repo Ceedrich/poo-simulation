@@ -7,7 +7,7 @@ using namespace std;
 void Particle::print(ostream &out) const {
   out << "pos : " << position_ << "; v : " << velocity_ << "; m : " << mass_;
 }
-}
+
 
 ostream &operator<<(ostream &out, Particle const &element) {
   element.print(out);
