@@ -34,4 +34,4 @@ jobs:
 
     - name: Run executables
       # Run the executables (best I know how to do for testing)
-      run: find ${{env.BUILD_DIR}} -maxdepth 1 -type f -executable -exec {} \;
+      run: run() { local exit_status=0; find "$1" -maxdepth 1 -type f -executable -print0 | while IFS= read -r -d '' file; do ./"$file" || exit_status=$?; done; return $exit_status; } && run $${github.workspace{}}/${{env.BUILD_DIR}}
