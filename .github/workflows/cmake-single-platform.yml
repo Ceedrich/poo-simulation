@@ -33,4 +33,4 @@ jobs:
 
     - name: Run executables
       # Run the executables (best I know how to do for testing
-      run: run() { for file in "$1"/*; do [ -x "$file" ] && ./"$file"; done; } && run ${{github.workspace}}/build
+      run: run() { for file in "$1"/*; do [ -x "$file" ] && "$file"; done; } && run ${{github.workspace}}/build
