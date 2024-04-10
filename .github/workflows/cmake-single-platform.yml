@@ -11,6 +11,7 @@ on:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
+  BUILD_DIR: build
 
 jobs:
   build:
@@ -29,8 +30,8 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      run: cmake --build ${{github.workspace}}/${{env.BUILD_DIR}} --config ${{env.BUILD_TYPE}}
 
     - name: Run executables
-      # Run the executables (best I know how to do for testing
-      run: run() { for file in "$1"/*; do [ -x "$file" ] && "$file"; done; } && run ${{github.workspace}}/build
+      # Run the executables (best I know how to do for testing)
+      run: find ${{env.BUILD_DIR}} -maxdepth 1 -type f -executable -exec {} \;
