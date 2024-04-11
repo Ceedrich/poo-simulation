@@ -1,6 +1,9 @@
 # Cheatsheet
 
 ## Constructeurs
+**Règle de trois**:
+- Si on touche le *Destructeur*, le *Constructeur de copie* ou le *operateur=*, il faut aussi penser aux autres!!!
+
 On peut passer une liste des valeurs: (pas de copie)
 ```c++
 #include <initializer_list>
@@ -95,6 +98,14 @@ void afficher(vector<const Base&> const &vec) {
   for (auto e : vec) { vec.afficher(); }
 }
 ```
+
+### Destructeurs Virtuels
+- liberer les ressource des *sous*-classes
+- le destructeur de la super-classe doit être virtuel, si les sous-classes doivent liberer les ressources
+- *gestion des resources par les sous-classes*
+
+Règle des trois:
+- destructeur, constructeur de copie, operateur=
 
 ### Classes Abstraites
 
