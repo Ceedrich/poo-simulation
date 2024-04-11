@@ -3,8 +3,8 @@
 #include <ostream>
 #include <string>
 
-#include "Drawable.hh"
-#include "DrawingFrame.hh"
+#include "Drawings/Drawable.hh"
+#include "Drawings/DrawingFrame.hh"
 
 /**
  * @brief Represents a 3D vector in Cartesian coordinates.

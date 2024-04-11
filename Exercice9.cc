@@ -1,6 +1,6 @@
-#include "Argon.hh"
-#include "Helium.hh"
-#include "Neon.hh"
+#include "Particles/Argon.hh"
+#include "Particles/Helium.hh"
+#include "Particles/Neon.hh"
 #include "System.hh"
 #include <iostream>
 

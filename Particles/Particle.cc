@@ -1,7 +1,7 @@
 #include "Particle.hh"
-#include "Enclosure.hh"
-#include "RandomGenerator.hh"
-#include "Vector3D.hh"
+#include "../Enclosure.hh"
+#include "../NumberGenerators/RandomGenerator.hh"
+#include "../Vector3D.hh"
 #include <cmath>
 #include <iostream>
 

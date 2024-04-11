@@ -1,7 +1,7 @@
-#include "Argon.hh"
 #include "Enclosure.hh"
-#include "Neon.hh"
-#include "TextViewer.hh"
+#include "Particles/Argon.hh"
+#include "Particles/Neon.hh"
+#include "Text/TextViewer.hh"
 #include "Vector3D.hh"
 #include <iostream>
 

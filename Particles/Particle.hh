@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Drawable.hh"
-#include "NumberGenerator.hh"
-#include "Vector3D.hh"
+#include "../Drawings/Drawable.hh"
+#include "../NumberGenerators/NumberGenerator.hh"
+#include "../Vector3D.hh"
 #include <iostream>
 #include <memory>
 

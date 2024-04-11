@@ -1,9 +1,9 @@
 #pragma once
 #include "Enclosure.hh"
-#include "Ex9NumberGenerator.hh"
-#include "NumberGenerator.hh"
-#include "Particle.hh"
-#include "RandomGenerator.hh"
+#include "NumberGenerators/Ex9NumberGenerator.hh"
+#include "NumberGenerators/NumberGenerator.hh"
+#include "NumberGenerators/RandomGenerator.hh"
+#include "Particles/Particle.hh"
 #include <memory>
 #include <vector>
 

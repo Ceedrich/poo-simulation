@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "Enclosure.hh"
-#include "Particle.hh"
+#include "../Enclosure.hh"
+#include "../Particles/Particle.hh"
 #include "TextViewer.hh"
 
 using namespace std;
