@@ -14,63 +14,64 @@ include_directories(${Qt5Widgets_INCLUDE_DIRS})
 
 qt5_add_resources(RESOURCE_FILES Graphics/resources.qrc)
 
-add_executable(simulation simulation.cc Vector3D.hh Vector3D.cc)
+file(GLOB SOURCES_PARTICLES "Particles/*.cc")
+file(GLOB HEADERS_PARTICLES "Particles/*.hh")
+
+file(GLOB HEADERS_DRAWINGS "Drawings/*.hh")
+
+file(GLOB SOURCES_NUMBER_GENERATORS "NumberGenerators/*.cc")
+file(GLOB HEADERS_NUMBER_GENERATORS "NumberGenerators/*.hh")
+
+file(GLOB SOURCES_GRAPHICS "Graphics/*.cc")
+file(GLOB HEADERS_GRAPHICS "Graphics/*.hh")
+
+file(GLOB SOURCES_TEXT "Text/*.cc")
+file(GLOB HEADERS_TEXT "Text/*.hh")
 
 # Tests
 add_executable(Vector3D test_Vector3D.cc Vector3D.cc Vector3D.hh)
 add_executable(Particle test_Particle.cc
-    Particles/Particle.cc Particles/Particle.hh
-    Particles/Neon.hh Particles/Neon.cc
+    Particles/Particle.hh Particles/Particle.cc
+    Particles/Neon.cc Particles/Neon.hh
     Vector3D.cc Vector3D.hh
 )
 add_executable(Enclosure test_Enclosure.cc Enclosure.hh Enclosure.cc)
 add_executable(Exercice7 Exercice7.cc
     Enclosure.cc Enclosure.hh
-    Text/TextViewer.cc Text/TextViewer.hh
-    Drawings/Drawable.hh
-    Drawings/DrawingFrame.hh
+    ${SOURCES_TEXT} ${HEADERS_TEXT}
+    ${HEADERS_DRAWINGS}
 
     Vector3D.cc Vector3D.hh
-    Particles/Particle.cc Particles/Particle.hh
-    Particles/Neon.cc Particles/Neon.hh
-    Particles/Argon.cc Particles/Argon.hh
+    ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 )
 
 add_executable(System test_System.cc
-    Drawings/Drawable.hh Drawings/DrawingFrame.hh
     System.cc System.hh
-    Particles/Particle.cc Particles/Particle.hh
+    ${SOURCES_DRAWINGS} ${HEADERS_DRAWINGS}
     Enclosure.cc Enclosure.hh
     Vector3D.cc Vector3D.hh
-    Particles/Argon.cc Particles/Argon.hh
-    Particles/Helium.cc Particles/Helium.hh
-    Particles/Neon.cc Particles/Neon.hh
+
+    ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 )
 
 add_executable(Exercice9 Exercice9.cc
-    NumberGenerators/NumberGenerator.hh
-    NumberGenerators/Ex9NumberGenerator.hh
-    NumberGenerators/RandomGenerator.hh
-    Particles/Particle.cc Particles/Particle.hh
     System.cc System.hh
     Enclosure.cc Enclosure.hh
     Vector3D.cc Vector3D.hh
-    Particles/Argon.cc Particles/Argon.hh
-    Particles/Neon.cc Particles/Neon.hh
-    Particles/Helium.cc Particles/Helium.hh
+
+    ${SOURCES_NUMBER_GENERATORS} ${HEADERS_NUMBER_GENERATORS}
+    ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 )
 
 add_executable(Graphisme graphisme.cc
-    Drawings/Drawable.hh Drawings/DrawingFrame.hh
+    ${HEADERS_DRAWINGS}
 
     System.hh System.cc
-    Particles/Particle.hh Particles/Particle.cc
     Enclosure.hh Enclosure.cc
     Vector3D.hh Vector3D.cc
+    ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 
-    Graphics/vertex_shader.hh
-    Graphics/GLWidget.hh Graphics/GLWidget.cc
-    Graphics/OpenGLViewer.hh Graphics/OpenGLViewer.cc
+    ${SOURCES_GRAPHICS} ${HEADERS_GRAPHICS}
 
     ${RESOURCE_FILES}
 )
