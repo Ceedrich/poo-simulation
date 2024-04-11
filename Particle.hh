@@ -26,6 +26,14 @@ public:
       : position_(pos), velocity_(v), mass_(m) {}
 
   /**
+   * @brief Constructs a Particle object being a copy of another Particle
+   * object.
+   *
+   * @param other The Particle object to copy.
+   */
+  Particle(Particle const &other) = default;
+
+  /**
    * @brief Returns the position of the particle.
    *
    * @return The position of the particle.
@@ -109,7 +117,7 @@ public:
    *
    * @return A unique pointer to the copied particle.
    */
-  virtual std::unique_ptr<Particle> copy_as_unique_ptr() const = 0;
+  virtual std::unique_ptr<Particle> copyAsUniqueParticlePtr() const = 0;
 
 private:
   Vector3D position_; ///< The position of the particle.
