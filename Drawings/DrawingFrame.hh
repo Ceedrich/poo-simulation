@@ -3,6 +3,7 @@
 
 class Particle;
 class Enclosure;
+class System;
 
 /**
  * @brief The DrawingFrame class is an abstract base class that represents a
@@ -34,8 +35,5 @@ public:
    */
   virtual void draw(Enclosure const &) = 0;
 
-  // virtual void draw(Neon const&) = 0;
-  // virtual void draw(Argon const&) = 0;
-  // virtual void draw(Enclosure const&) = 0;
-  // virtual void draw(System const&) = 0;
+  virtual void draw(System const &) = 0;
 };

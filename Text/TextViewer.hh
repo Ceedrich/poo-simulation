@@ -20,4 +20,6 @@ public:
    * @param enclosure The enclosure to be drawn.
    */
   virtual void draw(const Enclosure &) override;
+
+  virtual void draw(const System &) override;
 };

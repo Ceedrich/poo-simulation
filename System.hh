@@ -1,4 +1,6 @@
 #pragma once
+#include "Drawings/Drawable.hh"
+#include "Drawings/DrawingFrame.hh"
 #include "Enclosure.hh"
 #include "NumberGenerators/Ex9NumberGenerator.hh"
 #include "NumberGenerators/NumberGenerator.hh"
@@ -7,7 +9,7 @@
 #include <memory>
 #include <vector>
 
-class System {
+class System : public Drawable {
 public:
   /**
    * @brief Factory method for Exercise 9.
@@ -95,6 +97,8 @@ public:
    * @param dt The time step to evolve the system by.
    */
   void evolve(double dt);
+
+  virtual void draw_on(DrawingFrame &support) override;
 
 private:
   static double constexpr EPSILON = 1;

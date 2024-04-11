@@ -8,6 +8,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_compile_options(-Wall -Wextra -Wpedantic)
 
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(OpenGL REQUIRED)
+include_directories(${Qt5Widgets_INCLUDE_DIRS})
+
+qt5_add_resources(RESOURCE_FILES Graphics/resources.qrc)
+
 add_executable(simulation simulation.cc Vector3D.hh Vector3D.cc)
 
 # Tests
@@ -31,6 +37,7 @@ add_executable(Exercice7 Exercice7.cc
 )
 
 add_executable(System test_System.cc
+    Drawings/Drawable.hh Drawings/DrawingFrame.hh
     System.cc System.hh
     Particles/Particle.cc Particles/Particle.hh
     Enclosure.cc Enclosure.hh
@@ -52,5 +59,21 @@ add_executable(Exercice9 Exercice9.cc
     Particles/Neon.cc Particles/Neon.hh
     Particles/Helium.cc Particles/Helium.hh
 )
+
+add_executable(Graphisme graphisme.cc
+    Drawings/Drawable.hh Drawings/DrawingFrame.hh
+
+    System.hh System.cc
+    Particles/Particle.hh Particles/Particle.cc
+    Enclosure.hh Enclosure.cc
+    Vector3D.hh Vector3D.cc
+
+    Graphics/vertex_shader.hh
+    Graphics/GLWidget.hh Graphics/GLWidget.cc
+    Graphics/OpenGLViewer.hh Graphics/OpenGLViewer.cc
+
+    ${RESOURCE_FILES}
+)
+target_link_libraries(Graphisme Qt5::Widgets OpenGL::GL)
 
 include(GNUInstallDirs)
