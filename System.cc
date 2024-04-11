@@ -45,6 +45,7 @@ void System::evolve(double dt) {
 }
 
 void System::draw_on(DrawingFrame &support) {
+  support.draw(*this);
   support.draw(enclosure);
   for (auto const &p : particles) {
     support.draw(*p);
