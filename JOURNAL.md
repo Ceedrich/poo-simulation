@@ -4,6 +4,7 @@
 
 - Anna: reponses week 4 Particules, particules, Système, reponses Système, journal updaten
 - Cedric: Reponses différents gaz, journal updaten
+  - Particle should not be drawable. The different kinds of particles should be.
 
 ### Responsabilités
 
@@ -23,8 +24,9 @@
 | crée `Vector3D`                                   | 03:00 |  oui  |
 | crée `Particle`                                   | 01:00 |  oui  |
 | crée `Enclosure`                                  | 00:10 |  oui  |
-| fait "Différents gaz"                             | 01:30 |  non  |
+| fait "Différents gaz"                             | 01:30 |  oui  |
 | crée `System`                                     | 01:30 |  oui  |
+| introduit un interface graphique                  | 08:00 |  oui  |
 
 
 
@@ -50,5 +52,9 @@ On a fini la classe System et à répondu aux questions.
 Cedric a fait l'exercice "Différents gaz" en utilisant un peu de polymorphisme.
 
 
+## Semaine 6
+Cedric a fait l'exercice P9.
 
+## Semaine 7
+Cedric a crée un interface graphique.
 
