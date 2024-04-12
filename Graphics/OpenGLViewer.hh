@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Drawings/DrawingFrame.hh"
+#include "GLSphere.hh"
 #include <QMatrix4x4>
 #include <QOpenGLShaderProgram>
 
@@ -16,8 +17,25 @@ public:
     prog.setUniformValue("projection", projection);
   }
 
-  void drawSomething(); // TODO
+  void translate(double x, double y, double z);
+  void rotate(double angle, double dirX, double dirY, double dirZ);
+
+private:
+  void drawAxes(QMatrix4x4 const &point_of_view = QMatrix4x4(),
+                bool colored = true);
+  void drawCube(QMatrix4x4 const &point_of_view);
+
+  void drawParallelepipedeCubique(QMatrix4x4 const &point_of_view, double x,
+                                  double y, double z);
+  void drawSphere(QMatrix4x4 const &point_of_view = QMatrix4x4()) {
+    drawSphere(point_of_view, 0.0, 0.0, 0.0);
+  }
+
+  void drawSphere(QMatrix4x4 const &point_of_view, double red, double green,
+                  double blue);
 
 private:
   QOpenGLShaderProgram prog;
+  QMatrix4x4 view_matrix;
+  GLSphere sphere;
 };
