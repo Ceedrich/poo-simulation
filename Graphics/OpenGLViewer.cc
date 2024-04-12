@@ -22,10 +22,6 @@ void OpenGLViewer::init() {
   sphere.initialize();
 
   view_matrix.setToIdentity();
-
-  view_matrix.translate(0.0, 0.0, -0.4);
-  view_matrix.rotate(60.0, 0.0, 1.0, 0.0);
-  view_matrix.rotate(10.0, 0.0, 0.0, 1.0);
 }
 
 void OpenGLViewer::translate(double x, double y, double z) {
