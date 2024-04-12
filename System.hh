@@ -49,6 +49,7 @@ public:
    * @brief Move constructor.
    */
   System(System &&) = default;
+  System& operator=(System &&) = default;
 
   /**
    * @brief Constructor with enclosure dimensions.
