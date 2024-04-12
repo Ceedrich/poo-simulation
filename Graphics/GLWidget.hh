@@ -22,7 +22,9 @@ enum KEYMAP {
 
 class GLWidget : public QOpenGLWidget {
 public:
-  GLWidget(QWidget *parent = nullptr) : QOpenGLWidget(parent) {}
+  GLWidget(QWidget *parent = nullptr, System &&s = System::prefilled())
+      : QOpenGLWidget(parent), system(std::move(s)) {}
+  GLWidget(System &&s) : QOpenGLWidget(nullptr), system(std::move(s)) {}
   virtual ~GLWidget() = default;
 
 private:
