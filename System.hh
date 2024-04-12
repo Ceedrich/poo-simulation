@@ -5,6 +5,7 @@
 #include "NumberGenerators/Ex9NumberGenerator.hh"
 #include "NumberGenerators/NumberGenerator.hh"
 #include "NumberGenerators/RandomGenerator.hh"
+#include "Particles/Helium.hh"
 #include "Particles/Particle.hh"
 #include <memory>
 #include <vector>
@@ -19,6 +20,23 @@ public:
   static System exercice9() {
     System system;
     system.random_draw = std::make_unique<Ex9NumberGenerator>();
+    return system;
+  }
+
+  static System prefilled() {
+    System system;
+    for (int x(0); x < 20; x += 5) {
+      for (int y(0); y < 20; y += 5) {
+        for (int z(0); z < 20; z += 5) {
+          double vx = system.random_draw->uniform(-1.0, 1.0);
+          double vy = system.random_draw->uniform(-1.0, 1.0);
+          double vz = system.random_draw->uniform(-1.0, 1.0);
+          double m = system.random_draw->uniform(0.0, 20.0);
+          system.add_particle(
+              Helium(Vector3D(x, y, z), Vector3D(vx, vy, vz), m));
+        }
+      }
+    }
     return system;
   }
 
