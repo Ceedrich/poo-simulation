@@ -10,13 +10,16 @@ public:
 
   void initialize(GLuint slices = 25, GLuint stacks = 25);
 
-  void draw(QOpenGLShaderProgram &program, int attributeLocation);
+  void draw(QOpenGLShaderProgram &program, int attributeLocation,
+            int normalAttributeLocation);
 
   void bind();
   void release();
 
 private:
   QOpenGLBuffer vbo, ibo;
+  QVector<GLfloat> vertices;
+  QVector<GLfloat> normals;
   GLuint vbo_sz;
   GLuint ibo_sz[3];
 };

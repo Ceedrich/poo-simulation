@@ -1,3 +1,5 @@
 #pragma once
 
-enum Vertex_Shader_Attribute_ID { VertexID = 0, ColorID };
+namespace VertexShader {
+enum AttributeID { VertexID = 0, ColorID, NormalID };
+}

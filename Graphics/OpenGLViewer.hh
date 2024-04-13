@@ -14,7 +14,7 @@ public:
   void init();
 
   void setProjection(QMatrix4x4 const &projection) {
-    prog.setUniformValue("projection", projection);
+    shaderProgram.setUniformValue("projection", projection);
   }
 
   void translate(double x, double y, double z);
@@ -27,7 +27,7 @@ private:
                   double blue);
 
 private:
-  QOpenGLShaderProgram prog;
+  QOpenGLShaderProgram shaderProgram;
   QMatrix4x4 view_matrix;
   GLSphere sphere;
 };

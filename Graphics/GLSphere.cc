@@ -3,7 +3,8 @@
 #include <cmath>
 
 void GLSphere::initialize(GLuint slices, GLuint stacks) {
-  QVector<GLfloat> positions;
+  vertices.clear();
+  normals.clear();
 
   QVector<GLuint> indices0;
   QVector<GLuint> indices1;
@@ -11,12 +12,14 @@ void GLSphere::initialize(GLuint slices, GLuint stacks) {
 
   GLuint size(2 + slices * (stacks - 1));
 
-  positions.reserve(3 * size);
+  vertices.reserve(3 * size);
+  normals.reserve(3 * size);
 
   const double alpha(M_PI / double(stacks));
   const double beta(2.0 * M_PI / double(slices));
 
-  positions << 0.0 << 0.0 << 1.0;
+  vertices << 0.0 << 0.0 << 1.0;
+  normals << 0.0 << 0.0 << 1.0;
 
   for (GLuint i(1); i < stacks; ++i) {
     for (GLuint j(0); j < slices; ++j) {
@@ -25,11 +28,13 @@ void GLSphere::initialize(GLuint slices, GLuint stacks) {
       float y = sin(j * beta) * r;
       float x = cos(j * beta) * r;
 
-      positions << x << y << z;
+      vertices << x << y << z;
+      normals << x << y << z;
     }
   }
 
-  positions << 0.0 << 0.0 << -1.0;
+  vertices << 0.0 << 0.0 << -1.0;
+  normals << 0.0 << 0.0 << -1.0;
 
   indices0.reserve(slices + 2);
   for (GLuint i(0); i <= slices; ++i)
@@ -54,7 +59,7 @@ void GLSphere::initialize(GLuint slices, GLuint stacks) {
   vbo_sz = 3 * size * sizeof(GLfloat);
   vbo.create();
   vbo.bind();
-  vbo.allocate(positions.constData(), vbo_sz);
+  vbo.allocate(vertices.constData(), vbo_sz);
   vbo.release();
 
   ibo_sz[0] = indices0.size() * sizeof(GLuint);
@@ -69,11 +74,17 @@ void GLSphere::initialize(GLuint slices, GLuint stacks) {
   ibo.release();
 }
 
-void GLSphere::draw(QOpenGLShaderProgram &program, int attributeLocation) {
+void GLSphere::draw(QOpenGLShaderProgram &program, int vertexAttributeLocation,
+                    int normalAttributeLocation) {
   bind();
 
-  program.setAttributeBuffer(attributeLocation, GL_FLOAT, 0, 3);
-  program.enableAttributeArray(attributeLocation);
+  program.enableAttributeArray(vertexAttributeLocation);
+  program.setAttributeBuffer(vertexAttributeLocation, GL_FLOAT, 0, 3,
+                             6 * sizeof(GLfloat));
+
+  program.enableAttributeArray(normalAttributeLocation);
+  program.setAttributeBuffer(normalAttributeLocation, GL_FLOAT,
+                             3 * sizeof(GLfloat), 3, 6 * sizeof(GLfloat));
 
 #define BUFFER_OFFSET(a) ((char *)nullptr + (a))
 
@@ -84,7 +95,8 @@ void GLSphere::draw(QOpenGLShaderProgram &program, int attributeLocation) {
   glDrawElements(GL_TRIANGLE_FAN, ibo_sz[2] / sizeof(GLuint), GL_UNSIGNED_INT,
                  BUFFER_OFFSET(ibo_sz[0] + ibo_sz[1]));
 
-  program.disableAttributeArray(attributeLocation);
+  program.disableAttributeArray(vertexAttributeLocation);
+  program.disableAttributeArray(normalAttributeLocation);
 
   release();
 }
