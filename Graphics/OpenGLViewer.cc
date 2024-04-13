@@ -57,55 +57,6 @@ void OpenGLViewer::draw(const System &) { // TODO
   drawAxes();
 }
 
-void OpenGLViewer::drawCube(QMatrix4x4 const &point_of_view) {
-  prog.setUniformValue("vue_modele", point_of_view);
-
-  glBegin(GL_QUADS);
-  // face coté X = +1
-  prog.setAttributeValue(ColorID, 1.0, 0.0, 0.0); // rouge
-  prog.setAttributeValue(VertexID, +1.0, -1.0, -1.0);
-  prog.setAttributeValue(VertexID, +1.0, +1.0, -1.0);
-  prog.setAttributeValue(VertexID, +1.0, +1.0, +1.0);
-  prog.setAttributeValue(VertexID, +1.0, -1.0, +1.0);
-
-  // face coté X = -1
-  prog.setAttributeValue(ColorID, 0.0, 1.0, 0.0); // vert
-  prog.setAttributeValue(VertexID, -1.0, -1.0, -1.0);
-  prog.setAttributeValue(VertexID, -1.0, -1.0, +1.0);
-  prog.setAttributeValue(VertexID, -1.0, +1.0, +1.0);
-  prog.setAttributeValue(VertexID, -1.0, +1.0, -1.0);
-
-  // face coté Y = +1
-  prog.setAttributeValue(ColorID, 0.0, 0.0, 1.0); // bleu
-  prog.setAttributeValue(VertexID, -1.0, +1.0, -1.0);
-  prog.setAttributeValue(VertexID, -1.0, +1.0, +1.0);
-  prog.setAttributeValue(VertexID, +1.0, +1.0, +1.0);
-  prog.setAttributeValue(VertexID, +1.0, +1.0, -1.0);
-
-  // face coté Y = -1
-  prog.setAttributeValue(ColorID, 0.0, 1.0, 1.0); // cyan
-  prog.setAttributeValue(VertexID, -1.0, -1.0, -1.0);
-  prog.setAttributeValue(VertexID, +1.0, -1.0, -1.0);
-  prog.setAttributeValue(VertexID, +1.0, -1.0, +1.0);
-  prog.setAttributeValue(VertexID, -1.0, -1.0, +1.0);
-
-  // face coté Z = +1
-  prog.setAttributeValue(ColorID, 1.0, 1.0, 0.0); // jaune
-  prog.setAttributeValue(VertexID, -1.0, -1.0, +1.0);
-  prog.setAttributeValue(VertexID, +1.0, -1.0, +1.0);
-  prog.setAttributeValue(VertexID, +1.0, +1.0, +1.0);
-  prog.setAttributeValue(VertexID, -1.0, +1.0, +1.0);
-
-  // face coté Z = -1
-  prog.setAttributeValue(ColorID, 1.0, 0.0, 1.0); // magenta
-  prog.setAttributeValue(VertexID, -1.0, -1.0, -1.0);
-  prog.setAttributeValue(VertexID, -1.0, +1.0, -1.0);
-  prog.setAttributeValue(VertexID, +1.0, +1.0, -1.0);
-  prog.setAttributeValue(VertexID, +1.0, -1.0, -1.0);
-
-  glEnd();
-}
-
 void OpenGLViewer::drawAxes(const QMatrix4x4 &point_of_view, bool colored) {
   prog.setUniformValue("view_model", view_matrix * point_of_view);
   glBegin(GL_LINES);
@@ -137,54 +88,4 @@ void OpenGLViewer::drawSphere(const QMatrix4x4 &point_of_view, double red,
   prog.setUniformValue("view_model", view_matrix * point_of_view);
   prog.setAttributeValue(ColorID, red, green, blue);
   sphere.draw(prog, VertexID);
-}
-
-void OpenGLViewer::drawParallelepipedeCubique(const QMatrix4x4 &point_of_view,
-                                              double x, double y, double z) {
-  prog.setUniformValue("vue_modele", point_of_view);
-
-  glBegin(GL_QUADS);
-  // face coté X = +1
-  prog.setAttributeValue(ColorID, 1.0, 0.0, 0.0); // rouge
-  prog.setAttributeValue(VertexID, +x, +0.0, +0.0);
-  prog.setAttributeValue(VertexID, +x, +y, +0.0);
-  prog.setAttributeValue(VertexID, +x, +y, +z);
-  prog.setAttributeValue(VertexID, +x, +0.0, +1.0);
-
-  // face coté X = -1
-  prog.setAttributeValue(ColorID, 0.0, 1.0, 0.0); // vert
-  prog.setAttributeValue(VertexID, +0.0, +0.0, +0.0);
-  prog.setAttributeValue(VertexID, +0.0, +0.0, +z);
-  prog.setAttributeValue(VertexID, +0.0, +y, +z);
-  prog.setAttributeValue(VertexID, +0.0, +y, +0.0);
-
-  // face coté Y = +1
-  prog.setAttributeValue(ColorID, 0.0, 0.0, 1.0); // bleu
-  prog.setAttributeValue(VertexID, +0.0, +y, +0.0);
-  prog.setAttributeValue(VertexID, +0.0, +y, +z);
-  prog.setAttributeValue(VertexID, +x, +y, +z);
-  prog.setAttributeValue(VertexID, +x, +y, +0.0);
-
-  // face coté Y = -1
-  prog.setAttributeValue(ColorID, 0.0, 1.0, 1.0); // cyan
-  prog.setAttributeValue(VertexID, +0.0, +0.0, +0.0);
-  prog.setAttributeValue(VertexID, +x, +0.0, +0.0);
-  prog.setAttributeValue(VertexID, +x, +0.0, +z);
-  prog.setAttributeValue(VertexID, +0.0, +0.0, +z);
-
-  // face coté Z = +1
-  prog.setAttributeValue(ColorID, 1.0, 1.0, 0.0); // jaune
-  prog.setAttributeValue(VertexID, +0.0, +0.0, +z);
-  prog.setAttributeValue(VertexID, +x, +0.0, +z);
-  prog.setAttributeValue(VertexID, +x, +y, +z);
-  prog.setAttributeValue(VertexID, +0.0, +y, +z);
-
-  // face coté Z = -1
-  prog.setAttributeValue(ColorID, 1.0, 0.0, 1.0); // magenta
-  prog.setAttributeValue(VertexID, +0.0, +0.0, +0.0);
-  prog.setAttributeValue(VertexID, +0.0, +y, +0.0);
-  prog.setAttributeValue(VertexID, +x, +y, +0.0);
-  prog.setAttributeValue(VertexID, +x, +0.0, +0.0);
-
-  glEnd();
 }

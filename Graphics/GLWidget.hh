@@ -35,11 +35,15 @@ private:
   // Events
   virtual void keyPressEvent(QKeyEvent *event) override;
   virtual void timerEvent(QTimerEvent *event) override;
+  virtual void mouseMoveEvent(QMouseEvent *event) override;
+  virtual void mousePressEvent(QMouseEvent *event) override;
 
   void pause();
 
   int timerID;
   QElapsedTimer stopwatch;
+
+  QPoint lastMousePosition;
 
   OpenGLViewer viewer;
   System system = System::prefilled();

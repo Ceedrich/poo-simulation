@@ -76,6 +76,20 @@ void GLWidget::timerEvent(QTimerEvent *event) {
   system.evolve(dt);
   update();
 }
+void GLWidget::mousePressEvent(QMouseEvent *event) {
+  lastMousePosition = event->pos();
+}
+void GLWidget::mouseMoveEvent(QMouseEvent *event) {
+  if (event->buttons() & Qt::LeftButton) {
+    constexpr double small_angle(.4);
+    QPointF d(event->pos() - lastMousePosition);
+    lastMousePosition = event->pos();
+
+    viewer.rotate(small_angle * d.manhattanLength(), d.y(), d.x(), 0);
+
+    update();
+  }
+}
 
 void GLWidget::pause() {
   if (timerID == 0) {
