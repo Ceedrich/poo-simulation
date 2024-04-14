@@ -5,7 +5,9 @@
 #include "NumberGenerators/Ex9NumberGenerator.hh"
 #include "NumberGenerators/NumberGenerator.hh"
 #include "NumberGenerators/RandomGenerator.hh"
+#include "Particles/Argon.hh"
 #include "Particles/Helium.hh"
+#include "Particles/Neon.hh"
 #include "Particles/Particle.hh"
 #include <memory>
 #include <vector>
@@ -20,14 +22,21 @@ public:
   static System exercice9() {
     System system;
     system.random_draw = std::make_unique<Ex9NumberGenerator>();
+    system.add_particle(Helium(Vector3D(1, 1, 1), Vector3D(), 4.002602));
+    system.add_particle(
+        Neon(Vector3D(1, 18.5, 1), Vector3D(0, 0.2, 0), 20.1797));
+    system.add_particle(
+        Argon(Vector3D(1, 1, 3.1), Vector3D(0, 0, -0.5), 39.948));
+
     return system;
   }
 
   static System prefilled() {
     System system;
-    for (int x(0); x < 20; x += 5) {
-      for (int y(0); y < 20; y += 5) {
-        for (int z(0); z < 20; z += 5) {
+    int delta(5);
+    for (int x(0); x < 20; x += delta) {
+      for (int y(0); y < 20; y += delta) {
+        for (int z(0); z < 20; z += delta) {
           double vx = system.random_draw->uniform(-1.0, 1.0);
           double vy = system.random_draw->uniform(-1.0, 1.0);
           double vz = system.random_draw->uniform(-1.0, 1.0);
@@ -49,7 +58,7 @@ public:
    * @brief Move constructor.
    */
   System(System &&) = default;
-  System& operator=(System &&) = default;
+  System &operator=(System &&) = default;
 
   /**
    * @brief Constructor with enclosure dimensions.
