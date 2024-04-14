@@ -26,19 +26,6 @@ void OpenGLViewer::init() {
   shaderProgram.setUniformValue("light.color", 1.0, 1.0, 1.0);
 
   sphere.initialize();
-
-  view_matrix.setToIdentity();
-}
-
-void OpenGLViewer::translate(double x, double y, double z) {
-  QMatrix4x4 m;
-  m.translate(x, y, z);
-  view_matrix = m * view_matrix;
-}
-void OpenGLViewer::rotate(double angle, double dirX, double dirY, double dirZ) {
-  QMatrix4x4 m;
-  m.rotate(angle, dirX, dirY, dirZ);
-  view_matrix = m * view_matrix;
 }
 
 void OpenGLViewer::draw(const Particle &p) {
@@ -64,7 +51,7 @@ void OpenGLViewer::draw(const System &) { // TODO
 }
 
 void OpenGLViewer::drawAxes(const QMatrix4x4 &point_of_view, bool colored) {
-  shaderProgram.setUniformValue("view", view_matrix);
+  shaderProgram.setUniformValue("view", camera().view());
   shaderProgram.setUniformValue("model", point_of_view);
   glBegin(GL_LINES);
 
@@ -95,7 +82,7 @@ void OpenGLViewer::drawAxes(const QMatrix4x4 &point_of_view, bool colored) {
 
 void OpenGLViewer::drawSphere(const QMatrix4x4 &point_of_view, double red,
                               double green, double blue) {
-  shaderProgram.setUniformValue("view", view_matrix);
+  shaderProgram.setUniformValue("view", camera().view());
   shaderProgram.setUniformValue("model", point_of_view);
   shaderProgram.setAttributeValue(VertexShader::ColorID, red, green, blue);
   sphere.draw(shaderProgram, VertexShader::VertexID, VertexShader::NormalID);

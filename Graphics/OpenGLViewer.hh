@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Drawings/DrawingFrame.hh"
+#include "Camera.hh"
 #include "GLSphere.hh"
 #include <QMatrix4x4>
 #include <QOpenGLShaderProgram>
@@ -17,8 +18,7 @@ public:
     shaderProgram.setUniformValue("projection", projection);
   }
 
-  void translate(double x, double y, double z);
-  void rotate(double angle, double dirX, double dirY, double dirZ);
+  Camera &camera() { return camera_; };
 
 private:
   void drawAxes(QMatrix4x4 const &point_of_view = QMatrix4x4(),
@@ -28,6 +28,6 @@ private:
 
 private:
   QOpenGLShaderProgram shaderProgram;
-  QMatrix4x4 view_matrix;
+  Camera camera_;
   GLSphere sphere;
 };

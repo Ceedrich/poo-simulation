@@ -1,7 +1,11 @@
 #include "GLWidget.hh"
+#include "Inputs.hh"
 #include <QKeyEvent>
 #include <QMatrix4x4>
 #include <QTimerEvent>
+#include <cmath>
+
+using std::asin, std::clamp;
 
 void GLWidget::initializeGL() {
   viewer.init();
@@ -24,44 +28,44 @@ void GLWidget::paintGL() {
 }
 
 void GLWidget::keyPressEvent(QKeyEvent *event) {
-  constexpr double smallAngle(5.0);
+  constexpr double smallAngle(5.0 * M_PI / 180);
   constexpr double smallStep(0.5);
 
   switch (event->key()) {
   case Qt::Key::Key_Left:
-    viewer.rotate(smallAngle, 0.0, -1.0, 0.0);
+    viewer.camera().rotateYaw(+smallAngle);
     break;
   case Qt::Key::Key_Right:
-    viewer.rotate(smallAngle, 0.0, 1.0, 0.0);
+    viewer.camera().rotateYaw(-smallAngle);
     break;
   case Qt::Key::Key_Up:
-    viewer.rotate(smallAngle, -1.0, 0.0, 0.0);
+    viewer.camera().rotatePitch(+smallAngle);
     break;
   case Qt::Key::Key_Down:
-    viewer.rotate(smallAngle, 1.0, 0.0, 0.0);
+    viewer.camera().rotatePitch(-smallAngle);
     break;
-  case KEY_FORWARD:
-    viewer.translate(0.0, 0.0, smallStep);
+  case Inputs::FORWARD:
+    viewer.camera().move(0.0, 0.0, +smallStep);
     break;
-  case KEY_BACKWARD:
-    viewer.translate(0.0, 0.0, -smallStep);
+  case Inputs::BACKWARD:
+    viewer.camera().move(0.0, 0.0, -smallStep);
     break;
-  case KEY_LEFT:
-    viewer.translate(smallStep, 0.0, 0.0);
+  case Inputs::LEFT:
+    viewer.camera().move(+smallStep, 0.0, 0.0);
     break;
-  case KEY_RIGHT:
-    viewer.translate(-smallStep, 0.0, 0.0);
+  case Inputs::RIGHT:
+    viewer.camera().move(-smallStep, 0.0, 0.0);
     break;
-  case KEY_DOWN:
-    viewer.translate(0.0, smallStep, 0.0);
+  case Inputs::DOWN:
+    viewer.camera().move(0.0, -smallStep, 0.0);
     break;
-  case KEY_UP:
-    viewer.translate(0.0, -smallStep, 0.0);
+  case Inputs::UP:
+    viewer.camera().move(0.0, +smallStep, 0.0);
     break;
-  case KEY_PAUSE:
+  case Inputs::PAUSE:
     pause();
     break;
-  case KEY_QUIT:
+  case Inputs::QUIT:
     close();
     break;
   }
@@ -80,12 +84,15 @@ void GLWidget::mousePressEvent(QMouseEvent *event) {
   lastMousePosition = event->pos();
 }
 void GLWidget::mouseMoveEvent(QMouseEvent *event) {
+  double constexpr smallAngle(0.4 / 180);
   if (event->buttons() & Qt::LeftButton) {
-    constexpr double small_angle(.4);
-    QPointF d(event->pos() - lastMousePosition);
+    double dx(event->pos().x() - lastMousePosition.x());
+    double dy(event->pos().y() - lastMousePosition.y());
+
     lastMousePosition = event->pos();
 
-    viewer.rotate(small_angle * d.manhattanLength(), d.y(), d.x(), 0);
+    viewer.camera().rotateYaw(dx * smallAngle);
+    viewer.camera().rotatePitch(dy * smallAngle);
 
     update();
   }
