@@ -8,8 +8,8 @@
 class Enclosure : public Drawable {
 private:
   double width_;  // x
-  double length_; // y
-  double height_; // z
+  double height_; // y
+  double length_; // z
 
 public:
   /**
@@ -19,7 +19,7 @@ public:
    * @param l The length of the enclosure.
    * @param h The height of the enclosure.
    */
-  Enclosure(double w, double l, double h) : width_(w), length_(l), height_(h) {}
+  Enclosure(double w, double h, double l) : width_(w), height_(h), length_(l) {}
 
   /**
    * @brief Constructs a square Enclosure object with the given side length.

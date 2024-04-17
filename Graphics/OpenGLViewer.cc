@@ -42,10 +42,64 @@ void OpenGLViewer::draw(const Particle &p) {
     drawSphere(m, 1.0, 1.0, 0.0);
   }
 }
-void OpenGLViewer::draw(const Enclosure &) {
-  // drawParallelepipedeCubique(QMatrix4x4(), e.width(), e.height(),
-  // e.length());
-} // TODO
+void OpenGLViewer::draw(const Enclosure &e) {
+  constexpr QVector3D xColor(0.5, 0.5, 0.5);
+  constexpr QVector3D yColor(0.7, 0.7, 0.7);
+  constexpr QVector3D zColor(0.9, 0.9, 0.9);
+
+  QMatrix4x4 m;
+  m.scale(e.width(), e.height(), e.length());
+
+  shaderProgram.setUniformValue("view", camera().view());
+  shaderProgram.setUniformValue("model", m);
+  glBegin(GL_QUADS);
+
+  shaderProgram.setAttributeValue(VertexShader::ColorID, xColor);
+  // X = 0
+  shaderProgram.setAttributeValue(VertexShader::NormalID, +1.0, +0.0, +0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +0.0, +0.0, +0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +0.0, +1.0, +0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +0.0, +1.0, +1.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +0.0, +0.0, +1.0);
+
+  // X = 1
+  shaderProgram.setAttributeValue(VertexShader::NormalID, -1.0, +0.0, +0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +1.0, +1.0, +1.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +1.0, +1.0, +0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +1.0, +0.0, +0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +1.0, +0.0, +1.0);
+
+  shaderProgram.setAttributeValue(VertexShader::ColorID, yColor);
+  // Y = 0
+  shaderProgram.setAttributeValue(VertexShader::NormalID, 0.0, 1.0, 0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, 0.0, 0.0, 0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, 0.0, 0.0, 1.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, 1.0, 0.0, 1.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, 1.0, 0.0, 0.0);
+
+  // Y = 1
+  shaderProgram.setAttributeValue(VertexShader::NormalID, +0.0, -1.0, +0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +1.0, +1.0, +1.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +0.0, +1.0, +1.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +0.0, +1.0, +0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +1.0, +1.0, +0.0);
+
+  shaderProgram.setAttributeValue(VertexShader::ColorID, zColor);
+  // Z = 0
+  shaderProgram.setAttributeValue(VertexShader::NormalID, +0.0, +0.0, +1.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +0.0, +0.0, +0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +1.0, +0.0, +0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +1.0, +1.0, +0.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +0.0, +1.0, +0.0);
+
+  // Z = 1
+  shaderProgram.setAttributeValue(VertexShader::NormalID, +0.0, +0.0, -1.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +1.0, +1.0, +1.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +1.0, +0.0, +1.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +0.0, +0.0, +1.0);
+  shaderProgram.setAttributeValue(VertexShader::VertexID, +0.0, +1.0, +1.0);
+  glEnd();
+}
 void OpenGLViewer::draw(const System &) { // TODO
   drawAxes();
 }

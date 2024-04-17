@@ -32,11 +32,11 @@ public:
   }
 
   static System prefilled() {
-    System system;
+    System system(10.0, 20.0, 30.0);
     int delta(5);
-    for (int x(0); x < 20; x += delta) {
-      for (int y(0); y < 20; y += delta) {
-        for (int z(0); z < 20; z += delta) {
+    for (int x(0); x < system.enclosure.width(); x += delta) {
+      for (int y(0); y < system.enclosure.height(); y += delta) {
+        for (int z(0); z < system.enclosure.length(); z += delta) {
           double vx = system.random_draw->uniform(-1.0, 1.0);
           double vy = system.random_draw->uniform(-1.0, 1.0);
           double vz = system.random_draw->uniform(-1.0, 1.0);
