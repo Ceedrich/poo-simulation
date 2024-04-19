@@ -40,16 +40,16 @@ void Particle::collide(const Enclosure &enclosure) {
     position_ -= 2 * Vector3D(position_.x(), 0, 0);
     velocity_ = Vector3D(-velocity_.x(), velocity_.y(), velocity_.z());
   }
-  if (position_.y() > enclosure.length()) {
-    position_ -= 2 * Vector3D(0, position_.y() - enclosure.length(), 0);
+  if (position_.y() > enclosure.height()) {
+    position_ -= 2 * Vector3D(0, position_.y() - enclosure.height(), 0);
     velocity_ = Vector3D(velocity_.x(), -velocity_.y(), velocity_.z());
   }
   if (position_.y() < 0) {
     position_ -= 2 * Vector3D(0, position_.y(), 0);
     velocity_ = Vector3D(velocity_.x(), -velocity_.y(), velocity_.z());
   }
-  if (position_.z() > enclosure.height()) {
-    position_ -= 2 * Vector3D(0, 0, position_.z() - enclosure.height());
+  if (position_.z() > enclosure.length()) {
+    position_ -= 2 * Vector3D(0, 0, position_.z() - enclosure.length());
     velocity_ = Vector3D(velocity_.x(), velocity_.y(), -velocity_.z());
   }
   if (position_.z() < 0) {

@@ -67,9 +67,9 @@ public:
    * @param length The length of the enclosure.
    * @param height The height of the enclosure.
    */
-  System(double width, double length, double height)
+  System(double width, double height, double length)
       : random_draw(std::make_unique<RandomGenerator>()),
-        enclosure(width, length, height) {}
+        enclosure(width, height, length) {}
 
   /**
    * @brief Constructor with random seed.
@@ -87,9 +87,9 @@ public:
    * @param height The height of the enclosure.
    * @param random_seed The random seed to use.
    */
-  System(double width, double length, double height, unsigned int random_seed)
+  System(double width, double height, double length, unsigned int random_seed)
       : random_draw(std::make_unique<RandomGenerator>(random_seed)),
-        enclosure(width, length, height) {}
+        enclosure(width, height, length) {}
 
   /**
    * @brief Destructor.
