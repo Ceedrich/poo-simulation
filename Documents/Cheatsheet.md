@@ -18,7 +18,7 @@ Dans ce cas, il est aussi utile de definir un *Constructeur de deplacement*.
 class Complexe {
 public:
   static Complexe from_polar(double r, double theta) {
-    return Complexe(module * cos(theta), module * sin(theta));
+    return Complexe(r * cos(theta), r * sin(theta));
   }
 
   Complexe(double x, double y) : x_(x), y_(y) {}
