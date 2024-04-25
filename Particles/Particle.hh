@@ -77,7 +77,7 @@ public:
    * @param dt The time interval for which the particle's position will be
    * evolved.
    */
-  void evolve(double dt) { position_ += velocity_ * dt; }
+  virtual void evolve(double dt) { position_ += velocity_ * dt; }
 
   /**
    * @brief Collides the current particle with another particle.

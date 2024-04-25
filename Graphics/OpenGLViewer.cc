@@ -1,5 +1,6 @@
 #include "OpenGLViewer.hh"
 #include "../Particles/Helium.hh"
+#include "../Particles/MotionTrace.hh"
 #include "../System.hh"
 #include "vertex_shader.hh"
 #include <iostream>
@@ -41,6 +42,16 @@ void OpenGLViewer::draw(const Particle &p) {
   } else {
     drawSphere(m, 1.0, 1.0, 0.0);
   }
+}
+
+void OpenGLViewer::draw(const MotionTrace &p) {
+  shaderProgram.setUniformValue("model", QMatrix4x4());
+
+  glBegin(GL_LINE_STRIP);
+  for (const auto &point : p.points()) {
+    glVertex3f(point.x(), point.y(), point.z());
+  }
+  glEnd();
 }
 void OpenGLViewer::draw(const Enclosure &e) {
   constexpr QVector3D xColor(0.5, 0.5, 0.5);

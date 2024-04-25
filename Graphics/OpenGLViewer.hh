@@ -9,6 +9,7 @@
 class OpenGLViewer : public DrawingFrame {
 public:
   virtual void draw(Particle const &) override;
+  virtual void draw(MotionTrace const &) override;
   virtual void draw(Enclosure const &) override;
   virtual void draw(System const &) override;
 

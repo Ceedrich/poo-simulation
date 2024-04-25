@@ -1,6 +1,7 @@
 #pragma once
 #include "Drawable.hh"
 
+class MotionTrace;
 class Particle;
 class Enclosure;
 class System;
@@ -28,11 +29,8 @@ public:
    */
   virtual void draw(Particle const &) = 0;
 
-  /**
-   * @brief Draws an enclosure on the drawing frame.
-   *
-   * @param enclosure The enclosure to be drawn.
-   */
+  virtual void draw(MotionTrace const &) = 0;
+
   virtual void draw(Enclosure const &) = 0;
 
   virtual void draw(System const &) = 0;
