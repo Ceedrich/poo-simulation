@@ -11,8 +11,10 @@ QMatrix4x4 Camera::view() const {
 }
 
 void Camera::move(double x, double y, double z) {
-  QVector3D front_(front());
-  QVector3D right(QVector3D::crossProduct(WORLD_UP, front_));
+  QVector3D right(QVector3D::crossProduct(WORLD_UP, front()));
+  right.normalize();
+  QVector3D front_(QVector3D::crossProduct(right, WORLD_UP));
+  front_.normalize();
   position += (x * right + y * WORLD_UP + z * front_);
 }
 
