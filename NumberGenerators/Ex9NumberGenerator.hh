@@ -11,4 +11,5 @@ class Ex9NumberGenerator : public NumberGenerator {
       return 0;
     }
   }
+  double gaussian(double, double) override { return 0.0; }
 };
