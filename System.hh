@@ -33,19 +33,7 @@ public:
 
   static System prefilled() {
     System system(10.0, 20.0, 30.0);
-    int delta(5);
-    for (int x(0); x < system.enclosure.width(); x += delta) {
-      for (int y(0); y < system.enclosure.height(); y += delta) {
-        for (int z(0); z < system.enclosure.length(); z += delta) {
-          double vx = system.random_draw->uniform(-1.0, 1.0);
-          double vy = system.random_draw->uniform(-1.0, 1.0);
-          double vz = system.random_draw->uniform(-1.0, 1.0);
-          double m = system.random_draw->uniform(0.0, 20.0);
-          system.add_particle(
-              Helium(Vector3D(x, y, z), Vector3D(vx, vy, vz), m));
-        }
-      }
-    }
+    system.fill(40);
     return system;
   }
 
@@ -118,6 +106,12 @@ public:
    * @brief Deletes all particles from the system.
    */
   void delete_particles();
+
+  /**
+   * @brief Fills the system randomly with particles
+   * @param count The count of the particles
+   */
+  void fill(size_t count);
 
   /**
    * @brief Evolves the system over a given time step.

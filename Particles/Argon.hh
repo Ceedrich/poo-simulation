@@ -5,6 +5,10 @@
 
 class Argon : public Particle {
 public:
+  static constexpr double MOLAR_MASS = 39.948;
+  static constexpr double SPECIFIC_CONSTANT =
+      1000 * IDEAL_GAS_CONSTANT / MOLAR_MASS;
+
   Argon(Vector3D r, Vector3D p, double m) : Particle(r, p, m) {}
   void print(std::ostream &out) const override;
 

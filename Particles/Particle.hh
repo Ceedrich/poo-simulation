@@ -14,6 +14,8 @@
  */
 class Particle : public Drawable {
 public:
+  static constexpr double IDEAL_GAS_CONSTANT = 8.314472;
+
   /**
    * @brief Constructs a Particle object with the given position, speed, and
    * mass.

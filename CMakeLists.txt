@@ -78,4 +78,18 @@ add_executable(Graphisme graphisme.cc
 )
 target_link_libraries(Graphisme Qt5::Widgets OpenGL::GL)
 
+add_executable(Exercice12 Exercice12.cc
+    ${HEADERS_DRAWINGS}
+
+    System.hh System.cc
+    Enclosure.hh Enclosure.cc
+    Vector3D.hh Vector3D.cc
+    ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
+
+    ${SOURCES_GRAPHICS} ${HEADERS_GRAPHICS}
+
+    ${RESOURCE_FILES}
+)
+target_link_libraries(Exercice12 Qt5::Widgets OpenGL::GL)
+
 include(GNUInstallDirs)
