@@ -15,19 +15,48 @@ include_directories(${Qt5Widgets_INCLUDE_DIRS})
 
 qt5_add_resources(RESOURCE_FILES Graphics/resources.qrc)
 
-file(GLOB SOURCES_PARTICLES "Particles/*.cc")
-file(GLOB HEADERS_PARTICLES "Particles/*.hh")
+set(SOURCES_PARTICLES
+    Particles/Particle.cc
+    Particles/Helium.cc
+    Particles/Neon.cc
+    Particles/Argon.cc
+)
+set(HEADERS_PARTICLES
+    Particles/Particle.hh
+    Particles/Helium.hh
+    Particles/Neon.hh
+    Particles/Argon.hh
+)
 
-file(GLOB HEADERS_DRAWINGS "Drawings/*.hh")
+set(HEADERS_DRAWINGS
+    Drawings/Drawable.hh
+    Drawings/DrawingFrame.hh
+)
 
-file(GLOB SOURCES_NUMBER_GENERATORS "NumberGenerators/*.cc")
-file(GLOB HEADERS_NUMBER_GENERATORS "NumberGenerators/*.hh")
+set(HEADERS_NUMBER_GENERATORS
+    NumberGenerators/NumberGenerator.hh
+    NumberGenerators/RandomGenerator.hh
+    NumberGenerators/Ex9NumberGenerator.hh
+)
 
-file(GLOB SOURCES_GRAPHICS "Graphics/*.cc")
-file(GLOB HEADERS_GRAPHICS "Graphics/*.hh")
+set(SOURCES_GRAPHICS
+    Graphics/Camera.cc
+    Graphics/GLSphere.cc
+    Graphics/GLWidget.cc
+    Graphics/OpenGLViewer.cc
+)
 
-file(GLOB SOURCES_TEXT "Text/*.cc")
-file(GLOB HEADERS_TEXT "Text/*.hh")
+set(HEADERS_GRAPHICS
+    Graphics/Camera.hh
+    Graphics/GLSphere.hh
+    Graphics/GLWidget.hh
+    Graphics/Inputs.hh
+    Graphics/OpenGLViewer.hh
+    Graphics/vertex_shader.hh
+)
+
+set(SOURCES_TEXT Text/TextViewer.cc)
+set(HEADERS_TEXT Text/TextViewer.hh)
 
 # Tests
 add_executable(Vector3D test_Vector3D.cc Vector3D.cc Vector3D.hh)
@@ -60,7 +89,7 @@ add_executable(Exercice9 Exercice9.cc
     Enclosure.cc Enclosure.hh
     Vector3D.cc Vector3D.hh
 
-    ${SOURCES_NUMBER_GENERATORS} ${HEADERS_NUMBER_GENERATORS}
+    ${HEADERS_NUMBER_GENERATORS}
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 )
 
