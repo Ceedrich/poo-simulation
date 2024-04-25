@@ -9,7 +9,9 @@ using std::asin, std::clamp;
 
 void GLWidget::initializeGL() {
   viewer.init();
+  viewer.camera().move(10, 10, -10);
   timerID = startTimer(20);
+  ctimerID = startTimer(20);
   pause();
 }
 
@@ -28,39 +30,36 @@ void GLWidget::paintGL() {
 }
 
 void GLWidget::keyPressEvent(QKeyEvent *event) {
-  constexpr double smallAngle(5.0 * M_PI / 180);
-  constexpr double smallStep(0.5);
-
   switch (event->key()) {
-  case Qt::Key::Key_Left:
-    viewer.camera().rotateYaw(+smallAngle);
+  case Inputs::ROTATE_LEFT:
+    keys_pressed |= FLAGS::ROTATE_LEFT;
     break;
-  case Qt::Key::Key_Right:
-    viewer.camera().rotateYaw(-smallAngle);
+  case Inputs::ROTATE_RIGHT:
+    keys_pressed |= FLAGS::ROTATE_RIGHT;
     break;
-  case Qt::Key::Key_Up:
-    viewer.camera().rotatePitch(+smallAngle);
+  case Inputs::ROTATE_UP:
+    keys_pressed |= FLAGS::ROTATE_UP;
     break;
-  case Qt::Key::Key_Down:
-    viewer.camera().rotatePitch(-smallAngle);
+  case Inputs::ROTATE_DOWN:
+    keys_pressed |= FLAGS::ROTATE_DOWN;
     break;
-  case Inputs::FORWARD:
-    viewer.camera().move(0.0, 0.0, +smallStep);
+  case Inputs::STRAVE_FORWARD:
+    keys_pressed |= FLAGS::STRAVE_FORWARD;
     break;
-  case Inputs::BACKWARD:
-    viewer.camera().move(0.0, 0.0, -smallStep);
+  case Inputs::STRAVE_BACKWARD:
+    keys_pressed |= FLAGS::STRAVE_BACKWARD;
     break;
-  case Inputs::LEFT:
-    viewer.camera().move(+smallStep, 0.0, 0.0);
+  case Inputs::STRAVE_LEFT:
+    keys_pressed |= FLAGS::STRAVE_LEFT;
     break;
-  case Inputs::RIGHT:
-    viewer.camera().move(-smallStep, 0.0, 0.0);
+  case Inputs::STRAVE_RIGHT:
+    keys_pressed |= FLAGS::STRAVE_RIGHT;
     break;
-  case Inputs::DOWN:
-    viewer.camera().move(0.0, -smallStep, 0.0);
+  case Inputs::STRAVE_DOWN:
+    keys_pressed |= FLAGS::STRAVE_DOWN;
     break;
-  case Inputs::UP:
-    viewer.camera().move(0.0, +smallStep, 0.0);
+  case Inputs::STRAVE_UP:
+    keys_pressed |= FLAGS::STRAVE_UP;
     break;
   case Inputs::PAUSE:
     pause();
@@ -69,17 +68,89 @@ void GLWidget::keyPressEvent(QKeyEvent *event) {
     close();
     break;
   }
+}
 
+void GLWidget::keyReleaseEvent(QKeyEvent *event) {
+  switch (event->key()) {
+  case Inputs::ROTATE_LEFT:
+    keys_pressed &= ~FLAGS::ROTATE_LEFT;
+    break;
+  case Inputs::ROTATE_RIGHT:
+    keys_pressed &= ~FLAGS::ROTATE_RIGHT;
+    break;
+  case Inputs::ROTATE_UP:
+    keys_pressed &= ~FLAGS::ROTATE_UP;
+    break;
+  case Inputs::ROTATE_DOWN:
+    keys_pressed &= ~FLAGS::ROTATE_DOWN;
+    break;
+  case Inputs::STRAVE_FORWARD:
+    keys_pressed &= ~FLAGS::STRAVE_FORWARD;
+    break;
+  case Inputs::STRAVE_BACKWARD:
+    keys_pressed &= ~FLAGS::STRAVE_BACKWARD;
+    break;
+  case Inputs::STRAVE_LEFT:
+    keys_pressed &= ~FLAGS::STRAVE_LEFT;
+    break;
+  case Inputs::STRAVE_RIGHT:
+    keys_pressed &= ~FLAGS::STRAVE_RIGHT;
+    break;
+  case Inputs::STRAVE_DOWN:
+    keys_pressed &= ~FLAGS::STRAVE_DOWN;
+    break;
+  case Inputs::STRAVE_UP:
+    keys_pressed &= ~FLAGS::STRAVE_UP;
+    break;
+  }
+}
+
+void GLWidget::timerEvent(QTimerEvent *event) {
+  if (event->timerId() == timerID) {
+    updateSystemTimer();
+  }
+  if (event->timerId() == ctimerID) {
+    updateCameraTimer();
+  }
   update();
 }
-void GLWidget::timerEvent(QTimerEvent *event) {
-  Q_UNUSED(event);
 
+void GLWidget::updateSystemTimer() {
   double dt = stopwatch.restart() / 1000.0;
 
   system.evolve(dt);
-  update();
 }
+void GLWidget::updateCameraTimer() {
+  constexpr double straveSpeed(6.0);
+  constexpr double panSpeed(0.6);
+  double dt = cstopwatch.restart() / 1000.0;
+  if (!keys_pressed) {
+    return;
+  }
+
+  if (keys_pressed & FLAGS::ROTATE_LEFT)
+    viewer.camera().rotateYaw(+panSpeed * dt);
+  if (keys_pressed & FLAGS::ROTATE_RIGHT)
+    viewer.camera().rotateYaw(-panSpeed * dt);
+  if (keys_pressed & FLAGS::ROTATE_UP)
+    viewer.camera().rotatePitch(+panSpeed * dt);
+  if (keys_pressed & FLAGS::ROTATE_DOWN)
+    viewer.camera().rotatePitch(-panSpeed * dt);
+
+  if (keys_pressed & FLAGS::STRAVE_FORWARD)
+    viewer.camera().move(0.0, 0.0, +straveSpeed * dt);
+  if (keys_pressed & FLAGS::STRAVE_BACKWARD)
+    viewer.camera().move(0.0, 0.0, -straveSpeed * dt);
+  if (keys_pressed & FLAGS::STRAVE_UP)
+    viewer.camera().move(0.0, +straveSpeed * dt, 0.0);
+  if (keys_pressed & FLAGS::STRAVE_DOWN)
+    viewer.camera().move(0.0, -straveSpeed * dt, 0.0);
+  if (keys_pressed & FLAGS::STRAVE_LEFT)
+    viewer.camera().move(+straveSpeed * dt, 0.0, 0.0);
+  if (keys_pressed & FLAGS::STRAVE_RIGHT)
+    viewer.camera().move(-straveSpeed * dt, 0.0, 0.0);
+}
+
 void GLWidget::mousePressEvent(QMouseEvent *event) {
   lastMousePosition = event->pos();
 }

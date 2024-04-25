@@ -20,14 +20,20 @@ private:
 
   // Events
   virtual void keyPressEvent(QKeyEvent *event) override;
+  virtual void keyReleaseEvent(QKeyEvent *event) override;
   virtual void timerEvent(QTimerEvent *event) override;
   virtual void mouseMoveEvent(QMouseEvent *event) override;
   virtual void mousePressEvent(QMouseEvent *event) override;
 
+  void updateSystemTimer();
+  void updateCameraTimer();
+
   void pause();
 
   int timerID;
-  QElapsedTimer stopwatch;
+  int ctimerID;
+  unsigned short int keys_pressed;
+  QElapsedTimer stopwatch, cstopwatch;
 
   QPoint lastMousePosition;
 
