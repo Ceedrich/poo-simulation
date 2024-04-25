@@ -37,5 +37,7 @@ enum ROTATE_KEY {
 enum CONTROL_KEY {
   QUIT = Qt::Key::Key_Q,
   PAUSE = Qt::Key::Key_Escape,
+  SPEED_UP = Qt::Key::Key_E,
+  SPEED_DOWN = Qt::Key::Key_F,
 };
 } // namespace Inputs
