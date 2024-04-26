@@ -58,17 +58,6 @@ void Particle::collide(const Enclosure &enclosure) {
   }
 }
 
-bool Particle::encounters(Particle const &other, double const EPSILON) const {
-  int x1, y1, z1, x2, y2, z2;
-  x1 = int(position().x() / EPSILON);
-  y1 = int(position().y() / EPSILON);
-  z1 = int(position().z() / EPSILON);
-  x2 = int(other.position().x() / EPSILON);
-  y2 = int(other.position().y() / EPSILON);
-  z2 = int(other.position().z() / EPSILON);
-  return ((x1 == x2) && (y1 == y2) && (z1 == z2));
-}
-
 ostream &operator<<(ostream &out, Particle const &element) {
   element.print(out);
   return out;

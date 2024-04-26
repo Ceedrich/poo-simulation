@@ -26,7 +26,7 @@ void System::evolve(double dt) {
     auto &p = particles[i - 1];
     for (size_t j(0); j < i - 1; ++j) {
       auto &q = particles[j];
-      if (p->encounters(*q, EPSILON)) {
+      if (encounter(*p, *q)) {
         // cout << "La particule " << i
         //      << " entre en collision avec une autre particule " << j + 1
         //      << endl;
@@ -42,6 +42,17 @@ void System::evolve(double dt) {
       }
     }
   }
+}
+
+bool System::encounter(const Particle &p, const Particle &q) {
+  int x1, y1, z1, x2, y2, z2;
+  x1 = int(p.position().x() / EPSILON);
+  y1 = int(p.position().y() / EPSILON);
+  z1 = int(p.position().z() / EPSILON);
+  x2 = int(q.position().x() / EPSILON);
+  y2 = int(q.position().y() / EPSILON);
+  z2 = int(q.position().z() / EPSILON);
+  return ((x1 == x2) && (y1 == y2) && (z1 == z2));
 }
 
 void System::draw_on(DrawingFrame &support) {

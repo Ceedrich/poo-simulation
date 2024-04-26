@@ -122,8 +122,12 @@ public:
 
   virtual void draw_on(DrawingFrame &support) override;
 
+  void setEpsilon(double x) { EPSILON = x; }
+
 private:
-  static double constexpr EPSILON = 1;
+  double EPSILON = 1;
+
+  bool encounter(Particle const &p, Particle const &q);
 
   std::unique_ptr<NumberGenerator> random_draw;
   Enclosure enclosure;

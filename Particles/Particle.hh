@@ -104,17 +104,6 @@ public:
   void collide(Enclosure const &enclosure);
 
   /**
-   * @brief Checks if the particle encounters another particle within a given
-   * distance.
-   *
-   * @param other The other particle to check against.
-   * @param EPSILON The distance threshold for the encounter.
-   * @return True if the particle encounters the other particle, false
-   * otherwise.
-   */
-  bool encounters(Particle const &other, double const EPSILON = 1) const;
-
-  /**
    * @brief Creates a copy of the particle as a unique pointer.
    *
    * @return A unique pointer to the copied particle.
