@@ -19,4 +19,6 @@ public:
   std::unique_ptr<Particle> copyAsUniqueParticlePtr() const override {
     return copy();
   };
+
+  Vector3D color() const override { return Vector3D(0.02, 0.4, 0.675); }
 };

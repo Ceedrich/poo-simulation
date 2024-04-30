@@ -33,15 +33,7 @@ void OpenGLViewer::draw(const Particle &p) {
   QMatrix4x4 m;
   m.translate(p.position().x(), p.position().y(), p.position().z());
   m.scale(0.5);
-  if (p.mass() <= 5.0) {
-    drawSphere(m, 1.0, 0.0, 0.0);
-  } else if (p.mass() <= 10) {
-    drawSphere(m, 0.0, 1.0, 0.0);
-  } else if (p.mass() <= 15) {
-    drawSphere(m, 0.0, 0.0, 1.0);
-  } else {
-    drawSphere(m, 1.0, 1.0, 0.0);
-  }
+  drawSphere(m, p.color().x(), p.color().y(), p.color().z());
 }
 
 void OpenGLViewer::draw(const MotionTrace &p) {

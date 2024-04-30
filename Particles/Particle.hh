@@ -7,6 +7,17 @@
 #include <memory>
 
 /**
+ * COLOR Vectors obtained from
+ * https://colorkit.co/palette/5988c2-566acf-ad6ad9-d982e8-f297d9/
+ *
+ * Color 1: (Default)  	0.349, 0.533, 0.047
+ * Color 2: (Helium)		0.02, 0.4, 0.675
+ * Color 3: (Neon)			0.039, 0.839, 0.678
+ * Color 4: (Argon)			0.051, 0.596, 0.18
+ * Color 5: (TracePart)	0.059, 0.161, 0.49
+ */
+
+/**
  * @brief Represents a particle in a simulation.
  *
  * The Particle class inherits from the Drawable class and represents a particle
@@ -109,6 +120,8 @@ public:
    * @return A unique pointer to the copied particle.
    */
   virtual std::unique_ptr<Particle> copyAsUniqueParticlePtr() const = 0;
+
+  virtual Vector3D color() const { return Vector3D(0.349, 0.533, 0.047); }
 
 private:
   Vector3D position_; ///< The position of the particle.
