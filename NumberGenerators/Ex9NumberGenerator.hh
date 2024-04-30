@@ -13,5 +13,5 @@ class Ex9NumberGenerator : public NumberGenerator {
   }
   double gaussian(double, double) override { return 0.0; }
 
-  int uniformInt(int min, int max) override { return min; }
+  int uniformInt(int min, int) override { return min; }
 };
