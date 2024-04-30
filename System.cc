@@ -16,17 +16,36 @@ void System::add_particle(Particle const &particle) {
 
 void System::delete_particles() { particles.clear(); }
 
-void System::evolve(double dt) {
-  for (size_t i = 0; i < particles.size(); ++i) {
-    auto &p = particles[i];
+void System::evolve_multiple(System &s, double dt) {
+  for (auto const &p : s.particles) {
     p->evolve(dt);
-    p->collide(enclosure);
+    p->collide(s.enclosure);
   }
-  for (size_t i(particles.size()); i > 0; --i) {
-    auto &p = particles[i - 1];
+  for (size_t i(s.particles.size()); i > 0; --i) {
+    auto &p = s.particles[i - 1];
+    vector<Particle const &> collisions;
+    for (size_t j(i - 1); j > 0; --j) {
+      auto &q = s.particles[j - 1];
+      if (s.encounter(*p, *q))
+        collisions.push_back(*q);
+    }
+    for (auto const &q : collisions) {
+      p->collide(q);
+    }
+  }
+}
+
+void System::evolve_single(System &s, double dt) {
+  for (size_t i = 0; i < s.particles.size(); ++i) {
+    auto &p = s.particles[i];
+    p->evolve(dt);
+    p->collide(s.enclosure);
+  }
+  for (size_t i(s.particles.size()); i > 0; --i) {
+    auto &p = s.particles[i - 1];
     for (size_t j(0); j < i - 1; ++j) {
-      auto &q = particles[j];
-      if (encounter(*p, *q)) {
+      auto &q = s.particles[j];
+      if (s.encounter(*p, *q)) {
         // cout << "La particule " << i
         //      << " entre en collision avec une autre particule " << j + 1
         //      << endl;
@@ -34,7 +53,8 @@ void System::evolve(double dt) {
         // cout << "    " << i << " : " << *p << endl;
         // cout << "    " << j + 1 << " : " << *q << endl;
 
-        p->collide(*q, random_draw);
+        p->collide(*q, s.random_draw);
+        break;
 
         // cout << "  après le choc : " << endl;
         // cout << "    " << i << " : " << *p << endl;
@@ -64,8 +84,21 @@ bool System::encounter_center_of_mass(const Particle &p, const Particle &q,
 void System::setEncounterMethod(SYSTEM_ENCOUNTER_METHOD method) {
   switch (method) {
   case SYSTEM_ENCOUNTER_METHOD_PAVING:
+    encounter_method = encounter_paving;
     break;
   case SYSTEM_ENCOUNTER_METHOD_CENTER_OF_MASS:
+    encounter_method = encounter_center_of_mass;
+    break;
+  }
+}
+
+void System::setEvolveMethod(SYSTEM_EVOLVE_METHOD method) {
+  switch (method) {
+  case SYSTEM_EVOLVE_METHOD_SINGLE:
+    evolve_method = evolve_single;
+    break;
+  case SYSTEM_EVOLVE_METHOD_MULTIPLE:
+    evolve_method = evolve_multiple;
     break;
   }
 }

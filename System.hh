@@ -18,6 +18,11 @@ enum SYSTEM_ENCOUNTER_METHOD {
   SYSTEM_ENCOUNTER_METHOD_CENTER_OF_MASS,
 };
 
+enum SYSTEM_EVOLVE_METHOD {
+  SYSTEM_EVOLVE_METHOD_SINGLE,
+  SYSTEM_EVOLVE_METHOD_MULTIPLE,
+};
+
 class System : public Drawable {
 public:
   /**
@@ -124,13 +129,14 @@ public:
    *
    * @param dt The time step to evolve the system by.
    */
-  void evolve(double dt);
+  void evolve(double dt) { evolve_method(*this, dt); }
 
   virtual void draw_on(DrawingFrame &support) override;
 
   void setEpsilon(double x) { EPSILON = x; }
 
   void setEncounterMethod(SYSTEM_ENCOUNTER_METHOD method);
+  void setEvolveMethod(SYSTEM_EVOLVE_METHOD method);
 
 private:
   double EPSILON = 1;
@@ -140,7 +146,6 @@ private:
   std::vector<std::unique_ptr<Particle>> particles;
 
   // Encounter Method
-
   bool encounter(Particle const &p, Particle const &q) {
     return encounter_method(p, q, EPSILON);
   }
@@ -150,6 +155,11 @@ private:
                                        double EPSILON);
   std::function<bool(Particle const &, Particle const &, double)>
       encounter_method = encounter_paving;
+
+  // Evolve Method
+  static void evolve_single(System &s, double dt);
+  static void evolve_multiple(System &s, double dt);
+  std::function<void(System &, double)> evolve_method = evolve_single;
 };
 
 /**
