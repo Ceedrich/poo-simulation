@@ -44,7 +44,8 @@ void System::evolve(double dt) {
   }
 }
 
-bool System::encounter(const Particle &p, const Particle &q) {
+bool System::encounter_paving(const Particle &p, const Particle &q,
+                              double EPSILON) {
   int x1, y1, z1, x2, y2, z2;
   x1 = int(p.position().x() / EPSILON);
   y1 = int(p.position().y() / EPSILON);
@@ -53,6 +54,20 @@ bool System::encounter(const Particle &p, const Particle &q) {
   y2 = int(q.position().y() / EPSILON);
   z2 = int(q.position().z() / EPSILON);
   return ((x1 == x2) && (y1 == y2) && (z1 == z2));
+}
+
+bool System::encounter_center_of_mass(const Particle &p, const Particle &q,
+                                      double EPSILON) {
+  return (p.position() - q.position()).norm() < EPSILON;
+}
+
+void System::setEncounterMethod(SYSTEM_ENCOUNTER_METHOD method) {
+  switch (method) {
+  case SYSTEM_ENCOUNTER_METHOD_PAVING:
+    break;
+  case SYSTEM_ENCOUNTER_METHOD_CENTER_OF_MASS:
+    break;
+  }
 }
 
 void System::draw_on(DrawingFrame &support) {

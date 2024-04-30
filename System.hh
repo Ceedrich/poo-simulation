@@ -9,8 +9,14 @@
 #include "Particles/Helium.hh"
 #include "Particles/Neon.hh"
 #include "Particles/Particle.hh"
+#include <functional>
 #include <memory>
 #include <vector>
+
+enum SYSTEM_ENCOUNTER_METHOD {
+  SYSTEM_ENCOUNTER_METHOD_PAVING,
+  SYSTEM_ENCOUNTER_METHOD_CENTER_OF_MASS,
+};
 
 class System : public Drawable {
 public:
@@ -124,10 +130,18 @@ public:
 
   void setEpsilon(double x) { EPSILON = x; }
 
+  void setEncounterMethod(SYSTEM_ENCOUNTER_METHOD method);
+
 private:
   double EPSILON = 1;
 
-  bool encounter(Particle const &p, Particle const &q);
+  static bool encounter_paving(Particle const &p, Particle const &q,
+                               double EPSILON);
+  static bool encounter_center_of_mass(Particle const &p, Particle const &q,
+                                       double EPSILON);
+
+  std::function<bool(Particle const &, Particle const &, double)> encounter =
+      encounter_paving;
 
   std::unique_ptr<NumberGenerator> random_draw;
   Enclosure enclosure;
