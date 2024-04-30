@@ -135,17 +135,21 @@ public:
 private:
   double EPSILON = 1;
 
+  std::unique_ptr<NumberGenerator> random_draw;
+  Enclosure enclosure;
+  std::vector<std::unique_ptr<Particle>> particles;
+
+  // Encounter Method
+
+  bool encounter(Particle const &p, Particle const &q) {
+    return encounter_method(p, q, EPSILON);
+  }
   static bool encounter_paving(Particle const &p, Particle const &q,
                                double EPSILON);
   static bool encounter_center_of_mass(Particle const &p, Particle const &q,
                                        double EPSILON);
-
-  std::function<bool(Particle const &, Particle const &, double)> encounter =
-      encounter_paving;
-
-  std::unique_ptr<NumberGenerator> random_draw;
-  Enclosure enclosure;
-  std::vector<std::unique_ptr<Particle>> particles;
+  std::function<bool(Particle const &, Particle const &, double)>
+      encounter_method = encounter_paving;
 };
 
 /**
