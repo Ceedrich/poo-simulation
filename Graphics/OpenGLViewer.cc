@@ -21,7 +21,6 @@ void OpenGLViewer::init() {
   shaderProgram.bind();
 
   // Setup Light
-  shaderProgram.setUniformValue("light.ambient", 1.0, 1.0, 1.0);
   shaderProgram.setUniformValue("light.ambient_intensity", 0.3f);
   shaderProgram.setUniformValue("light.position", 25.0, 25.0, 25.0);
   shaderProgram.setUniformValue("light.color", 1.0, 1.0, 1.0);

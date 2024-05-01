@@ -6,7 +6,6 @@ in vec3 FragPos;
 struct Light {
     float ambient_intensity;
     vec3 position;
-    vec3 ambient;
     vec3 specular;
     vec3 color;
 };
@@ -15,7 +14,7 @@ uniform Light light;
 
 void main() {
     // Ambient lighting
-    vec3 ambient = light.ambient_intensity * light.ambient;
+    vec3 ambient = light.ambient_intensity * light.color;
     // Diffuse lighting
     vec3 norm = normalize(Normal);
     vec3 lightDir = normalize(light.position - FragPos);
