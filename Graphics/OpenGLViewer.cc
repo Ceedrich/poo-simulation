@@ -7,10 +7,12 @@
 
 void OpenGLViewer::init() {
   shaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex,
-                                        ":/shaders/vertex_shader.glsl");
+                                        ":/shaders/VertexShader.glsl");
 
   shaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment,
-                                        ":/shaders/fragment_shader.glsl");
+                                        shaderMode == SHADER_MODE_MINIMAL
+                                            ? SHADER_MODE_MINIMAL_LOCATION
+                                            : SHADER_MODE_PHONG_LOCATION);
 
   shaderProgram.bindAttributeLocation("vertex", VertexShader::VertexID);
   shaderProgram.bindAttributeLocation("color", VertexShader::ColorID);

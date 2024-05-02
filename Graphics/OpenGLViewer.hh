@@ -8,6 +8,10 @@
 
 class OpenGLViewer : public DrawingFrame {
 public:
+  enum SHADER_MODE {
+    SHADER_MODE_PHONG,
+    SHADER_MODE_MINIMAL,
+  };
   virtual void draw(Particle const &) override;
   virtual void draw(MotionTrace const &) override;
   virtual void draw(Enclosure const &) override;
@@ -21,6 +25,8 @@ public:
 
   Camera &camera() { return camera_; };
 
+  void setShaderMode(SHADER_MODE mode) { shaderMode = mode; }
+
 private:
   void drawAxes(QMatrix4x4 const &point_of_view = QMatrix4x4(),
                 bool colored = true);
@@ -28,6 +34,11 @@ private:
                   double blue);
 
 private:
+  static constexpr const char *const SHADER_MODE_PHONG_LOCATION =
+      ":/shaders/FragmentShaderPhong.glsl";
+  static constexpr const char *const SHADER_MODE_MINIMAL_LOCATION =
+      ":/shaders/FragmentShaderMinimal.glsl";
+  SHADER_MODE shaderMode = SHADER_MODE_PHONG;
   QOpenGLShaderProgram shaderProgram;
   Camera camera_;
   GLSphere sphere;
