@@ -13,18 +13,18 @@
 #include <memory>
 #include <vector>
 
-enum SYSTEM_ENCOUNTER_METHOD {
-  SYSTEM_ENCOUNTER_METHOD_PAVING,
-  SYSTEM_ENCOUNTER_METHOD_CENTER_OF_MASS,
-};
-
-enum SYSTEM_EVOLVE_METHOD {
-  SYSTEM_EVOLVE_METHOD_SINGLE,
-  SYSTEM_EVOLVE_METHOD_MULTIPLE,
-};
-
 class System : public Drawable {
 public:
+  enum ENCOUNTER_METHOD {
+    ENCOUNTER_METHOD_PAVING,
+    ENCOUNTER_METHOD_CENTER_OF_MASS,
+  };
+
+  enum EVOLVE_METHOD {
+    EVOLVE_METHOD_SINGLE,
+    EVOLVE_METHOD_MULTIPLE,
+  };
+
   /**
    * @brief Factory method for Exercise 9.
    *
@@ -68,7 +68,7 @@ public:
    */
   System(double width, double height, double length)
       : random_draw(std::make_unique<RandomGenerator>()),
-        enclosure(width, height, length) {}
+        enclosure_(width, height, length) {}
 
   /**
    * @brief Constructor with random seed.
@@ -88,7 +88,7 @@ public:
    */
   System(double width, double height, double length, unsigned int random_seed)
       : random_draw(std::make_unique<RandomGenerator>(random_seed)),
-        enclosure(width, height, length) {}
+        enclosure_(width, height, length) {}
 
   /**
    * @brief Destructor.
@@ -131,18 +131,20 @@ public:
    */
   void evolve(double dt) { evolve_method(*this, dt); }
 
+  Enclosure const &enclosure() const { return enclosure_; }
+
   virtual void draw_on(DrawingFrame &support) override;
 
   void setEpsilon(double x) { EPSILON = x; }
 
-  void setEncounterMethod(SYSTEM_ENCOUNTER_METHOD method);
-  void setEvolveMethod(SYSTEM_EVOLVE_METHOD method);
+  void setEncounterMethod(ENCOUNTER_METHOD method);
+  void setEvolveMethod(EVOLVE_METHOD method);
 
 private:
   double EPSILON = 1;
 
   std::unique_ptr<NumberGenerator> random_draw;
-  Enclosure enclosure;
+  Enclosure enclosure_;
   std::vector<std::unique_ptr<Particle>> particles;
 
   // Encounter Method

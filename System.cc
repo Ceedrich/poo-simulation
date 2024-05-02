@@ -17,48 +17,45 @@ void System::add_particle(Particle const &particle) {
 void System::delete_particles() { particles.clear(); }
 
 void System::evolve_multiple(System &s, double dt) {
-  for (auto const &p : s.particles) {
+  for (auto &p : s.particles) {
     p->evolve(dt);
-    p->collide(s.enclosure);
+    p->collide(s.enclosure_);
   }
-  for (size_t i(s.particles.size()); i > 0; --i) {
-    auto &p = s.particles[i - 1];
-    vector<Particle const &> collisions;
-    for (size_t j(i - 1); j > 0; --j) {
-      auto &q = s.particles[j - 1];
-      if (s.encounter(*p, *q))
-        collisions.push_back(*q);
-    }
-    for (auto const &q : collisions) {
-      p->collide(q);
+  for (auto i(s.particles.rbegin()); i != s.particles.rend(); ++i) {
+    auto &p(*i);
+    for (auto j(i + 1); j != s.particles.rend(); ++i) {
+      auto &q(*j);
+      if (s.encounter(*p, *q)) {
+        p->collide(*q, s.random_draw);
+      }
     }
   }
 }
 
 void System::evolve_single(System &s, double dt) {
-  for (size_t i = 0; i < s.particles.size(); ++i) {
-    auto &p = s.particles[i];
+  for (auto &p : s.particles) {
     p->evolve(dt);
-    p->collide(s.enclosure);
+    p->collide(s.enclosure_);
   }
-  for (size_t i(s.particles.size()); i > 0; --i) {
-    auto &p = s.particles[i - 1];
-    for (size_t j(0); j < i - 1; ++j) {
+  vector<bool> collided(s.particles.size(), false);
+  for (size_t _i(s.particles.size()); _i > 0; --_i) {
+    size_t i = _i - 1;
+    if (collided[i]) {
+      continue;
+    }
+    auto &p = s.particles[i];
+    for (size_t _j(_i - 1); _j > 0; --_j) {
+      size_t j = _j - 1;
+      if (collided[j]) {
+        continue;
+      }
       auto &q = s.particles[j];
+
       if (s.encounter(*p, *q)) {
-        // cout << "La particule " << i
-        //      << " entre en collision avec une autre particule " << j + 1
-        //      << endl;
-        // cout << "  avant le choc : " << endl;
-        // cout << "    " << i << " : " << *p << endl;
-        // cout << "    " << j + 1 << " : " << *q << endl;
-
         p->collide(*q, s.random_draw);
+        collided[i] = true;
+        collided[j] = true;
         break;
-
-        // cout << "  après le choc : " << endl;
-        // cout << "    " << i << " : " << *p << endl;
-        // cout << "    " << j + 1 << " : " << *q << endl;
       }
     }
   }
@@ -81,23 +78,23 @@ bool System::encounter_center_of_mass(const Particle &p, const Particle &q,
   return (p.position() - q.position()).norm() < EPSILON;
 }
 
-void System::setEncounterMethod(SYSTEM_ENCOUNTER_METHOD method) {
+void System::setEncounterMethod(ENCOUNTER_METHOD method) {
   switch (method) {
-  case SYSTEM_ENCOUNTER_METHOD_PAVING:
+  case ENCOUNTER_METHOD_PAVING:
     encounter_method = encounter_paving;
     break;
-  case SYSTEM_ENCOUNTER_METHOD_CENTER_OF_MASS:
+  case ENCOUNTER_METHOD_CENTER_OF_MASS:
     encounter_method = encounter_center_of_mass;
     break;
   }
 }
 
-void System::setEvolveMethod(SYSTEM_EVOLVE_METHOD method) {
+void System::setEvolveMethod(EVOLVE_METHOD method) {
   switch (method) {
-  case SYSTEM_EVOLVE_METHOD_SINGLE:
+  case EVOLVE_METHOD_SINGLE:
     evolve_method = evolve_single;
     break;
-  case SYSTEM_EVOLVE_METHOD_MULTIPLE:
+  case EVOLVE_METHOD_MULTIPLE:
     evolve_method = evolve_multiple;
     break;
   }
@@ -105,7 +102,7 @@ void System::setEvolveMethod(SYSTEM_EVOLVE_METHOD method) {
 
 void System::draw_on(DrawingFrame &support) {
   support.draw(*this);
-  enclosure.draw_on(support);
+  enclosure_.draw_on(support);
   for (auto const &p : particles) {
     p->draw_on(support);
   }
@@ -115,9 +112,9 @@ void System::fill(size_t count) {
   constexpr double temperature = 0.1;
   constexpr double specific_constant = Neon::SPECIFIC_CONSTANT;
   for (size_t _i(0); _i < count; ++_i) {
-    Vector3D position(random_draw->uniform(0, enclosure.width()),
-                      random_draw->uniform(0, enclosure.height()),
-                      random_draw->uniform(0, enclosure.length()));
+    Vector3D position(random_draw->uniform(0, enclosure_.width()),
+                      random_draw->uniform(0, enclosure_.height()),
+                      random_draw->uniform(0, enclosure_.length()));
     Vector3D velocity(
         random_draw->gaussian(0.0, sqrt(specific_constant * temperature)),
         random_draw->gaussian(0.0, sqrt(specific_constant * temperature)),
