@@ -8,8 +8,16 @@
 using std::asin, std::clamp;
 
 void GLWidget::initializeGL() {
+  constexpr double CAMERA_OFFSET = 1.2;
   viewer.init();
-  viewer.camera().move(10, 10, -10);
+
+  viewer.camera().move(system.enclosure().width() * CAMERA_OFFSET,
+                       system.enclosure().height() / 2,
+                       system.enclosure().length() * CAMERA_OFFSET);
+
+  viewer.camera().lookAt(system.enclosure().width() / 2,
+                         system.enclosure().height() / 2,
+                         system.enclosure().length() / 2);
   timerID = startTimer(20);
   ctimerID = startTimer(20);
   pause();
