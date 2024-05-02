@@ -35,6 +35,7 @@ private:
   unsigned short int keys_pressed;
   static constexpr double cMovementSpeed = 6.0;
   static constexpr double cSpeedMultiplier = 2.0;
+  static constexpr double dt = 0.1;
   bool cSpeedUp = false;
   QElapsedTimer stopwatch, cstopwatch;
 

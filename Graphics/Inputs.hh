@@ -38,5 +38,6 @@ enum CONTROL_KEY {
   QUIT = Qt::Key::Key_Q,
   PAUSE = Qt::Key::Key_Escape,
   SPEED_MODIFIER = Qt::Key::Key_Control,
+  EVOLVE = Qt::Key::Key_Return,
 };
 } // namespace Inputs

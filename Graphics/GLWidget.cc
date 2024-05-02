@@ -78,6 +78,10 @@ void GLWidget::keyPressEvent(QKeyEvent *event) {
   case Inputs::QUIT:
     close();
     break;
+  case Inputs::EVOLVE:
+    system.evolve(dt);
+    update();
+    break;
   }
 }
 
