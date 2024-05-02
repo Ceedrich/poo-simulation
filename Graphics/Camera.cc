@@ -6,7 +6,7 @@ using std::sin, std::cos, std::acos, std::atan2;
 
 QMatrix4x4 Camera::view() const {
   QMatrix4x4 m;
-  m.lookAt(position, position + front(), WORLD_UP);
+  m.lookAt(position_, position_ + front(), WORLD_UP);
   return m;
 }
 
@@ -15,11 +15,11 @@ void Camera::move(double x, double y, double z) {
   right.normalize();
   QVector3D front_(QVector3D::crossProduct(right, WORLD_UP));
   front_.normalize();
-  position += (x * right + y * WORLD_UP + z * front_);
+  position_ += (x * right + y * WORLD_UP + z * front_);
 }
 
 void Camera::lookAt(double x, double y, double z) {
-  QVector3D dir(QVector3D(x - position.x(), y - position.y(), z - position.z())
+  QVector3D dir(QVector3D(x - position_.x(), y - position_.y(), z - position_.z())
                     .normalized());
 
   yaw = atan2(dir.x(), dir.z());

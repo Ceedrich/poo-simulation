@@ -41,6 +41,7 @@ void GLWidget::resizeGL(int width, int height) {
 }
 
 void GLWidget::paintGL() {
+  viewer.updateShaderUniformValues();
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   system.draw_on(viewer);
 }

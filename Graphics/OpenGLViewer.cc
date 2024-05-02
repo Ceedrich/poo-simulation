@@ -23,12 +23,26 @@ void OpenGLViewer::init() {
   shaderProgram.bind();
 
   // Setup Light
-  shaderProgram.setUniformValue("light.ambient_intensity",
-                                light_.ambientIntensity());
-  shaderProgram.setUniformValue("light.position", light_.position());
-  shaderProgram.setUniformValue("light.color", light_.color());
 
   sphere.initialize();
+}
+
+void OpenGLViewer::updateShaderUniformValues() {
+  shaderProgram.setUniformValue("view", camera().view());
+
+  if (shaderMode == SHADER_MODE_PHONG) {
+    shaderProgram.setUniformValue("light.position", light_.position());
+    shaderProgram.setUniformValue("light.color", light_.color());
+
+    shaderProgram.setUniformValue("light.ambient_intensity",
+                                  light_.ambientIntensity());
+    shaderProgram.setUniformValue("light.diffuse_intensity",
+                                  light_.diffuseIntensity());
+    shaderProgram.setUniformValue("light.specular_intensity",
+                                  light_.specularIntensity());
+
+    shaderProgram.setUniformValue("viewPos", camera().position());
+  }
 }
 
 void OpenGLViewer::draw(const Particle &p) {
@@ -55,7 +69,6 @@ void OpenGLViewer::draw(const Enclosure &e) {
   QMatrix4x4 m;
   m.scale(e.width(), e.height(), e.length());
 
-  shaderProgram.setUniformValue("view", camera().view());
   shaderProgram.setUniformValue("model", m);
   glBegin(GL_QUADS);
 
@@ -110,7 +123,6 @@ void OpenGLViewer::draw(const System &) { // TODO
 }
 
 void OpenGLViewer::drawAxes(const QMatrix4x4 &point_of_view, bool colored) {
-  shaderProgram.setUniformValue("view", camera().view());
   shaderProgram.setUniformValue("model", point_of_view);
   glBegin(GL_LINES);
 
@@ -141,7 +153,6 @@ void OpenGLViewer::drawAxes(const QMatrix4x4 &point_of_view, bool colored) {
 
 void OpenGLViewer::drawSphere(const QMatrix4x4 &point_of_view, double red,
                               double green, double blue) {
-  shaderProgram.setUniformValue("view", camera().view());
   shaderProgram.setUniformValue("model", point_of_view);
   shaderProgram.setAttributeValue(VertexShader::ColorID, red, green, blue);
   sphere.draw(shaderProgram, VertexShader::VertexID, VertexShader::NormalID);

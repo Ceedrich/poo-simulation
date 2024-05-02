@@ -29,6 +29,8 @@ public:
 
   void setShaderMode(SHADER_MODE mode) { shaderMode = mode; }
 
+  void updateShaderUniformValues();
+
 private:
   void drawAxes(QMatrix4x4 const &point_of_view = QMatrix4x4(),
                 bool colored = true);
