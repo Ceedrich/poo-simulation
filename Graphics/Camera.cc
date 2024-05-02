@@ -18,6 +18,14 @@ void Camera::move(double x, double y, double z) {
   position += (x * right + y * WORLD_UP + z * front_);
 }
 
+void Camera::lookAt(double x, double y, double z) {
+  QVector3D dir(QVector3D(x - position.x(), y - position.y(), z - position.z())
+                    .normalized());
+
+  yaw = atan2(dir.x(), dir.z());
+  pitch = atan(dir.y());
+}
+
 void Camera::rotateYaw(double angle) { yaw += angle; }
 void Camera::rotatePitch(double angle) {
   pitch += angle;
