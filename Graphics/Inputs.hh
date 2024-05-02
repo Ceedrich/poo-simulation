@@ -43,5 +43,6 @@ enum CONTROL_KEY {
   TOGGLE_AMBIENT = Qt::Key::Key_7,
   TOGGLE_DIFFUSE = Qt::Key::Key_8,
   TOGGLE_SPECULAR = Qt::Key::Key_9,
+  RESET_VIEW = Qt::Key::Key_R,
 };
 } // namespace Inputs

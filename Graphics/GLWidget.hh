@@ -13,10 +13,15 @@ public:
   GLWidget(System &&s) : QOpenGLWidget(nullptr), system(std::move(s)) {}
   virtual ~GLWidget() = default;
 
+  void reset();
+
 private:
   virtual void initializeGL() override;
   virtual void resizeGL(int width, int height) override;
   virtual void paintGL() override;
+
+  void initCamera();
+  void initLight();
 
   // Events
   virtual void keyPressEvent(QKeyEvent *event) override;

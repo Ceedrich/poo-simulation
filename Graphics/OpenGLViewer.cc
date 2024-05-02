@@ -22,8 +22,6 @@ void OpenGLViewer::init() {
 
   shaderProgram.bind();
 
-  // Setup Light
-
   sphere.initialize();
 }
 

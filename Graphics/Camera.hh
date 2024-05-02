@@ -12,6 +12,9 @@ public:
   void rotatePitch(double angle);
 
   void move(double x, double y, double z);
+  void setPosition(double x, double y, double z) {
+    position_ = QVector3D(x, y, z);
+  }
   void lookAt(double x, double y, double z);
 
   QMatrix4x4 view() const;
