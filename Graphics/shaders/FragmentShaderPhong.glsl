@@ -7,6 +7,7 @@ struct Light {
     float ambient_intensity;
     float specular_intensity;
     float diffuse_intensity;
+    float shininess;
     vec3 position;
     vec3 color;
 };
@@ -25,7 +26,7 @@ void main() {
     // Specular
     vec3 viewDir = normalize(viewPos - FragPos);
     vec3 reflectDir = reflect(-lightDir, norm);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), max(light.shininess, 1));
     vec3 specular = light.specular_intensity * spec * light.color;
 
     //vec3 resultColor = (ambient) * objectColor;

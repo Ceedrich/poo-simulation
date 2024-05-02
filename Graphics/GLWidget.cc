@@ -91,6 +91,19 @@ void GLWidget::keyPressEvent(QKeyEvent *event) {
     system.evolve(dt);
     update();
     break;
+  case Inputs::MOVE_LIGHT_SOURCE:
+    viewer.light().setPosition(viewer.camera().position());
+    update();
+    break;
+  case Inputs::TOGGLE_AMBIENT:
+    viewer.light().toggleAmbient();
+    break;
+  case Inputs::TOGGLE_DIFFUSE:
+    viewer.light().toggleDiffuse();
+    break;
+  case Inputs::TOGGLE_SPECULAR:
+    viewer.light().toggleSpecular();
+    break;
   }
 }
 

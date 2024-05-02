@@ -41,11 +41,14 @@ void OpenGLViewer::updateShaderUniformValues() {
     shaderProgram.setUniformValue("light.specular_intensity",
                                   light_.specularIntensity());
 
+    shaderProgram.setUniformValue("light.shininess", light_.shininess());
+
     shaderProgram.setUniformValue("viewPos", camera().position());
   }
 }
 
 void OpenGLViewer::draw(const Particle &p) {
+  light_.setShininess(32);
   QMatrix4x4 m;
   m.translate(p.position().x(), p.position().y(), p.position().z());
   m.scale(0.5);
@@ -53,6 +56,7 @@ void OpenGLViewer::draw(const Particle &p) {
 }
 
 void OpenGLViewer::draw(const MotionTrace &p) {
+  light_.setShininess(32);
   shaderProgram.setUniformValue("model", QMatrix4x4());
 
   glBegin(GL_LINE_STRIP);
@@ -62,6 +66,7 @@ void OpenGLViewer::draw(const MotionTrace &p) {
   glEnd();
 }
 void OpenGLViewer::draw(const Enclosure &e) {
+  light_.setShininess(10);
   constexpr QVector3D xColor(0.5, 0.5, 0.5);
   constexpr QVector3D yColor(0.7, 0.7, 0.7);
   constexpr QVector3D zColor(0.9, 0.9, 0.9);

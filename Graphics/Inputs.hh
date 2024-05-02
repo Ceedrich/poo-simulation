@@ -39,5 +39,9 @@ enum CONTROL_KEY {
   PAUSE = Qt::Key::Key_Escape,
   SPEED_MODIFIER = Qt::Key::Key_Control,
   EVOLVE = Qt::Key::Key_Return,
+  MOVE_LIGHT_SOURCE = Qt::Key::Key_L,
+  TOGGLE_AMBIENT = Qt::Key::Key_7,
+  TOGGLE_DIFFUSE = Qt::Key::Key_8,
+  TOGGLE_SPECULAR = Qt::Key::Key_9,
 };
 } // namespace Inputs
