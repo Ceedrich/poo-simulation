@@ -3,6 +3,7 @@
 #include "../Drawings/DrawingFrame.hh"
 #include "Camera.hh"
 #include "GLSphere.hh"
+#include "Light.hh"
 #include <QMatrix4x4>
 #include <QOpenGLShaderProgram>
 
@@ -24,6 +25,7 @@ public:
   }
 
   Camera &camera() { return camera_; };
+  Light &light() { return light_; }
 
   void setShaderMode(SHADER_MODE mode) { shaderMode = mode; }
 
@@ -40,6 +42,7 @@ private:
       ":/shaders/FragmentShaderMinimal.glsl";
   SHADER_MODE shaderMode = SHADER_MODE_PHONG;
   QOpenGLShaderProgram shaderProgram;
+  Light light_;
   Camera camera_;
   GLSphere sphere;
 };

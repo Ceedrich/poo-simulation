@@ -9,7 +9,6 @@ using std::asin, std::clamp;
 
 void GLWidget::initializeGL() {
   constexpr double CAMERA_OFFSET = 1.2;
-  viewer.init();
 
   viewer.camera().move(system.enclosure().width() * CAMERA_OFFSET,
                        system.enclosure().height() / 2,
@@ -18,6 +17,15 @@ void GLWidget::initializeGL() {
   viewer.camera().lookAt(system.enclosure().width() / 2,
                          system.enclosure().height() / 2,
                          system.enclosure().length() / 2);
+
+  constexpr double LIGHT_OFFSET = 1.4;
+
+  viewer.light().setPosition(system.enclosure().width() * LIGHT_OFFSET,
+                             system.enclosure().height() * LIGHT_OFFSET,
+                             system.enclosure().length() * LIGHT_OFFSET);
+
+  viewer.init();
+
   timerID = startTimer(20);
   ctimerID = startTimer(20);
   pause();

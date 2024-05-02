@@ -53,6 +53,7 @@ set(HEADERS_GRAPHICS
     Graphics/Inputs.hh
     Graphics/OpenGLViewer.hh
     Graphics/vertex_shader.hh
+    Graphics/Light.hh
 )
 
 set(SOURCES_TEXT Text/TextViewer.cc)
