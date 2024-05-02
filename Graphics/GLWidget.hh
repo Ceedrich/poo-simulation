@@ -33,7 +33,9 @@ private:
   int timerID;
   int ctimerID;
   unsigned short int keys_pressed;
-  double cMovementSpeed = 6.0;
+  static constexpr double cMovementSpeed = 6.0;
+  static constexpr double cSpeedMultiplier = 2.0;
+  bool cSpeedUp = false;
   QElapsedTimer stopwatch, cstopwatch;
 
   QPoint lastMousePosition;

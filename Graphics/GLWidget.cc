@@ -38,8 +38,6 @@ void GLWidget::paintGL() {
 }
 
 void GLWidget::keyPressEvent(QKeyEvent *event) {
-  constexpr double cAcceleration(0.5);
-
   switch (event->key()) {
   case Inputs::ROTATE_LEFT:
     keys_pressed |= FLAGS::ROTATE_LEFT;
@@ -71,11 +69,8 @@ void GLWidget::keyPressEvent(QKeyEvent *event) {
   case Inputs::STRAVE_UP:
     keys_pressed |= FLAGS::STRAVE_UP;
     break;
-  case Inputs::SPEED_UP:
-    cMovementSpeed += cAcceleration;
-    break;
-  case Inputs::SPEED_DOWN:
-    cMovementSpeed -= cAcceleration;
+  case Inputs::SPEED_MODIFIER:
+    cSpeedUp = true;
     break;
   case Inputs::PAUSE:
     pause();
@@ -118,6 +113,9 @@ void GLWidget::keyReleaseEvent(QKeyEvent *event) {
   case Inputs::STRAVE_UP:
     keys_pressed &= ~FLAGS::STRAVE_UP;
     break;
+  case Inputs::SPEED_MODIFIER:
+    cSpeedUp = false;
+    break;
   }
 }
 
@@ -152,18 +150,20 @@ void GLWidget::updateCameraTimer() {
   if (keys_pressed & FLAGS::ROTATE_DOWN)
     viewer.camera().rotatePitch(-panSpeed * dt);
 
+  const double speed = cMovementSpeed * (cSpeedUp ? cSpeedMultiplier : 1);
+
   if (keys_pressed & FLAGS::STRAVE_FORWARD)
-    viewer.camera().move(0.0, 0.0, +cMovementSpeed * dt);
+    viewer.camera().move(0.0, 0.0, +speed * dt);
   if (keys_pressed & FLAGS::STRAVE_BACKWARD)
-    viewer.camera().move(0.0, 0.0, -cMovementSpeed * dt);
+    viewer.camera().move(0.0, 0.0, -speed * dt);
   if (keys_pressed & FLAGS::STRAVE_UP)
-    viewer.camera().move(0.0, +cMovementSpeed * dt, 0.0);
+    viewer.camera().move(0.0, +speed * dt, 0.0);
   if (keys_pressed & FLAGS::STRAVE_DOWN)
-    viewer.camera().move(0.0, -cMovementSpeed * dt, 0.0);
+    viewer.camera().move(0.0, -speed * dt, 0.0);
   if (keys_pressed & FLAGS::STRAVE_LEFT)
-    viewer.camera().move(+cMovementSpeed * dt, 0.0, 0.0);
+    viewer.camera().move(+speed * dt, 0.0, 0.0);
   if (keys_pressed & FLAGS::STRAVE_RIGHT)
-    viewer.camera().move(-cMovementSpeed * dt, 0.0, 0.0);
+    viewer.camera().move(-speed * dt, 0.0, 0.0);
 }
 
 void GLWidget::mousePressEvent(QMouseEvent *event) {
