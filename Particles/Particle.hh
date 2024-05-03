@@ -10,11 +10,11 @@
  * COLOR Vectors obtained from
  * https://colorkit.co/palette/5988c2-566acf-ad6ad9-d982e8-f297d9/
  *
- * Color 1: (Default)  	0.349, 0.533, 0.047
- * Color 2: (Helium)		0.02, 0.4, 0.675
- * Color 3: (Neon)			0.039, 0.839, 0.678
- * Color 4: (Argon)			0.051, 0.596, 0.18
- * Color 5: (TracePart)	0.059, 0.161, 0.49
+ * Color 1: (Default)  	#5988c2
+ * Color 2: (Helium)		#f297d9
+ * Color 3: (Neon)	    #d982e8
+ * Color 4: (Argon)			#ad6ad9
+ * Color 5: (TracePart)	#566acf
  */
 
 /**
@@ -121,7 +121,9 @@ public:
    */
   virtual std::unique_ptr<Particle> copyAsUniqueParticlePtr() const = 0;
 
-  virtual Vector3D color() const { return Vector3D(0.349, 0.533, 0.047); }
+  virtual Vector3D color() const {
+    return (1 / 255.0) * Vector3D(0x59, 0x88, 0xc2);
+  }
 
 private:
   Vector3D position_; ///< The position of the particle.

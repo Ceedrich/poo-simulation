@@ -119,7 +119,21 @@ void System::fill(size_t count) {
         random_draw->gaussian(0.0, sqrt(specific_constant * temperature)),
         random_draw->gaussian(0.0, sqrt(specific_constant * temperature)),
         random_draw->gaussian(0.0, sqrt(specific_constant * temperature)));
-    add_particle(Neon(position, velocity, 10));
+    int i = random_draw->uniformInt(0, 2);
+    switch (i) {
+    case 0:
+      add_particle(Neon(position, velocity, 10.0));
+      break;
+    case 1:
+      add_particle(Argon(position, velocity, 10.0));
+      break;
+    case 2:
+      add_particle(Helium(position, velocity, 10.0));
+      break;
+    default:
+      add_particle(Neon(position, velocity, 10.0));
+      break;
+    }
   }
 }
 

@@ -21,7 +21,9 @@ public:
     motionTrace.draw_on(support);
   }
 
-  Vector3D color() const override { return Vector3D(0.059, 0.161, 0.49); }
+  Vector3D color() const override {
+    return (1 / 255.0) * Vector3D(0x56, 0x6a, 0xcf);
+  }
 
 private:
   static constexpr unsigned int MAX_POINTS = 2000;

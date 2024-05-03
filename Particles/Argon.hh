@@ -18,5 +18,7 @@ public:
     return copy();
   };
 
-  Vector3D color() const override { return Vector3D(0.051, 0.596, 0.18); }
+  Vector3D color() const override {
+    return (1 / 255.0) * Vector3D(0xad, 0x6a, 0xd9);
+  }
 };
