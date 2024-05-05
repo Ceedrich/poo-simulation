@@ -11,16 +11,15 @@ QMatrix4x4 Camera::view() const {
 }
 
 void Camera::move(double x, double y, double z) {
-  QVector3D right(QVector3D::crossProduct(WORLD_UP, front()));
-  right.normalize();
-  QVector3D front_(QVector3D::crossProduct(right, WORLD_UP));
-  front_.normalize();
+  QVector3D right(QVector3D::crossProduct(WORLD_UP, front()).normalized());
+  QVector3D front_(QVector3D::crossProduct(right, WORLD_UP).normalized());
   position_ += (x * right + y * WORLD_UP + z * front_);
 }
 
 void Camera::lookAt(double x, double y, double z) {
-  QVector3D dir(QVector3D(x - position_.x(), y - position_.y(), z - position_.z())
-                    .normalized());
+  QVector3D dir(
+      QVector3D(x - position_.x(), y - position_.y(), z - position_.z())
+          .normalized());
 
   yaw = atan2(dir.x(), dir.z());
   pitch = atan(dir.y());
@@ -28,21 +27,19 @@ void Camera::lookAt(double x, double y, double z) {
 
 void Camera::rotateYaw(double angle) { yaw += angle; }
 void Camera::rotatePitch(double angle) {
+  constexpr double epsilon = 0.1;
+  constexpr double upper_bound = M_PI / 2 - epsilon;
+  constexpr double lower_bound = -M_PI / 2 + epsilon;
   pitch += angle;
-  if (pitch <= -M_PI / 2) {
-    pitch = -M_PI / 2;
+  if (pitch <= lower_bound) {
+    pitch = lower_bound;
   }
-  if (pitch >= M_PI / 2) {
-    pitch = M_PI / 2;
+  if (pitch >= upper_bound) {
+    pitch = upper_bound;
   }
 }
 
 QVector3D Camera::front() const {
-  if (pitch <= -M_PI / 2)
-    return QVector3D(0.0, -1.0, 0.0);
-  if (pitch >= M_PI / 2)
-    return QVector3D(0.0, 1.0, 0.0);
-
   double x(cos(pitch) * sin(yaw));
   double y(sin(pitch));
   double z(cos(pitch) * cos(yaw));
