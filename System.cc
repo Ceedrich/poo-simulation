@@ -109,7 +109,6 @@ void System::draw_on(DrawingFrame &support) {
 }
 
 void System::fill(size_t count) {
-  constexpr double temperature = 0.1;
   constexpr double specific_constant = Neon::SPECIFIC_CONSTANT;
   for (size_t _i(0); _i < count; ++_i) {
     Vector3D position(random_draw->uniform(0, enclosure_.width()),

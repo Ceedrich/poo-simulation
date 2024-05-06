@@ -139,9 +139,12 @@ public:
 
   void setEncounterMethod(ENCOUNTER_METHOD method);
   void setEvolveMethod(EVOLVE_METHOD method);
+  void setTemperature(double temp) { this->temperature = temp; }
 
 private:
   double EPSILON = 1;
+
+  double temperature = 0.1;
 
   std::unique_ptr<NumberGenerator> random_draw;
   Enclosure enclosure_;
