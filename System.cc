@@ -109,28 +109,22 @@ void System::draw_on(DrawingFrame &support) {
 }
 
 void System::fill(size_t count) {
-  constexpr double specific_constant = Neon::SPECIFIC_CONSTANT;
+  enum PARTICLE_TYPE {
+    NEON = 0,
+    HELIUM = 1,
+    ARGON = 2,
+  };
   for (size_t _i(0); _i < count; ++_i) {
-    Vector3D position(random_draw->uniform(0, enclosure_.width()),
-                      random_draw->uniform(0, enclosure_.height()),
-                      random_draw->uniform(0, enclosure_.length()));
-    Vector3D velocity(
-        random_draw->gaussian(0.0, sqrt(specific_constant * temperature)),
-        random_draw->gaussian(0.0, sqrt(specific_constant * temperature)),
-        random_draw->gaussian(0.0, sqrt(specific_constant * temperature)));
-    int i = random_draw->uniformInt(0, 2);
-    switch (i) {
-    case 0:
-      add_particle(Neon(position, velocity, 10.0));
+    PARTICLE_TYPE particle_type = (PARTICLE_TYPE)random_draw->uniformInt(0, 2);
+    switch (particle_type) {
+    case NEON:
+      addParticleAtRandomPlace<Neon>(*this);
       break;
-    case 1:
-      add_particle(Argon(position, velocity, 10.0));
+    case HELIUM:
+      addParticleAtRandomPlace<Helium>(*this);
       break;
-    case 2:
-      add_particle(Helium(position, velocity, 10.0));
-      break;
-    default:
-      add_particle(Neon(position, velocity, 10.0));
+    case ARGON:
+      addParticleAtRandomPlace<Argon>(*this);
       break;
     }
   }

@@ -142,6 +142,18 @@ public:
   void setTemperature(double temp) { this->temperature = temp; }
 
 private:
+  template <typename T> static void addParticleAtRandomPlace(System &s) {
+    double constexpr specific_constant = T::SPECIFIC_CONSTANT;
+    Vector3D position(s.random_draw->uniform(0, s.enclosure_.width()),
+                      s.random_draw->uniform(0, s.enclosure_.height()),
+                      s.random_draw->uniform(0, s.enclosure_.length()));
+    Vector3D velocity(
+        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature)),
+        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature)),
+        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature)));
+    s.add_particle(T(position, velocity, 10.0));
+  }
+
   double EPSILON = 1;
 
   double temperature = 0.1;
