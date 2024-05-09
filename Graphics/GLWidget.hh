@@ -37,7 +37,7 @@ private:
 
   int timerID;
   int ctimerID;
-  unsigned short int keys_pressed;
+  unsigned short int keys_pressed = 0;
   static constexpr double cMovementSpeed = 6.0;
   static constexpr double cSpeedMultiplier = 2.0;
   static constexpr double dt = 0.1;
