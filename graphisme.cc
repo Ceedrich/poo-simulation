@@ -13,7 +13,7 @@
 int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
 
-  System s;
+  System s(100, 100, 100);
   s.fill(100);
 
   MainWindow window(std::move(s));

@@ -9,7 +9,11 @@
 class GLWidget : public QOpenGLWidget {
 public:
   GLWidget(QWidget *parent = nullptr, System &&s = System::prefilled())
-      : QOpenGLWidget(parent), system(std::move(s)) {
+      : QOpenGLWidget(parent), system(std::move(s)),
+        cMovementSpeed(
+            std::max({system.enclosure().width(), system.enclosure().height(),
+                      system.enclosure().length()}) /
+            2.0) {
     setFocusPolicy(Qt::StrongFocus);
   }
   GLWidget(System &&s) : QOpenGLWidget(nullptr), system(std::move(s)) {
@@ -22,6 +26,7 @@ public:
   }
 
   void reset();
+  void setCameraMovementSpeed(double v) { cMovementSpeed = v; }
 
 private:
   virtual void initializeGL() override;
@@ -43,17 +48,17 @@ private:
 
   void pause();
 
+  OpenGLViewer viewer;
+  System system = System::prefilled();
+
   int timerID;
   int ctimerID;
   unsigned short int keys_pressed = 0;
-  static constexpr double cMovementSpeed = 6.0;
+  double cMovementSpeed = 6.0;
   static constexpr double cSpeedMultiplier = 2.0;
   static constexpr double dt = 0.1;
   bool cSpeedUp = false;
   QElapsedTimer stopwatch, cstopwatch;
 
   QPoint lastMousePosition;
-
-  OpenGLViewer viewer;
-  System system = System::prefilled();
 };
