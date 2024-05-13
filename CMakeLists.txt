@@ -54,6 +54,8 @@ set(HEADERS_GRAPHICS
     Graphics/OpenGLViewer.hh
     Graphics/vertex_shader.hh
     Graphics/Light.hh
+    Graphics/ControlsWidget.hh
+    Graphics/MainWindow.hh
 )
 
 set(SOURCES_TEXT Text/TextViewer.cc)

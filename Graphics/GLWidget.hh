@@ -9,9 +9,17 @@
 class GLWidget : public QOpenGLWidget {
 public:
   GLWidget(QWidget *parent = nullptr, System &&s = System::prefilled())
-      : QOpenGLWidget(parent), system(std::move(s)) {}
-  GLWidget(System &&s) : QOpenGLWidget(nullptr), system(std::move(s)) {}
+      : QOpenGLWidget(parent), system(std::move(s)) {
+    setFocusPolicy(Qt::StrongFocus);
+  }
+  GLWidget(System &&s) : QOpenGLWidget(nullptr), system(std::move(s)) {
+    setFocusPolicy(Qt::StrongFocus);
+  }
   virtual ~GLWidget() = default;
+
+  void setShaderMode(OpenGLViewer::SHADER_MODE mode) {
+    viewer.setShaderMode(mode);
+  }
 
   void reset();
 

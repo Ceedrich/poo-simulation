@@ -96,7 +96,11 @@ void GLWidget::keyPressEvent(QKeyEvent *event) {
     pause();
     break;
   case Inputs::QUIT:
-    close();
+    if (parentWidget() != nullptr)
+      parentWidget()->close();
+    else {
+      close();
+    }
     break;
   case Inputs::EVOLVE:
     system.evolve(dt);
