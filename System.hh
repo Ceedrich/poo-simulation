@@ -107,6 +107,13 @@ public:
   void print(std::ostream &out) const;
 
   /**
+   * @brief Prints the system to the output in an easy format to save and load
+   * it
+   * @param out The output stream to print to
+   */
+  void printRaw(std::ostream &out) const;
+
+  /**
    * @brief Adds a particle to the system.
    *
    * @param particle The particle to add.

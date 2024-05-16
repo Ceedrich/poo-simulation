@@ -11,6 +11,7 @@ public:
 
   Argon(Vector3D r, Vector3D p, double m) : Particle(r, p, m) {}
   void print(std::ostream &out) const override;
+  void printRaw(std::ostream &out) const override;
 
   std::unique_ptr<Argon> copy() const { return std::make_unique<Argon>(*this); }
 

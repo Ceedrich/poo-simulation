@@ -4,6 +4,7 @@
 #include <QMatrix4x4>
 #include <QTimerEvent>
 #include <cmath>
+#include <fstream>
 
 using std::asin, std::clamp;
 
@@ -122,6 +123,12 @@ void GLWidget::keyPressEvent(QKeyEvent *event) {
   case Inputs::RESET_VIEW:
     reset();
     break;
+  case Inputs::SAVE_FILE:
+    saveToFile();
+    break;
+  case Inputs::LOAD_FILE:
+    loadFromFile();
+    break;
   }
 }
 
@@ -236,4 +243,40 @@ void GLWidget::pause() {
     killTimer(timerID);
     timerID = 0;
   }
+}
+
+constexpr auto FILE_NAME = "Simulation.csv";
+void GLWidget::saveToFile() const {
+  std::ofstream file;
+  file.open(FILE_NAME);
+  system.printRaw(file);
+  file.close();
+}
+
+void GLWidget::loadFromFile() {
+  std::ifstream file(FILE_NAME);
+  double w, h, l;
+  file >> w >> h >> l;
+  System s(w, h, l);
+  while (!file.fail() && !file.eof()) {
+    std::string type;
+    double rx, ry, rz, vx, vy, vz, m;
+    file >> type >> rx >> ry >> rz >> vx >> vy >> vz >> m;
+    if (type == "Helium") {
+      s.add_particle(Helium(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+    }
+    if (type == "Neon") {
+      s.add_particle(Neon(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+    }
+    if (type == "Argon") {
+      s.add_particle(Argon(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+    }
+  }
+
+  system = std::move(s);
+  initCamera();
+  initLight();
+  cMovementSpeed =
+      std::max({system.enclosure().width(), system.enclosure().height(),
+                system.enclosure().length()});
 }

@@ -35,6 +35,8 @@ private:
 
   void initCamera();
   void initLight();
+  void saveToFile() const;
+  void loadFromFile();
 
   // Events
   virtual void keyPressEvent(QKeyEvent *event) override;

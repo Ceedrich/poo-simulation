@@ -11,6 +11,12 @@ void Particle::print(ostream &out) const {
   out << "pos : " << position_ << "; v : " << velocity_ << "; m : " << mass_;
 }
 
+void Particle::printRaw(std::ostream &out) const {
+  out << position().x() << " " << position().y() << " " << position().z() << " "
+      << velocity().x() << " " << velocity().y() << " " << position().z() << " "
+      << mass_ << std::endl;
+}
+
 void Particle::collide(Particle &other,
                        std::unique_ptr<NumberGenerator> &random_generator) {
   // 1. Calculer vg = m1/(m1 + m2)v1 + m2/(m1 + m2)v2

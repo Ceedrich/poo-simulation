@@ -10,6 +10,13 @@ void System::print(ostream &out) const {
   }
 }
 
+void System::printRaw(std::ostream &out) const {
+  enclosure_.printRaw(out);
+  for (auto const &p : particles) {
+    p->printRaw(out);
+  }
+}
+
 void System::add_particle(Particle const &particle) {
   particles.push_back((particle.copyAsUniqueParticlePtr()));
 }

@@ -7,6 +7,7 @@ public:
   TraceParticle(Vector3D r, Vector3D v, double m) : Particle(r, v, m) {}
 
   void evolve(double dt) override;
+  void printRaw(std::ostream &out) const override;
 
   std::unique_ptr<TraceParticle> copy() const {
     return std::make_unique<TraceParticle>(*this);

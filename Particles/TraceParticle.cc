@@ -5,3 +5,8 @@ void TraceParticle::evolve(double dt) {
 
   Particle::evolve(dt);
 }
+
+void TraceParticle::printRaw(std::ostream &out) const {
+  out << "Trace ";
+  Particle::printRaw(out);
+}

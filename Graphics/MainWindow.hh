@@ -46,7 +46,9 @@ private:
       "R",
       "reset camera and light position", //
       "7,8,9",
-      "toggle ambient, diffuse and specular lighting"};
+      "toggle ambient, diffuse and specular lighting", //
+      "P, I",
+      "Save/Load the current status to a file (not working for TraceParticle)"};
   ControlsWidget controls;
   GLWidget scene_;
   QVBoxLayout layout;

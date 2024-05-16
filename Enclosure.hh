@@ -60,6 +60,8 @@ public:
    * @param support The DrawingFrame to draw on.
    */
   virtual void draw_on(DrawingFrame &support) override { support.draw(*this); }
+
+  void printRaw(std::ostream &out) const;
 };
 
 /**

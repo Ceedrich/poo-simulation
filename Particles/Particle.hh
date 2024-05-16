@@ -46,6 +46,8 @@ public:
    */
   Particle(Particle const &other) = default;
 
+  virtual ~Particle() = default;
+
   /**
    * @brief Returns the position of the particle.
    *
@@ -73,6 +75,8 @@ public:
    * @param out The output stream to print to.
    */
   virtual void print(std::ostream &out) const;
+
+  virtual void printRaw(std::ostream &out) const;
 
   /**
    * @brief Draws the particle on a DrawingFrame object.

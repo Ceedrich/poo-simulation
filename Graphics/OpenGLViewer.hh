@@ -37,7 +37,6 @@ private:
   void drawSphere(QMatrix4x4 const &point_of_view, double red, double green,
                   double blue);
 
-private:
   static constexpr const char *const PHONG_SHADER_LOCATION =
       ":/shaders/FragmentShaderPhong.glsl";
   static constexpr const char *const SIMPLE_SHADER_LOCATION =
