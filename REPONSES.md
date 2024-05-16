@@ -3,15 +3,17 @@ Ce fichier contient les reponses aux questions posées dans les énoncés d'exer
 
 ## Semaine 02
 ### [Question P1.1] Comment représentez-vous ces vecteurs ? Comment sont-ils organisés : quels attributs ? quelles méthodes ? quels droits d'accès ?
-La classe vecteur contient les coordonnées cardinales (x, y, z) comme attributs privées et quelques méthodes publiques qui permettent de modifier/calculer avec des vecteurs.
+La classe vecteur contient les coordonnées cartesienne (x, y, z) comme attributs privées et quelques méthodes publiques qui permettent de modifier/calculer avec des vecteurs. 
 
-Les méthodes `to_string`, `print`, et `operator<<` donnent/affichent le vecteur en format `<x> <y> <z>` pour faciliter ces "outputs".
+Les méthodes `to_string`, `print`, et `operator<<` donnent/affichent le vecteur en format `<x> <y> <z>`. //Was sind outputs? Und sind es nur diese Methoden?
 
-En général, on préfère l'utilisation des operateurs standards (`+(=)`, `-(=)`, `==`, `<<` et `*(=)` pour multiplication par un scalaire) pour faciliter l'interface.
+En général, on *préfère* l'utilisation des operateurs standards (`+(=)`, `-(=)`, `==`, `<<` et `*(=)` pour multiplication par un scalaire) pour faciliter l'interface. //Was meint preferer? Sind sie implementiert? Gegenüber methoden &ja sind implementiert
+
+Plus tard dans le projet encore plusieurs méthodes ont été implémenté.
 
 ## Semaine 04
 ### [Question P4.1] Avez-vous ajouté un constructeur de copie ? Pourquoi (justifiez votre choix) ?
-Ouais, on n'a pas implementé un constructeur de copie, mais il existe, ajouté par le compilateur. Un `Vector3D` est une classe relativement simple ne contenant que trois attributs. C'est donc pas très chèr de faire une copie.
+Non, on n'a pas ajouté un constructeur de copie, mais il existe déjà un, implementé par le compilateur. Un `Vector3D` est une classe relativement simple ne contenant que trois attributs. C'est donc pas très chèr de faire une copie.
 
 ### [Question P4.2] Si l'on souhaitait ajouter un constructeur par coordonnées sphériques (deux angles et une longueur),
 
@@ -41,7 +43,7 @@ On a intruduit les opérateurs suivantes:
 ## Semaine 06
 
 ### [Question P7.1] En termes de POO, quelle est donc la nature de la méthode dessine_sur() ?
-La méthode `dessine_sur(SupportADessin&)` (on l'a nommé `draw_on(DrawingFrame&)` en anglais) est une méthode virtuelle pure de la super-classe (abstraite) `Dessinable` (nommée `Drawable`) qui force les enfants de cette classe à implementer une méthode permettant de dessiner l'objet en question sur un `DrawingFrame`.
+La méthode `dessine_sur(SupportADessin&)` (on l'a nommé `draw_on(DrawingFrame&)` en anglais) est une méthode virtuelle pure de la super-classe (abstraite) `Dessinable` (nommée `Drawable`) qui force les sous-classes de cette classe à implementer une méthode permettant de dessiner l'objet en question sur un `DrawingFrame`.
 
 
 ### [Question P8.1] A quoi faut-il faire attention pour les classes contenant des pointeurs ? Quelle(s) solution(s) est/sont envisageable(s) ?
@@ -50,8 +52,8 @@ On a minimé ce problème en utilisant des `unique_ptr` qui admettent q'une seul
 
 
 ### [Question P8.2] Comment représentez vous la classe Systeme ? Expliquez votre conception (attributs, interface, ...).
-Notre classe Systeme est construit d'une enceinte(space) et d'une vecteur contenue des pointeurs de particules. Le vecteur est necessaire pour pouvoir avoir multiple particule dans la même system. On a un vecteur de pointeurs pour rendre possible le polymorphisme et dans ce cas utiliser les méthodes virtuelles propre de particule.
-Tous les méthodes sont publique, comme ca on peut changer la system.
+Notre classe Systeme est construit d'une enceinte(*space*(Enclosure)) et d'une vecteur contenue des pointeurs de particules. Le vecteur est necessaire pour pouvoir avoir multiples particules dans le même système. On a un vecteur de pointeurs pour rendre possible le polymorphisme et dans ce cas utiliser les méthodes virtuelles propre de particule.
+Tous les méthodes sont publique, comme ca on peut changer le système.
 
 
 ### [Question P8.3] Comment empêchez-vous cela (copie et affectation) ?
@@ -69,6 +71,10 @@ System` operator=(System const&) = delete;
 ### [Question P9.2] Quelle est la complexité de l'algorithme de simulation lorsqu'il utilise cette méthode pour savoir si deux particules se rencontrent ?
 En utilisant cet algorithme, il faut itérer sur tous les particules pour chaqu'une des particules. Il faut donc faire deux boucles "for". Cette méthode ajoute donc la complexité temporale $\Theta(n^2)$ où n est la nombre des particules.
 
+##Semaine 9
+###[Question P11.1] Si vous souhaitez voir l'enceinte, c.-à-d. la faire dessiner, comment devez vous modifier (ou pas) votre conception/votre code ?
+//TODO
+
 ## Semaine 12
 
 ### [Question P13.1] Comment représentez-vous cette/ces nouvelle(s) particule(s) ? Où s'incri(ven)t-elle(s) dans votre conception ?
@@ -81,6 +87,10 @@ Il faut, pour tout particule, marquer la case où la particule se trouve. Ça, o
 La complexité temporelle de cet algorithme est donc $O(n^2)$.
 
 // Je suis pas content
+
+###[Question P14.2]Comment et où avez-vous implémenté cette nouvelle façon de calculer les collisions ?
+
+//TODO
 
 
 
