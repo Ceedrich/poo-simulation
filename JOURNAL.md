@@ -9,6 +9,7 @@
   - D'Vektore wo ofd particles zeiged, wenn die gmacht worde send
   - Tâches ergänzen
   - répondre à: P9.1, P11.1, P14.2
+  - Renommer test executables (Prefixé avec test_)
 
 ### Responsabilités
 
