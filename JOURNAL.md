@@ -74,7 +74,8 @@ On a encore plus travailler sur le graphisme et on a fait la premier Simulation,
 
 ##Semaine 9
 On a repondu aux questions restant.
-On a commencé a travailler sur le "Lighting shader", pour lequel on a choisir de travailler avec le "phong model". Pour ca il a fallait de premièrement se mettre au courant avec cette modèle.
+On a commencé a travailler sur le "Lighting shader", pour lequel on a implementer le "phong model". Pour ca il a fallait de premièrement se mettre au courant avec cette modèle.
+Pour le "phong model", on a implementé "ambient & diffuse lighing" mais pas encore "specular lighing".
 
 
 ##Semaine 10
