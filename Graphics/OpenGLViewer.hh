@@ -9,9 +9,9 @@
 
 class OpenGLViewer : public DrawingFrame {
 public:
-  enum SHADER_MODE {
-    SHADER_MODE_PHONG,
-    SHADER_MODE_MINIMAL,
+  enum GRAPHICS_LEVEL {
+    GRAPHICS_LEVEL_HIGH,
+    GRAPHICS_LEVEL_LOW,
   };
   virtual void draw(Particle const &) override;
   virtual void draw(MotionTrace const &) override;
@@ -27,7 +27,7 @@ public:
   Camera &camera() { return camera_; };
   Light &light() { return light_; }
 
-  void setShaderMode(SHADER_MODE mode) { shaderMode = mode; }
+  void setGraphicsLevel(GRAPHICS_LEVEL level) { graphicsLevel = level; }
 
   void updateShaderUniformValues();
 
@@ -38,11 +38,11 @@ private:
                   double blue);
 
 private:
-  static constexpr const char *const SHADER_MODE_PHONG_LOCATION =
+  static constexpr const char *const PHONG_SHADER_LOCATION =
       ":/shaders/FragmentShaderPhong.glsl";
-  static constexpr const char *const SHADER_MODE_MINIMAL_LOCATION =
+  static constexpr const char *const SIMPLE_SHADER_LOCATION =
       ":/shaders/FragmentShaderMinimal.glsl";
-  SHADER_MODE shaderMode = SHADER_MODE_PHONG;
+  GRAPHICS_LEVEL graphicsLevel = GRAPHICS_LEVEL_HIGH;
   QOpenGLShaderProgram shaderProgram;
   Light light_;
   Camera camera_;

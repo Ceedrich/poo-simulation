@@ -10,9 +10,9 @@ void OpenGLViewer::init() {
                                         ":/shaders/VertexShader.glsl");
 
   shaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment,
-                                        shaderMode == SHADER_MODE_MINIMAL
-                                            ? SHADER_MODE_MINIMAL_LOCATION
-                                            : SHADER_MODE_PHONG_LOCATION);
+                                        graphicsLevel == GRAPHICS_LEVEL_HIGH
+                                            ? PHONG_SHADER_LOCATION
+                                            : SIMPLE_SHADER_LOCATION);
 
   shaderProgram.bindAttributeLocation("vertex", VertexShader::VertexID);
   shaderProgram.bindAttributeLocation("color", VertexShader::ColorID);
@@ -28,7 +28,7 @@ void OpenGLViewer::init() {
 void OpenGLViewer::updateShaderUniformValues() {
   shaderProgram.setUniformValue("view", camera().view());
 
-  if (shaderMode == SHADER_MODE_PHONG) {
+  if (graphicsLevel == GRAPHICS_LEVEL_HIGH) {
     shaderProgram.setUniformValue("light.position", light_.position());
     shaderProgram.setUniformValue("light.color", light_.color());
 

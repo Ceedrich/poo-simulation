@@ -21,8 +21,8 @@ public:
   }
   virtual ~GLWidget() = default;
 
-  void setShaderMode(OpenGLViewer::SHADER_MODE mode) {
-    viewer.setShaderMode(mode);
+  void setGraphicsLevel(OpenGLViewer::GRAPHICS_LEVEL level) {
+    viewer.setGraphicsLevel(level);
   }
 
   void reset();
