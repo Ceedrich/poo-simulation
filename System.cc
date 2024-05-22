@@ -136,3 +136,15 @@ void System::fill(size_t count) {
     }
   }
 }
+
+double System::averageKineticEnergy() const {
+  if (particles.size() == 0)
+    return 0.0;
+  double energy = 0.0;
+  for (auto const &p : particles) {
+    energy += ((1 / 2) * p->mass() * p->velocity().norm2());
+  }
+  energy /= particles.size();
+
+  return energy;
+}

@@ -148,6 +148,8 @@ public:
   void setEvolveMethod(EVOLVE_METHOD method);
   void setTemperature(double temp) { this->temperature = temp; }
 
+  double averageKineticEnergy() const;
+
 private:
   template <typename T> static void addParticleAtRandomPlace(System &s) {
     double constexpr specific_constant = T::SPECIFIC_CONSTANT;
