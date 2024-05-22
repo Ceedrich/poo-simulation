@@ -63,5 +63,5 @@ public:
 
   void print(std::ostream &out) const override;
 
-  void printRaw(std::ostream &out) const;
+  void printRaw(std::ostream &out) const override;
 };

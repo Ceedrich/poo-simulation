@@ -111,7 +111,7 @@ public:
    * it
    * @param out The output stream to print to
    */
-  void printRaw(std::ostream &out) const;
+  void printRaw(std::ostream &out) const override;
 
   /**
    * @brief Adds a particle to the system.

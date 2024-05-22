@@ -77,7 +77,7 @@ public:
    */
   virtual void print(std::ostream &out) const override;
 
-  virtual void printRaw(std::ostream &out) const;
+  virtual void printRaw(std::ostream &out) const override;
 
   /**
    * @brief Draws the particle on a DrawingFrame object.
