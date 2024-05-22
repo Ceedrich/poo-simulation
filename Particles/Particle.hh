@@ -2,6 +2,7 @@
 
 #include "../Drawings/Drawable.hh"
 #include "../NumberGenerators/NumberGenerator.hh"
+#include "../Printable.hh"
 #include "../Vector3D.hh"
 #include <iostream>
 #include <memory>
@@ -23,7 +24,7 @@
  * The Particle class inherits from the Drawable class and represents a particle
  * with a position, speed, and mass.
  */
-class Particle : public Drawable {
+class Particle : public Drawable, public Printable {
 public:
   static constexpr double IDEAL_GAS_CONSTANT = 8.314472;
 
@@ -74,7 +75,7 @@ public:
    *
    * @param out The output stream to print to.
    */
-  virtual void print(std::ostream &out) const;
+  virtual void print(std::ostream &out) const override;
 
   virtual void printRaw(std::ostream &out) const;
 
@@ -134,13 +135,3 @@ private:
   Vector3D velocity_; ///< The speed of the particle.
   double mass_;       ///< The mass of the particle.
 };
-
-/**
- * @brief Overloads the << operator to print the particle's information to the
- * output stream.
- *
- * @param out The output stream to print to.
- * @param element The particle object to print.
- * @return The output stream after printing the particle's information.
- */
-std::ostream &operator<<(std::ostream &out, Particle const &element);

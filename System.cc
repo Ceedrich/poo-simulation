@@ -136,8 +136,3 @@ void System::fill(size_t count) {
     }
   }
 }
-
-ostream &operator<<(ostream &out, System const &system) {
-  system.print(out);
-  return out;
-}

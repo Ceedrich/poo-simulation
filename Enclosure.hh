@@ -5,7 +5,7 @@
 #include "Drawings/DrawingFrame.hh"
 #include "Vector3D.hh"
 
-class Enclosure : public Drawable {
+class Enclosure : public Drawable, public Printable {
 private:
   double width_;  // x
   double height_; // y
@@ -61,14 +61,7 @@ public:
    */
   virtual void draw_on(DrawingFrame &support) override { support.draw(*this); }
 
+  void print(std::ostream &out) const override;
+
   void printRaw(std::ostream &out) const;
 };
-
-/**
- * @brief Overloads the << operator to allow printing of Enclosure objects.
- *
- * @param stream The output stream.
- * @param enclosure The Enclosure object to print.
- * @return The modified output stream.
- */
-std::ostream &operator<<(std::ostream &stream, Enclosure const &enclosure);

@@ -5,6 +5,7 @@
 
 #include "Drawings/Drawable.hh"
 #include "Drawings/DrawingFrame.hh"
+#include "Printable.hh"
 
 /**
  * @brief Represents a 3D vector in Cartesian coordinates.
@@ -12,7 +13,7 @@
  * The Vector3D class inherits from the Drawable class and provides methods for
  * vector operations.
  */
-class Vector3D {
+class Vector3D : public Printable {
 private:
   double x_, y_, z_;
 
@@ -115,6 +116,8 @@ public:
    * @return The normalized vector.
    */
   Vector3D normalize() const;
+
+  void print(std::ostream &out) const override;
 
   // Operator overloads
   /**
@@ -226,12 +229,3 @@ double operator*(Vector3D const &vec1, Vector3D const &vec2);
  * @return The cross product of the vectors.
  */
 const Vector3D operator^(Vector3D vec1, Vector3D const &vec2);
-
-/**
- * @brief Writes the vector to an output stream.
- *
- * @param stream The output stream.
- * @param vec The vector.
- * @return The modified output stream.
- */
-std::ostream &operator<<(std::ostream &stream, Vector3D const &);

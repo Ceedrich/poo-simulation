@@ -62,19 +62,27 @@ set(SOURCES_TEXT Text/TextViewer.cc)
 set(HEADERS_TEXT Text/TextViewer.hh)
 
 # Tests
-add_executable(Vector3D test_Vector3D.cc Vector3D.cc Vector3D.hh)
+add_executable(Vector3D test_Vector3D.cc
+    Vector3D.cc Vector3D.hh
+    Printable.cc Printable.hh
+)
 add_executable(Particle test_Particle.cc
     Particles/Particle.hh Particles/Particle.cc
     Particles/Neon.cc Particles/Neon.hh
     Vector3D.cc Vector3D.hh
+    Printable.cc Printable.hh
 )
-add_executable(Enclosure test_Enclosure.cc Enclosure.hh Enclosure.cc)
+add_executable(Enclosure test_Enclosure.cc
+    Enclosure.hh Enclosure.cc
+    Printable.cc Printable.hh
+)
 add_executable(Exercice7 Exercice7.cc
     Enclosure.cc Enclosure.hh
     ${SOURCES_TEXT} ${HEADERS_TEXT}
     ${HEADERS_DRAWINGS}
 
     Vector3D.cc Vector3D.hh
+    Printable.cc Printable.hh
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 )
 
@@ -83,6 +91,7 @@ add_executable(System test_System.cc
     ${SOURCES_DRAWINGS} ${HEADERS_DRAWINGS}
     Enclosure.cc Enclosure.hh
     Vector3D.cc Vector3D.hh
+    Printable.cc Printable.hh
 
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 )
@@ -91,6 +100,7 @@ add_executable(Exercice9 Exercice9.cc
     System.cc System.hh
     Enclosure.cc Enclosure.hh
     Vector3D.cc Vector3D.hh
+    Printable.cc Printable.hh
 
     ${HEADERS_NUMBER_GENERATORS}
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
@@ -102,6 +112,7 @@ add_executable(Graphisme graphisme.cc
     System.hh System.cc
     Enclosure.hh Enclosure.cc
     Vector3D.hh Vector3D.cc
+    Printable.cc Printable.hh
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 
     ${SOURCES_GRAPHICS} ${HEADERS_GRAPHICS}
@@ -116,6 +127,7 @@ add_executable(Exercice12 Exercice12.cc
     System.hh System.cc
     Enclosure.hh Enclosure.cc
     Vector3D.hh Vector3D.cc
+    Printable.hh Printable.cc
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 
     ${SOURCES_GRAPHICS} ${HEADERS_GRAPHICS}
@@ -130,6 +142,7 @@ add_executable(Exercice13 Exercice13.cc
     System.hh System.cc
     Enclosure.hh Enclosure.cc
     Vector3D.hh Vector3D.cc
+    Printable.hh Printable.cc
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
     Particles/TraceParticle.cc Particles/TraceParticle.hh
     Particles/MotionTrace.cc Particles/MotionTrace.hh

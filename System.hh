@@ -13,7 +13,7 @@
 #include <memory>
 #include <vector>
 
-class System : public Drawable {
+class System : public Drawable, public Printable {
 public:
   enum ENCOUNTER_METHOD {
     ENCOUNTER_METHOD_PAVING,
@@ -104,7 +104,7 @@ public:
    *
    * @param out The output stream to print to.
    */
-  void print(std::ostream &out) const;
+  void print(std::ostream &out) const override;
 
   /**
    * @brief Prints the system to the output in an easy format to save and load
@@ -185,12 +185,3 @@ private:
   static void evolve_multiple(System &s, double dt);
   std::function<void(System &, double)> evolve_method = evolve_single;
 };
-
-/**
- * @brief Overloaded stream insertion operator for System objects.
- *
- * @param out The output stream.
- * @param system The System object to insert into the stream.
- * @return The modified output stream.
- */
-std::ostream &operator<<(std::ostream &out, System const &system);

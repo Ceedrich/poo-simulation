@@ -64,6 +64,8 @@ Vector3D &Vector3D::operator^=(Vector3D const &other) {
   return *this;
 }
 
+void Vector3D::print(std::ostream &out) const { out << to_string(); }
+
 double operator*(Vector3D const &vec1, Vector3D const &vec2) {
   return vec1.dot_prod(vec2);
 }
@@ -84,6 +86,3 @@ const Vector3D operator-(Vector3D vec1, Vector3D const &vec2) {
 }
 const Vector3D operator*(Vector3D vec, double scalar) { return vec *= scalar; }
 const Vector3D operator*(double scalar, Vector3D vec) { return vec *= scalar; }
-std::ostream &operator<<(std::ostream &stream, Vector3D const &vec) {
-  return stream << vec.to_string();
-}

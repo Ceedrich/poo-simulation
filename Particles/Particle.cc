@@ -63,8 +63,3 @@ void Particle::collide(const Enclosure &enclosure) {
     velocity_ = Vector3D(velocity_.x(), velocity_.y(), -velocity_.z());
   }
 }
-
-ostream &operator<<(ostream &out, Particle const &element) {
-  element.print(out);
-  return out;
-}
