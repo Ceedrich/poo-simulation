@@ -8,6 +8,11 @@
 
 class GLWidget : public QOpenGLWidget {
 public:
+    /**
+   * @brief Constructor of the class GLWidget.
+   * @param Parent widget
+   * @param System
+   */
   GLWidget(QWidget *parent = nullptr, System &&s = System::prefilled())
       : QOpenGLWidget(parent), system(std::move(s)),
         cMovementSpeed(
@@ -16,16 +21,31 @@ public:
             2.0) {
     setFocusPolicy(Qt::StrongFocus);
   }
+
+  /**
+   * @brief Constructor of the class GLWidget.
+   * @param System
+   */
   GLWidget(System &&s) : QOpenGLWidget(nullptr), system(std::move(s)) {
     setFocusPolicy(Qt::StrongFocus);
   }
   virtual ~GLWidget() = default;
 
+  /**
+   * @brief sets the graphics Level.
+   * @param Level that the graphic level is set to.
+   */
   void setGraphicsLevel(OpenGLViewer::GRAPHICS_LEVEL level) {
     viewer.setGraphicsLevel(level);
   }
-
+  /**
+   * @brief Resets the widget to initial status.
+   */
   void reset();
+  /**
+   * @brief Sets the camera movement speed.
+   * @param Camera movement speed.
+   */
   void setCameraMovementSpeed(double v) { cMovementSpeed = v; }
 
 private:
