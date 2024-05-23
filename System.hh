@@ -146,14 +146,51 @@ public:
 
   virtual void draw_on(DrawingFrame &support) override;
 
+  /**
+   * @brief Returns a const reference to the enclosure of the system
+   * @return The enclosure of the system
+   */
   Enclosure const &enclosure() const { return enclosure_; }
+  /**
+   * @brief Returns the average kinetic energy of all the particles in the
+   * simulation
+   * @return the average kinetic energy
+   */
   double averageKineticEnergy() const;
+  /**
+   * @brief Returns the maximum distance two particles need to have in order to
+   * collide or the length of the cubes in the paving of the enclosure. This
+   * depends on the ENCOUNTER_METHOD
+   * @return the distance epsilon
+   */
   double epsilon() const { return epsilon_; }
+  /**
+   * @brief Returns the temperature of the simulation
+   * @return the temperature
+   */
   double temperature() const { return temperature_; }
 
+  /**
+   * @brief sets the maximum distance two particles need to have in order to
+   * collide or the length of the cubes in the paving of the enclosure. This
+   * depends on the ENCOUNTER_METHOD
+   * @param x the value to set the distance to
+   */
   void setEpsilon(double x) { epsilon_ = x; }
+  /**
+   * @brief set the encounter method to the given method
+   * @param method the encounter method
+   */
   void setEncounterMethod(ENCOUNTER_METHOD method) { encounterMethod = method; }
+  /**
+   * @brief set the evolve method to the given method
+   * @param method the method
+   */
   void setEvolveMethod(EVOLVE_METHOD method) { evolveMethod = method; }
+  /**
+   * @brief sets the temperature of the system to the given temperature
+   * @param temp the temperature
+   */
   void setTemperature(double temp) { temperature_ = temp; }
 
 private:

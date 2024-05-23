@@ -3,7 +3,6 @@
 
 #include "Drawings/Drawable.hh"
 #include "Drawings/DrawingFrame.hh"
-#include "Vector3D.hh"
 
 class Enclosure : public Drawable, public Printable {
 private:
