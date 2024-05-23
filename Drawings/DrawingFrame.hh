@@ -17,21 +17,34 @@ class System;
  */
 class DrawingFrame {
 public:
-  /**
-   * @brief Virtual destructor for the DrawingFrame class.
-   */
+
   virtual ~DrawingFrame() = default;
 
   /**
    * @brief Draws a particle on the drawing frame.
    *
-   * @param particle The particle to be drawn.
+   * @param The particle to be drawn.
    */
   virtual void draw(Particle const &) = 0;
 
+    /**
+   * @brief Draws a motion trace on the drawing frame.
+   *
+   * @param Motion trace to be drawn.
+   */
   virtual void draw(MotionTrace const &) = 0;
 
+    /**
+   * @brief Draws an enclosure on the drawing frame.
+   *
+   * @param Enclosure to be drawn.
+   */
   virtual void draw(Enclosure const &) = 0;
 
+    /**
+   * @brief Draws a system on the drawing frame.
+   *
+   * @param System to be drawn.
+   */
   virtual void draw(System const &) = 0;
 };
