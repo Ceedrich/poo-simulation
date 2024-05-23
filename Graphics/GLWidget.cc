@@ -259,9 +259,18 @@ void GLWidget::saveToFile() const {
 
 void GLWidget::loadFromFile() {
   std::ifstream file(FILE_NAME);
+  // epsilon temp encounter evolve
+  double epsilon, temperature;
+  int encounterMethod, evolveMethod;
   double w, h, l;
+  file >> epsilon >> temperature;
+  file >> evolveMethod >> encounterMethod;
   file >> w >> h >> l;
   System s(w, h, l);
+  s.setEpsilon(epsilon);
+  s.setTemperature(temperature);
+  s.setEncounterMethod((System::ENCOUNTER_METHOD)encounterMethod);
+  s.setEvolveMethod((System::EVOLVE_METHOD)evolveMethod);
   while (!file.fail() && !file.eof()) {
     std::string type;
     double rx, ry, rz, vx, vy, vz, m;
@@ -286,5 +295,8 @@ void GLWidget::loadFromFile() {
 }
 
 System::Info GLWidget::systemInfo() const {
-  return {.averageKineticEnergy = system.averageKineticEnergy()};
+  return {
+      .averageKineticEnergy = system.averageKineticEnergy(),
+      .epsilon = system.epsilon(),
+  };
 }

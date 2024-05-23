@@ -28,8 +28,6 @@ public:
   struct Info {
     double averageKineticEnergy;
     double epsilon;
-    ENCOUNTER_METHOD encounterMethod;
-    EVOLVE_METHOD evolveMethod;
   };
 
   /**
@@ -151,9 +149,9 @@ public:
 
   void setEpsilon(double x) { EPSILON = x; }
 
-  void setEncounterMethod(ENCOUNTER_METHOD method);
-  void setEvolveMethod(EVOLVE_METHOD method);
-  void setTemperature(double temp) { this->temperature = temp; }
+  void setEncounterMethod(ENCOUNTER_METHOD method) { encounterMethod = method; }
+  void setEvolveMethod(EVOLVE_METHOD method) { evolveMethod = method; }
+  void setTemperature(double temp) { temperature = temp; }
 
   double averageKineticEnergy() const;
   double epsilon() const { return EPSILON; }
@@ -190,6 +188,7 @@ private:
       return encounter_paving(p, q, EPSILON);
       break;
     }
+    return false;
   }
   static bool encounter_paving(Particle const &p, Particle const &q,
                                double EPSILON);

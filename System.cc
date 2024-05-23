@@ -11,6 +11,9 @@ void System::print(ostream &out) const {
 }
 
 void System::printRaw(std::ostream &out) const {
+  // epsilon temp encounter evolve
+  out << EPSILON << " " << temperature << " " << encounterMethod << " "
+      << evolveMethod << std::endl;
   enclosure_.printRaw(out);
   for (auto const &p : particles) {
     p->printRaw(out);
@@ -83,28 +86,6 @@ bool System::encounter_paving(const Particle &p, const Particle &q,
 bool System::encounter_center_of_mass(const Particle &p, const Particle &q,
                                       double EPSILON) {
   return (p.position() - q.position()).norm() < EPSILON;
-}
-
-void System::setEncounterMethod(ENCOUNTER_METHOD method) {
-  switch (method) {
-  case ENCOUNTER_METHOD_PAVING:
-    encounter_method = encounter_paving;
-    break;
-  case ENCOUNTER_METHOD_CENTER_OF_MASS:
-    encounter_method = encounter_center_of_mass;
-    break;
-  }
-}
-
-void System::setEvolveMethod(EVOLVE_METHOD method) {
-  switch (method) {
-  case EVOLVE_METHOD_SINGLE:
-    evolve_method = evolve_single;
-    break;
-  case EVOLVE_METHOD_MULTIPLE:
-    evolve_method = evolve_multiple;
-    break;
-  }
 }
 
 void System::draw_on(DrawingFrame &support) {
