@@ -1,32 +1,55 @@
 #pragma once
 #include "ControlsWidget.hh"
 #include "GLWidget.hh"
+#include "InfoWidget.hh"
+#include <QTimer>
 #include <QWidget>
 
 class MainWindow : public QWidget {
 public:
   MainWindow(System &&s)
-      : controls(CONTROLS, this), scene_(this, std::move(s)), layout(this) {
+      : controls(CONTROLS, this), scene_(this, std::move(s)), mainLayout(this) {
     init();
   }
-  MainWindow() : controls(CONTROLS, this), scene_(this), layout(this) {
+  MainWindow() : controls(CONTROLS, this), scene_(this), mainLayout(this) {
     init();
   }
 
   GLWidget &scene() { return scene_; }
 
 private:
+  QTimer timer;
+  int timerID;
+
+  virtual void timerEvent(QTimerEvent *event) override {
+    if (event->timerId() == timerID) {
+      updateSystemInfo();
+    }
+  }
   void init() {
-    // Setup controls
+    timerID = startTimer(100);
+    // Setup Text Widgets
     controls.setBackgroundRole(QPalette::Dark);
+    info.setBackgroundRole(QPalette::Dark);
 
     // Setup Main Window
     setMinimumSize(500, 500);
     setStyleSheet("background-color: #000;");
     setContentsMargins(0, 0, 0, 0);
 
-    layout.addWidget(&scene_, 1);
-    layout.addWidget(&controls);
+    updateSystemInfo();
+
+    mainLayout.addWidget(&scene_, 1);
+    bottomLayout.addWidget(&controls, 1);
+    bottomLayout.addWidget(&info, 1);
+
+    mainLayout.addLayout(&bottomLayout);
+  }
+
+  void updateSystemInfo() {
+    info.setEpsilon(scene_.systemInfo().epsilon);
+    info.setTemperature(scene_.systemInfo().temperature);
+    info.setAverageKineticEnergy(scene_.systemInfo().averageKineticEnergy);
   }
 
   static auto constexpr CONTROLS = {
@@ -54,6 +77,8 @@ private:
       "Z",
       "Slow down the simulation"};
   ControlsWidget controls;
+  InfoWidget info;
   GLWidget scene_;
-  QVBoxLayout layout;
+  QVBoxLayout mainLayout;
+  QHBoxLayout bottomLayout;
 };

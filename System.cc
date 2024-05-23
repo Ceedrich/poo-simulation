@@ -123,7 +123,7 @@ double System::averageKineticEnergy() const {
     return 0.0;
   double energy = 0.0;
   for (auto const &p : particles) {
-    energy += ((1 / 2) * p->mass() * p->velocity().norm2());
+    energy += ((1.0 / 2.0) * p->mass() * p->velocity().norm2());
   }
   energy /= particles.size();
 

@@ -55,6 +55,7 @@ set(HEADERS_GRAPHICS
     Graphics/vertex_shader.hh
     Graphics/Light.hh
     Graphics/ControlsWidget.hh
+    Graphics/InfoWidget.hh
     Graphics/MainWindow.hh
 )
 
