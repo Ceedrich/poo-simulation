@@ -1,5 +1,4 @@
 #include "System.hh"
-#include "IntegerPosition.hh"
 
 using namespace std;
 
@@ -13,7 +12,7 @@ void System::print(ostream &out) const {
 
 void System::printRaw(std::ostream &out) const {
   // epsilon temp encounter evolve
-  out << EPSILON << " " << temperature_ << " " << encounterMethod << " "
+  out << epsilon_ << " " << temperature_ << " " << encounterMethod << " "
       << evolveMethod << std::endl;
   enclosure_.printRaw(out);
   for (auto const &p : particles) {
@@ -62,7 +61,7 @@ void System::evolve_multiple(System &s, double dt) {
   for (auto &p : s.particles) {
     p->evolve(dt);
     p->collide(s.enclosure_);
-    particleMap[getBoxPos(*p, s.EPSILON)].push_back(p.get());
+    particleMap[getBoxPos(*p, s.epsilon_)].push_back(p.get());
   }
 
   // Loop through boxes
@@ -171,6 +170,19 @@ void System::evolve(double dt) {
     break;
   case EVOLVE_METHOD_SIMPLE:
     evolve_single(*this, dt);
+    break;
+  }
+}
+bool System::encounter(const Particle &p, const Particle &q) {
+  switch (encounterMethod) {
+  case ENCOUNTER_METHOD_CENTER_OF_MASS:
+    return encounter_center_of_mass(p, q, epsilon_);
+    break;
+  case ENCOUNTER_METHOD_PAVING:
+    return encounter_paving(p, q, epsilon_);
+    break;
+  default:
+    return false;
     break;
   }
 }

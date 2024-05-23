@@ -144,34 +144,21 @@ public:
    */
   void evolve(double dt);
 
-  Enclosure const &enclosure() const { return enclosure_; }
-
   virtual void draw_on(DrawingFrame &support) override;
 
-  void setEpsilon(double x) { EPSILON = x; }
+  Enclosure const &enclosure() const { return enclosure_; }
+  double averageKineticEnergy() const;
+  double epsilon() const { return epsilon_; }
+  double temperature() const { return temperature_; }
 
+  void setEpsilon(double x) { epsilon_ = x; }
   void setEncounterMethod(ENCOUNTER_METHOD method) { encounterMethod = method; }
   void setEvolveMethod(EVOLVE_METHOD method) { evolveMethod = method; }
   void setTemperature(double temp) { temperature_ = temp; }
 
-  double averageKineticEnergy() const;
-  double epsilon() const { return EPSILON; }
-  double temperature() const { return temperature_; }
-
 private:
-  template <typename T> static void addParticleAtRandomPlace(System &s) {
-    double constexpr specific_constant = T::SPECIFIC_CONSTANT;
-    Vector3D position(s.random_draw->uniform(0, s.enclosure_.width()),
-                      s.random_draw->uniform(0, s.enclosure_.height()),
-                      s.random_draw->uniform(0, s.enclosure_.length()));
-    Vector3D velocity(
-        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)),
-        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)),
-        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)));
-    s.add_particle(T(position, velocity, 10.0));
-  }
-
-  double EPSILON = 1;
+  // Atriburtes
+  double epsilon_ = 1;
   double temperature_ = 0.1;
   ENCOUNTER_METHOD encounterMethod = ENCOUNTER_METHOD_PAVING;
   EVOLVE_METHOD evolveMethod = EVOLVE_METHOD_SIMPLE;
@@ -181,17 +168,7 @@ private:
   std::vector<std::unique_ptr<Particle>> particles;
 
   // Encounter Method
-  bool encounter(Particle const &p, Particle const &q) {
-    switch (encounterMethod) {
-    case ENCOUNTER_METHOD_CENTER_OF_MASS:
-      return encounter_center_of_mass(p, q, EPSILON);
-      break;
-    case ENCOUNTER_METHOD_PAVING:
-      return encounter_paving(p, q, EPSILON);
-      break;
-    }
-    return false;
-  }
+  bool encounter(Particle const &p, Particle const &q);
   static bool encounter_paving(Particle const &p, Particle const &q,
                                double EPSILON);
   static bool encounter_center_of_mass(Particle const &p, Particle const &q,
@@ -199,4 +176,17 @@ private:
   // Evolve Method
   static void evolve_single(System &s, double dt);
   static void evolve_multiple(System &s, double dt);
+
+  template <typename TParticle>
+  static void addParticleAtRandomPlace(System &s) {
+    double constexpr specific_constant = TParticle::SPECIFIC_CONSTANT;
+    Vector3D position(s.random_draw->uniform(0, s.enclosure_.width()),
+                      s.random_draw->uniform(0, s.enclosure_.height()),
+                      s.random_draw->uniform(0, s.enclosure_.length()));
+    Vector3D velocity(
+        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)),
+        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)),
+        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)));
+    s.add_particle(TParticle(position, velocity, 10.0));
+  }
 };
