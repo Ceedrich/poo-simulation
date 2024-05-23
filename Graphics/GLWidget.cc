@@ -280,3 +280,7 @@ void GLWidget::loadFromFile() {
       std::max({system.enclosure().width(), system.enclosure().height(),
                 system.enclosure().length()});
 }
+
+System::Info GLWidget::systemInfo() const {
+  return {.averageKineticEnergy = system.averageKineticEnergy()};
+}

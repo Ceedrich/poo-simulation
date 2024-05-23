@@ -16,6 +16,7 @@ public:
             2.0) {
     setFocusPolicy(Qt::StrongFocus);
   }
+
   GLWidget(System &&s) : QOpenGLWidget(nullptr), system(std::move(s)) {
     setFocusPolicy(Qt::StrongFocus);
   }
@@ -27,6 +28,7 @@ public:
 
   void reset();
   void setCameraMovementSpeed(double v) { cMovementSpeed = v; }
+  System::Info systemInfo() const;
 
 private:
   virtual void initializeGL() override;

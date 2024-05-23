@@ -25,6 +25,10 @@ public:
     EVOLVE_METHOD_MULTIPLE,
   };
 
+  struct Info {
+    double averageKineticEnergy;
+  };
+
   /**
    * @brief Factory method for Exercise 9.
    *
