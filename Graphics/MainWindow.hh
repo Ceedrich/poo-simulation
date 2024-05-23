@@ -28,6 +28,7 @@ private:
     layout.addWidget(&scene_, 1);
     layout.addWidget(&controls);
   }
+
   static auto constexpr CONTROLS = {
       "W, A, S, D, SPACE, SHIFT",
       "move camera", //
@@ -48,7 +49,10 @@ private:
       "7,8,9",
       "toggle ambient, diffuse and specular lighting", //
       "P, I",
-      "Save/Load the current status to a file (not working for TraceParticle)"};
+      "Save/Load the current status to a file (not working for "
+      "TraceParticle)", //
+      "Z",
+      "Slow down the simulation"};
   ControlsWidget controls;
   GLWidget scene_;
   QVBoxLayout layout;
