@@ -27,6 +27,9 @@ public:
 
   struct Info {
     double averageKineticEnergy;
+    double epsilon;
+    ENCOUNTER_METHOD encounterMethod;
+    EVOLVE_METHOD evolveMethod;
   };
 
   /**
@@ -140,7 +143,7 @@ public:
    *
    * @param dt The time step to evolve the system by.
    */
-  void evolve(double dt) { evolve_method(*this, dt); }
+  void evolve(double dt);
 
   Enclosure const &enclosure() const { return enclosure_; }
 
@@ -153,6 +156,7 @@ public:
   void setTemperature(double temp) { this->temperature = temp; }
 
   double averageKineticEnergy() const;
+  double epsilon() const { return EPSILON; }
 
 private:
   template <typename T> static void addParticleAtRandomPlace(System &s) {
@@ -168,8 +172,9 @@ private:
   }
 
   double EPSILON = 1;
-
   double temperature = 0.1;
+  ENCOUNTER_METHOD encounterMethod = ENCOUNTER_METHOD_PAVING;
+  EVOLVE_METHOD evolveMethod = EVOLVE_METHOD_SINGLE;
 
   std::unique_ptr<NumberGenerator> random_draw;
   Enclosure enclosure_;
@@ -177,17 +182,20 @@ private:
 
   // Encounter Method
   bool encounter(Particle const &p, Particle const &q) {
-    return encounter_method(p, q, EPSILON);
+    switch (encounterMethod) {
+    case ENCOUNTER_METHOD_CENTER_OF_MASS:
+      return encounter_center_of_mass(p, q, EPSILON);
+      break;
+    case ENCOUNTER_METHOD_PAVING:
+      return encounter_paving(p, q, EPSILON);
+      break;
+    }
   }
   static bool encounter_paving(Particle const &p, Particle const &q,
                                double EPSILON);
   static bool encounter_center_of_mass(Particle const &p, Particle const &q,
                                        double EPSILON);
-  std::function<bool(Particle const &, Particle const &, double)>
-      encounter_method = encounter_paving;
-
   // Evolve Method
   static void evolve_single(System &s, double dt);
   static void evolve_multiple(System &s, double dt);
-  std::function<void(System &, double)> evolve_method = evolve_single;
 };

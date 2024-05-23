@@ -148,3 +148,14 @@ double System::averageKineticEnergy() const {
 
   return energy;
 }
+
+void System::evolve(double dt) {
+  switch (evolveMethod) {
+  case EVOLVE_METHOD_MULTIPLE:
+    evolve_multiple(*this, dt);
+    break;
+  case EVOLVE_METHOD_SINGLE:
+    evolve_single(*this, dt);
+    break;
+  }
+}
