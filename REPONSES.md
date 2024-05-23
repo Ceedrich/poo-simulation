@@ -82,42 +82,13 @@ Ce particule peut être representé comme une sous-classe d'un des particules d�
 
 
 ### [Question P14.1] Avant de préciser les détails d'implémentation, quelle est la complexité temporelle pire cas de cette solution en fonction du nombre de particules ? [Attention : on suppose, par hypothèse même du modèle de gaz parfait, que les particules sont équiréparties dans l'enceinte. On suppose de plus que la taille d'une case est petite par rapport à la taille de l'enceinte. Ainsi on peut raisonnablement faire l'hypothèse que le nombre de particules par case est négligeable (O(1)) devant le nombre total de particules (c.-à-d. toutes les particules ne se retrouvent pas en même temps dans la même case). Quel(s) inconvénient(s) présente cependant cette solution ?
-Il faut, pour tout particule, marquer la case où la particule se trouve. Ça, on peut faire en $O(n)$. Ainsi, il faut traverser tous les particules encore une fois et puis, pour chaque particule, traverser tous les autres pour trouver celles, qui se trouvent dans la même case. On ajoute donc une fonction en $O(n^2)$.
+Pour déplacer les particules et actualiser les cases dans lesquels elles se trouvent, il faut parcourir tous les $n$ particules. C'est donc en $\Theta(n)$.
+Ensuite, il suffit de parcourir tous les cases non-vides (maximum $n$ cases) et ainsi simuler les collisions de tous les particules dans le case. Lorsqu'on a supposer que la nombre des particules par case est négligeable, ceci est aussi possible en $\Theta(n)$.
+Cette méthode a besoin de la création des nouveaux types. Mais, en raison de notre choix d'implémentation (voir P14.2), ni la classe `Particle` ni la classe `Enclosure` doit être modifié.
 
-La complexité temporelle de cet algorithme est donc $O(n^2)$.
-
-// Je suis pas content
+On a donc deux boucles en $\Theta(n)$ et finallement l'algorithme est en $\Theta(n)$.
 
 ###[Question P14.2]Comment et où avez-vous implémenté cette nouvelle façon de calculer les collisions ?
+On l'a fait en travers d'un `std::unorderd_map` indexé par un nouveau type et sa "hash function". Ceci permet d'ajouter tous les particules à un case indexé par la position de la particule. Dans la deuxième boucle, on parcourt tous les cases contenant des particules (en utilisant les itérateurs sur le `unorderd_map`) et ensuite faire collider tous les particules dans la case.
 
-//TODO
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Ceci évite de modifier les classes `Particle` et `Enclosure` et ne faut que deux nouveaux types qui sont isolées dans le fichier `System.cc` et ne sont pas visibles à l'extérieur.

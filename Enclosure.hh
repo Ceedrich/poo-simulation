@@ -60,7 +60,7 @@ public:
    * @param support The DrawingFrame to draw on.
    */
   virtual void draw_on(DrawingFrame &support) override { support.draw(*this); }
-  
+
   /**
    * @brief Prints representation from enclosure to outstream
    *
@@ -69,7 +69,8 @@ public:
   void print(std::ostream &out) const override;
 
   /**
-   * @brief Prints representation from enclosure to outstream to save the state of the Enclosure
+   * @brief Prints representation from enclosure to outstream to save the state
+   * of the Enclosure
    *
    * @param Stream which is used to print
    */

@@ -1,4 +1,5 @@
 #include "System.hh"
+#include "IntegerPosition.hh"
 
 using namespace std;
 
@@ -26,17 +27,50 @@ void System::add_particle(Particle const &particle) {
 
 void System::delete_particles() { particles.clear(); }
 
+struct BoxPos {
+  size_t x = 0;
+  size_t y = 0;
+  size_t z = 0;
+
+  bool operator==(BoxPos const &p) const {
+    return x == p.x && y == p.y && z == p.z;
+  }
+};
+
+struct BoxPosHash {
+  size_t operator()(BoxPos const &p) const {
+    return (std::hash<int>()(p.x) ^ //
+            std::hash<int>()(p.y) ^ //
+            std::hash<int>()(p.z));
+  }
+};
+
+BoxPos getBoxPos(Particle const &p, double epsilon) {
+  return {
+      (size_t)std::floor(p.position().x() / epsilon),
+      (size_t)std::floor(p.position().y() / epsilon),
+      (size_t)std::floor(p.position().z() / epsilon),
+  };
+}
+
 void System::evolve_multiple(System &s, double dt) {
+  // setup maps
+  std::unordered_map<BoxPos, vector<Particle *>, BoxPosHash> particleMap;
+  std::unordered_map<Particle *, bool> collided;
+
+  // evolve the particles
   for (auto &p : s.particles) {
     p->evolve(dt);
     p->collide(s.enclosure_);
+    particleMap[getBoxPos(*p, s.EPSILON)].push_back(p.get());
   }
-  for (auto i(s.particles.rbegin()); i != s.particles.rend(); ++i) {
-    auto &p(*i);
-    for (auto j(i + 1); j != s.particles.rend(); ++i) {
-      auto &q(*j);
-      if (s.encounter(*p, *q)) {
-        p->collide(*q, s.random_draw);
+
+  // Loop through boxes
+  for (auto it = particleMap.begin(); it != particleMap.end(); ++it) {
+    auto &box(it->second);
+    for (size_t i(0); i < box.size(); ++i) {
+      for (size_t j(i + 1); j < box.size(); ++j) {
+        box[i]->collide(*box[j], s.random_draw);
       }
     }
   }

@@ -4,7 +4,10 @@
 
 int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
-  GLWidget window;
+
+  System s(System::exercice9());
+
+  GLWidget window(std::move(s));
 
   window.show();
 
