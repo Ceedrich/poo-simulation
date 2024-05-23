@@ -166,10 +166,10 @@ double System::averageKineticEnergy() const {
 
 void System::evolve(double dt) {
   switch (evolveMethod) {
-  case EVOLVE_METHOD_MULTIPLE:
+  case EVOLVE_METHOD_ADVANCED:
     evolve_multiple(*this, dt);
     break;
-  case EVOLVE_METHOD_SINGLE:
+  case EVOLVE_METHOD_SIMPLE:
     evolve_single(*this, dt);
     break;
   }

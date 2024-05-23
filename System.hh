@@ -21,8 +21,8 @@ public:
   };
 
   enum EVOLVE_METHOD {
-    EVOLVE_METHOD_SINGLE,
-    EVOLVE_METHOD_MULTIPLE,
+    EVOLVE_METHOD_SIMPLE,
+    EVOLVE_METHOD_ADVANCED,
   };
 
   struct Info {
@@ -174,7 +174,7 @@ private:
   double EPSILON = 1;
   double temperature_ = 0.1;
   ENCOUNTER_METHOD encounterMethod = ENCOUNTER_METHOD_PAVING;
-  EVOLVE_METHOD evolveMethod = EVOLVE_METHOD_SINGLE;
+  EVOLVE_METHOD evolveMethod = EVOLVE_METHOD_SIMPLE;
 
   std::unique_ptr<NumberGenerator> random_draw;
   Enclosure enclosure_;
