@@ -5,10 +5,7 @@
 - Anna: reponses week 4 Particules, particules, Système, reponses Système, journal updaten
 - Cedric: Reponses différents gaz, journal updaten
   - Particle should not be drawable. The different kinds of particles should be.
-  - Exercice P13
-  - D'Vektore wo ofd particles zeiged, wenn die gmacht worde send
   - Tâches ergänzen
-  - répondre à: P9.1, P11.1, P14.2
 
 ### Responsabilités
 

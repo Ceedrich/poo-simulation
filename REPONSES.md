@@ -66,14 +66,16 @@ System` operator=(System const&) = delete;
 ## Semaine 07
 
 ### [Question P9.1] Comment (et à quel(s) endroit(s)) intégrez vous ces deux aspects ?
-// TODO
+La construction d'une situation initiale est fait dans les "Factorys" de la classe `System`. Il y'en a plusieurs, par exemple pour constituer les conditions initiales pour cette exercice (`System::exercice9()`), mais aussi de remplir l'enceinte avec des particules d'une manière aléatoire (`System::prefilled()`).
+
+La mise à jour des particules est fait dans la méthode `void System::evolve(double)`. Dans l'implémentation de cet exercice, on déplace tous les particules et les fait rebondir sur les parois et ensuite gère les chocs dans une deuxième boucle (plus précicement deux boucles emboîtées).
 
 ### [Question P9.2] Quelle est la complexité de l'algorithme de simulation lorsqu'il utilise cette méthode pour savoir si deux particules se rencontrent ?
 En utilisant cet algorithme, il faut itérer sur tous les particules pour chaqu'une des particules. Il faut donc faire deux boucles "for". Cette méthode ajoute donc la complexité temporale $\Theta(n^2)$ où n est la nombre des particules.
 
 ##Semaine 9
 ###[Question P11.1] Si vous souhaitez voir l'enceinte, c.-à-d. la faire dessiner, comment devez vous modifier (ou pas) votre conception/votre code ?
-//TODO
+Il ne faut rien faire. On voit déja l'enceinte sur l'écran puisqu'on a implementé la méthode `OpenGLViwer::draw(Enclosure const&)` et la méthode `System::draw_on(DrawingFrame &support)` dessine déjà l'enceinte.
 
 ## Semaine 12
 
