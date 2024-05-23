@@ -129,6 +129,9 @@ void GLWidget::keyPressEvent(QKeyEvent *event) {
   case Inputs::LOAD_FILE:
     loadFromFile();
     break;
+  case Inputs::SLOW_DOWN_SIMULATION:
+    slowDown = !slowDown;
+    break;
   }
 }
 
@@ -181,7 +184,8 @@ void GLWidget::timerEvent(QTimerEvent *event) {
 }
 
 void GLWidget::updateSystemTimer() {
-  double dt = stopwatch.restart() / 1000.0;
+  double dt =
+      stopwatch.restart() / 1000.0 * (slowDown ? slowDownMultiplier : 1.0);
 
   system.evolve(dt);
 }

@@ -31,6 +31,7 @@ public:
   System::Info systemInfo() const;
 
 private:
+  bool slowDown = false;
   virtual void initializeGL() override;
   virtual void resizeGL(int width, int height) override;
   virtual void paintGL() override;
@@ -61,6 +62,7 @@ private:
   double cMovementSpeed = 6.0;
   static constexpr double cSpeedMultiplier = 2.0;
   static constexpr double dt = 0.1;
+  static constexpr double slowDownMultiplier = 0.2;
   bool cSpeedUp = false;
   QElapsedTimer stopwatch, cstopwatch;
 
