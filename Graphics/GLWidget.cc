@@ -298,5 +298,6 @@ System::Info GLWidget::systemInfo() const {
   return {
       .averageKineticEnergy = system.averageKineticEnergy(),
       .epsilon = system.epsilon(),
+      .temperature = system.temperature(),
   };
 }

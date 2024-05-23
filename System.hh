@@ -28,6 +28,7 @@ public:
   struct Info {
     double averageKineticEnergy;
     double epsilon;
+    double temperature;
   };
 
   /**
@@ -151,10 +152,11 @@ public:
 
   void setEncounterMethod(ENCOUNTER_METHOD method) { encounterMethod = method; }
   void setEvolveMethod(EVOLVE_METHOD method) { evolveMethod = method; }
-  void setTemperature(double temp) { temperature = temp; }
+  void setTemperature(double temp) { temperature_ = temp; }
 
   double averageKineticEnergy() const;
   double epsilon() const { return EPSILON; }
+  double temperature() const { return temperature_; }
 
 private:
   template <typename T> static void addParticleAtRandomPlace(System &s) {
@@ -163,14 +165,14 @@ private:
                       s.random_draw->uniform(0, s.enclosure_.height()),
                       s.random_draw->uniform(0, s.enclosure_.length()));
     Vector3D velocity(
-        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature)),
-        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature)),
-        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature)));
+        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)),
+        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)),
+        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)));
     s.add_particle(T(position, velocity, 10.0));
   }
 
   double EPSILON = 1;
-  double temperature = 0.1;
+  double temperature_ = 0.1;
   ENCOUNTER_METHOD encounterMethod = ENCOUNTER_METHOD_PAVING;
   EVOLVE_METHOD evolveMethod = EVOLVE_METHOD_SINGLE;
 

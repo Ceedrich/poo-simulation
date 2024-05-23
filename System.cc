@@ -12,7 +12,7 @@ void System::print(ostream &out) const {
 
 void System::printRaw(std::ostream &out) const {
   // epsilon temp encounter evolve
-  out << EPSILON << " " << temperature << " " << encounterMethod << " "
+  out << EPSILON << " " << temperature_ << " " << encounterMethod << " "
       << evolveMethod << std::endl;
   enclosure_.printRaw(out);
   for (auto const &p : particles) {
