@@ -62,17 +62,17 @@ set(SOURCES_TEXT Text/TextViewer.cc)
 set(HEADERS_TEXT Text/TextViewer.hh)
 
 # Tests
-add_executable(Vector3D test_Vector3D.cc
+add_executable(test_Vector3D test_Vector3D.cc
     Vector3D.cc Vector3D.hh
     Printable.cc Printable.hh
 )
-add_executable(Particle test_Particle.cc
+add_executable(test_Particle test_Particle.cc
     Particles/Particle.hh Particles/Particle.cc
     Particles/Neon.cc Particles/Neon.hh
     Vector3D.cc Vector3D.hh
     Printable.cc Printable.hh
 )
-add_executable(Enclosure test_Enclosure.cc
+add_executable(test_Enclosure test_Enclosure.cc
     Enclosure.hh Enclosure.cc
     Printable.cc Printable.hh
 )
@@ -86,7 +86,7 @@ add_executable(Exercice7 Exercice7.cc
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 )
 
-add_executable(System test_System.cc
+add_executable(test_System test_System.cc
     System.cc System.hh
     ${SOURCES_DRAWINGS} ${HEADERS_DRAWINGS}
     Enclosure.cc Enclosure.hh
