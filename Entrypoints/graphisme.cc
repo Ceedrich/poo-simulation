@@ -1,7 +1,7 @@
-#include "Graphics/ControlsWidget.hh"
-#include "Graphics/GLWidget.hh"
-#include "Graphics/MainWindow.hh"
-#include "Graphics/OpenGLViewer.hh"
+#include "../Graphics/ControlsWidget.hh"
+#include "../Graphics/GLWidget.hh"
+#include "../Graphics/MainWindow.hh"
+#include "../Graphics/OpenGLViewer.hh"
 #include <QApplication>
 #include <QLabel>
 #include <QMainWindow>

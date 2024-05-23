@@ -1,4 +1,4 @@
-#include "Enclosure.hh"
+#include "../Enclosure.hh"
 #include <iostream>
 
 using namespace std;

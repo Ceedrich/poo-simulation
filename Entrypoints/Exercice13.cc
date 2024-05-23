@@ -1,6 +1,6 @@
-#include "Graphics/GLWidget.hh"
-#include "Particles/TraceParticle.hh"
-#include "System.hh"
+#include "../Graphics/GLWidget.hh"
+#include "../Particles/TraceParticle.hh"
+#include "../System.hh"
 #include <QApplication>
 #include <iostream>
 

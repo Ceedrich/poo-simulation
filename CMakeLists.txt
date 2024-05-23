@@ -63,21 +63,21 @@ set(SOURCES_TEXT Text/TextViewer.cc)
 set(HEADERS_TEXT Text/TextViewer.hh)
 
 # Tests
-add_executable(test_Vector3D test_Vector3D.cc
+add_executable(test_Vector3D Entrypoints/test_Vector3D.cc
     Vector3D.cc Vector3D.hh
     Printable.cc Printable.hh
 )
-add_executable(test_Particle test_Particle.cc
+add_executable(test_Particle Entrypoints/test_Particle.cc
     Particles/Particle.hh Particles/Particle.cc
     Particles/Neon.cc Particles/Neon.hh
     Vector3D.cc Vector3D.hh
     Printable.cc Printable.hh
 )
-add_executable(test_Enclosure test_Enclosure.cc
+add_executable(test_Enclosure Entrypoints/test_Enclosure.cc
     Enclosure.hh Enclosure.cc
     Printable.cc Printable.hh
 )
-add_executable(Exercice7 Exercice7.cc
+add_executable(Exercice7 Entrypoints/Exercice7.cc
     Enclosure.cc Enclosure.hh
     ${SOURCES_TEXT} ${HEADERS_TEXT}
     ${HEADERS_DRAWINGS}
@@ -87,7 +87,7 @@ add_executable(Exercice7 Exercice7.cc
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 )
 
-add_executable(test_System test_System.cc
+add_executable(test_System Entrypoints/test_System.cc
     System.cc System.hh
     ${SOURCES_DRAWINGS} ${HEADERS_DRAWINGS}
     Enclosure.cc Enclosure.hh
@@ -97,7 +97,7 @@ add_executable(test_System test_System.cc
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 )
 
-add_executable(Exercice9 Exercice9.cc
+add_executable(Exercice9 Entrypoints/Exercice9.cc
     System.cc System.hh
     Enclosure.cc Enclosure.hh
     Vector3D.cc Vector3D.hh
@@ -107,22 +107,7 @@ add_executable(Exercice9 Exercice9.cc
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 )
 
-add_executable(Graphisme graphisme.cc
-    ${HEADERS_DRAWINGS}
-
-    System.hh System.cc
-    Enclosure.hh Enclosure.cc
-    Vector3D.hh Vector3D.cc
-    Printable.cc Printable.hh
-    ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
-
-    ${SOURCES_GRAPHICS} ${HEADERS_GRAPHICS}
-
-    ${RESOURCE_FILES}
-)
-target_link_libraries(Graphisme Qt5::Widgets OpenGL::GL)
-
-add_executable(Exercice12 Exercice12.cc
+add_executable(Exercice12 Entrypoints/Exercice12.cc
     ${HEADERS_DRAWINGS}
 
     System.hh System.cc
@@ -137,7 +122,7 @@ add_executable(Exercice12 Exercice12.cc
 )
 target_link_libraries(Exercice12 Qt5::Widgets OpenGL::GL)
 
-add_executable(Exercice13 Exercice13.cc
+add_executable(Exercice13 Entrypoints/Exercice13.cc
     ${HEADERS_DRAWINGS}
 
     System.hh System.cc
@@ -153,6 +138,22 @@ add_executable(Exercice13 Exercice13.cc
     ${RESOURCE_FILES}
 )
 target_link_libraries(Exercice13 Qt5::Widgets OpenGL::GL)
+
+add_executable(Graphisme Entrypoints/graphisme.cc
+    ${HEADERS_DRAWINGS}
+
+    System.hh System.cc
+    Enclosure.hh Enclosure.cc
+    Vector3D.hh Vector3D.cc
+    Printable.cc Printable.hh
+    ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
+
+    ${SOURCES_GRAPHICS} ${HEADERS_GRAPHICS}
+
+    ${RESOURCE_FILES}
+)
+target_link_libraries(Graphisme Qt5::Widgets OpenGL::GL)
+
 
 
 include(GNUInstallDirs)

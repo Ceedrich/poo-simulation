@@ -1,4 +1,4 @@
-#include "Graphics/GLWidget.hh"
+#include "../Graphics/GLWidget.hh"
 #include <QApplication>
 #include <iostream>
 
