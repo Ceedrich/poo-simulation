@@ -122,6 +122,23 @@ add_executable(Exercice11 Entrypoints/Exercice11.cc
 )
 target_link_libraries(Exercice11 Qt5::Widgets OpenGL::GL)
 
+add_executable(Exercice12 Entrypoints/Exercice12.cc
+    ${HEADERS_DRAWINGS}
+
+    System.hh System.cc
+    Enclosure.hh Enclosure.cc
+    Vector3D.hh Vector3D.cc
+    Printable.hh Printable.cc
+    ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
+    Particles/TraceParticle.cc Particles/TraceParticle.hh
+    Particles/MotionTrace.cc Particles/MotionTrace.hh
+
+    ${SOURCES_GRAPHICS} ${HEADERS_GRAPHICS}
+
+    ${RESOURCE_FILES}
+)
+target_link_libraries(Exercice12 Qt5::Widgets OpenGL::GL)
+
 add_executable(Exercice13 Entrypoints/Exercice13.cc
     ${HEADERS_DRAWINGS}
 
