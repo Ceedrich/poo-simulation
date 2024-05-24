@@ -3,6 +3,7 @@
 
 #include "Drawings/Drawable.hh"
 #include "Drawings/DrawingFrame.hh"
+#include "Printable.hh"
 
 class Enclosure : public Drawable, public Printable {
 private:
