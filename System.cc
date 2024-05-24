@@ -53,7 +53,7 @@ BoxPos getBoxPos(Particle const &p, double epsilon) {
   };
 }
 
-void System::evolve_multiple(System &s, double dt) {
+void System::evolveAdvanced(System &s, double dt) {
   // setup maps
   std::unordered_map<BoxPos, vector<Particle *>, BoxPosHash> particleMap;
   std::unordered_map<Particle *, bool> collided;
@@ -76,7 +76,7 @@ void System::evolve_multiple(System &s, double dt) {
   }
 }
 
-void System::evolve_single(System &s, double dt) {
+void System::evolveSimple(System &s, double dt) {
   for (auto &p : s.particles) {
     p->evolve(dt);
     p->collide(s.enclosure_);
@@ -167,10 +167,10 @@ double System::averageKineticEnergy() const {
 void System::evolve(double dt) {
   switch (evolveMethod) {
   case EVOLVE_METHOD_ADVANCED:
-    evolve_multiple(*this, dt);
+    evolveAdvanced(*this, dt);
     break;
   case EVOLVE_METHOD_SIMPLE:
-    evolve_single(*this, dt);
+    evolveSimple(*this, dt);
     break;
   }
 }

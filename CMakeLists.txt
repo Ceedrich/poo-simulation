@@ -107,7 +107,7 @@ add_executable(Exercice9 Entrypoints/Exercice9.cc
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 )
 
-add_executable(Exercice12 Entrypoints/Exercice12.cc
+add_executable(Exercice11 Entrypoints/Exercice11.cc
     ${HEADERS_DRAWINGS}
 
     System.hh System.cc
@@ -120,7 +120,7 @@ add_executable(Exercice12 Entrypoints/Exercice12.cc
 
     ${RESOURCE_FILES}
 )
-target_link_libraries(Exercice12 Qt5::Widgets OpenGL::GL)
+target_link_libraries(Exercice11 Qt5::Widgets OpenGL::GL)
 
 add_executable(Exercice13 Entrypoints/Exercice13.cc
     ${HEADERS_DRAWINGS}
