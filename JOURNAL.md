@@ -6,6 +6,7 @@
 - Cedric: Reponses différents gaz, journal updaten
   - Particle should not be drawable. The different kinds of particles should be.
   - Tâches ergänzen
+  - Masse des particles
 
 ### Responsabilités
 

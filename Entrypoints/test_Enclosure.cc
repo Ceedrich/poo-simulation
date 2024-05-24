@@ -6,7 +6,7 @@ using namespace std;
 int main() {
   Enclosure e1;
   Enclosure e2(50);
-  Enclosure e3(123, 14, 023);
+  Enclosure e3(123, 14, 19);
 
   cout << "E1 : " << e1 << endl;
   cout << "E2 : " << e2 << endl;

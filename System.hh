@@ -10,7 +10,6 @@
 #include "Particles/Neon.hh"
 #include "Particles/Particle.hh"
 #include "Printable.hh"
-#include <functional>
 #include <memory>
 #include <vector>
 

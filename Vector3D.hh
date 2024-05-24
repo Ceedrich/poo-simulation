@@ -3,8 +3,6 @@
 #include <ostream>
 #include <string>
 
-#include "Drawings/Drawable.hh"
-#include "Drawings/DrawingFrame.hh"
 #include "Printable.hh"
 
 /**
@@ -40,7 +38,7 @@ public:
    */
   double x() const { return x_; }
 
-  /**
+  /*
    * @brief Returns the y-coordinate of the vector.
    *
    * @return The y-coordinate of the vector.

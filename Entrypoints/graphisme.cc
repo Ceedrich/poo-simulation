@@ -1,14 +1,9 @@
-#include "../Graphics/ControlsWidget.hh"
-#include "../Graphics/GLWidget.hh"
 #include "../Graphics/MainWindow.hh"
-#include "../Graphics/OpenGLViewer.hh"
 #include <QApplication>
 #include <QLabel>
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QVBoxLayout>
-#include <array>
-#include <iostream>
 
 int main(int argc, char *argv[]) {
   QApplication app(argc, argv);

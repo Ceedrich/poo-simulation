@@ -1,4 +1,6 @@
-# Reponses
+
+#include <iostream>
+Reponses
 Ce fichier contient les reponses aux questions posées dans les énoncés d'exercices.
 
 ## Semaine 02
@@ -66,7 +68,7 @@ System` operator=(System const&) = delete;
 ## Semaine 07
 
 ### [Question P9.1] Comment (et à quel(s) endroit(s)) intégrez vous ces deux aspects ?
-La construction d'une situation initiale est fait dans les "Factorys" de la classe `System`. Il y'en a plusieurs, par exemple pour constituer les conditions initiales pour cette exercice (`System::exercice9()`), mais aussi de remplir l'enceinte avec des particules d'une manière aléatoire (`System::prefilled()`).
+La construction d'une situation initiale est fait dans les "Factorys" de la classe `System`. Il y'en a plusieurs, par exemple pour constituer les conditions initiales pour cette exercice (`System::exercice9()`), mais aussi de remplir l'enceinte avec des particules d'une manière aléatoire (`System::prefilled()`, cf. P12).
 
 La mise à jour des particules est fait dans la méthode `void System::evolve(double)`. Dans l'implémentation de cet exercice, on déplace tous les particules et les fait rebondir sur les parois et ensuite gère les chocs dans une deuxième boucle (plus précicement deux boucles emboîtées).
 

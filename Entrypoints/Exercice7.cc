@@ -4,7 +4,6 @@
 #include "../Particles/Neon.hh"
 #include "../Text/TextViewer.hh"
 #include "../Vector3D.hh"
-#include <iostream>
 
 int main() {
   TextViewer textViewer;
@@ -16,5 +15,6 @@ int main() {
 
   textViewer.draw(neon);
   textViewer.draw(argon);
+  textViewer.draw(helium);
   textViewer.draw(e);
 }

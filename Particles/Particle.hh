@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Drawings/Drawable.hh"
+#include "../Enclosure.hh"
 #include "../NumberGenerators/NumberGenerator.hh"
 #include "../Printable.hh"
 #include "../Vector3D.hh"

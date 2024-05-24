@@ -16,8 +16,8 @@ public:
    * @brief Constructs an Enclosure object with the given dimensions.
    *
    * @param w The width of the enclosure.
-   * @param l The length of the enclosure.
    * @param h The height of the enclosure.
+   * @param l The length of the enclosure.
    */
   Enclosure(double w, double h, double l) : width_(w), height_(h), length_(l) {}
 

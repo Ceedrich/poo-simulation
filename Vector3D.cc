@@ -4,8 +4,6 @@
 #include <iostream>
 #include <sstream>
 
-bool Vector3D::is_equal(const Vector3D &other) const { return *this == other; }
-
 std::string Vector3D::to_string() const {
   std::ostringstream strs;
   strs << x_ << " " << y_ << " " << z_;

@@ -4,13 +4,12 @@ class DrawingFrame;
 
 class Drawable {
 public:
-    /**
+   /**
    * @brief draws the particle on a drawing frame
    */
   virtual void draw_on(DrawingFrame &) = 0;
 
   virtual ~Drawable() = default;
-
 
   Drawable(Drawable const &) = default;
   Drawable &operator=(Drawable const &) = default;
