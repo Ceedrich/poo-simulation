@@ -1,4 +1,4 @@
-#include "../Graphics/GLWidget.hh"
+#include "../Graphics/MainWindow.hh"
 #include <QApplication>
 
 int main(int argc, char *argv[]) {
@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
 
   System s(System::exercice9());
 
-  GLWidget window(std::move(s));
+  MainWindow window(std::move(s));
 
   window.show();
 
