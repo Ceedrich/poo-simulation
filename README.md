@@ -29,3 +29,4 @@ Ainsi, on trouve des executables de la forme "Exercice\*", "Test_\*" et l'execut
 - <kbd>r</kbd>: réinitialiser la position de la lumière et celle de la caméra.
 - <kbd>7</kbd><kbd>8</kbd><kbd>9</kbd>: allumer/éteindre les trois parties de la lumiere "phong": "ambient", "diffuse", "specular"
 - <kbd>P</kbd><kbd>I</kbd>: sauvegarder/charger l'état du système en un fichier (appelé `Simulation.csv`)
+- <kbd>Z</kbd>: ralentir le mouvement des particules dans le système

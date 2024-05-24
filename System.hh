@@ -9,6 +9,7 @@
 #include "Particles/Helium.hh"
 #include "Particles/Neon.hh"
 #include "Particles/Particle.hh"
+#include "Printable.hh"
 #include <functional>
 #include <memory>
 #include <vector>
@@ -21,8 +22,14 @@ public:
   };
 
   enum EVOLVE_METHOD {
-    EVOLVE_METHOD_SINGLE,
-    EVOLVE_METHOD_MULTIPLE,
+    EVOLVE_METHOD_SIMPLE,
+    EVOLVE_METHOD_ADVANCED,
+  };
+
+  struct Info {
+    double averageKineticEnergy;
+    double epsilon;
+    double temperature;
   };
 
   /**
@@ -136,54 +143,88 @@ public:
    *
    * @param dt The time step to evolve the system by.
    */
-  void evolve(double dt) { evolve_method(*this, dt); }
-
-  Enclosure const &enclosure() const { return enclosure_; }
+  void evolve(double dt);
 
   virtual void draw_on(DrawingFrame &support) override;
 
-  void setEpsilon(double x) { EPSILON = x; }
-
-  void setEncounterMethod(ENCOUNTER_METHOD method);
-  void setEvolveMethod(EVOLVE_METHOD method);
-  void setTemperature(double temp) { this->temperature = temp; }
-
+  /**
+   * @brief Returns a const reference to the enclosure of the system
+   * @return The enclosure of the system
+   */
+  Enclosure const &enclosure() const { return enclosure_; }
+  /**
+   * @brief Returns the average kinetic energy of all the particles in the
+   * simulation
+   * @return the average kinetic energy
+   */
   double averageKineticEnergy() const;
+  /**
+   * @brief Returns the maximum distance two particles need to have in order to
+   * collide or the length of the cubes in the paving of the enclosure. This
+   * depends on the ENCOUNTER_METHOD
+   * @return the distance epsilon
+   */
+  double epsilon() const { return epsilon_; }
+  /**
+   * @brief Returns the temperature of the simulation
+   * @return the temperature
+   */
+  double temperature() const { return temperature_; }
+
+  /**
+   * @brief sets the maximum distance two particles need to have in order to
+   * collide or the length of the cubes in the paving of the enclosure. This
+   * depends on the ENCOUNTER_METHOD
+   * @param x the value to set the distance to
+   */
+  void setEpsilon(double x) { epsilon_ = x; }
+  /**
+   * @brief set the encounter method to the given method
+   * @param method the encounter method
+   */
+  void setEncounterMethod(ENCOUNTER_METHOD method) { encounterMethod = method; }
+  /**
+   * @brief set the evolve method to the given method
+   * @param method the method
+   */
+  void setEvolveMethod(EVOLVE_METHOD method) { evolveMethod = method; }
+  /**
+   * @brief sets the temperature of the system to the given temperature
+   * @param temp the temperature
+   */
+  void setTemperature(double temp) { temperature_ = temp; }
 
 private:
-  template <typename T> static void addParticleAtRandomPlace(System &s) {
-    double constexpr specific_constant = T::SPECIFIC_CONSTANT;
-    Vector3D position(s.random_draw->uniform(0, s.enclosure_.width()),
-                      s.random_draw->uniform(0, s.enclosure_.height()),
-                      s.random_draw->uniform(0, s.enclosure_.length()));
-    Vector3D velocity(
-        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature)),
-        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature)),
-        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature)));
-    s.add_particle(T(position, velocity, 10.0));
-  }
-
-  double EPSILON = 1;
-
-  double temperature = 0.1;
+  // Atriburtes
+  double epsilon_ = 1;
+  double temperature_ = 0.1;
+  ENCOUNTER_METHOD encounterMethod = ENCOUNTER_METHOD_PAVING;
+  EVOLVE_METHOD evolveMethod = EVOLVE_METHOD_SIMPLE;
 
   std::unique_ptr<NumberGenerator> random_draw;
   Enclosure enclosure_;
   std::vector<std::unique_ptr<Particle>> particles;
 
   // Encounter Method
-  bool encounter(Particle const &p, Particle const &q) {
-    return encounter_method(p, q, EPSILON);
-  }
+  bool encounter(Particle const &p, Particle const &q);
   static bool encounter_paving(Particle const &p, Particle const &q,
                                double EPSILON);
   static bool encounter_center_of_mass(Particle const &p, Particle const &q,
                                        double EPSILON);
-  std::function<bool(Particle const &, Particle const &, double)>
-      encounter_method = encounter_paving;
-
   // Evolve Method
   static void evolve_single(System &s, double dt);
   static void evolve_multiple(System &s, double dt);
-  std::function<void(System &, double)> evolve_method = evolve_single;
+
+  template <typename TParticle>
+  static void addParticleAtRandomPlace(System &s) {
+    double constexpr specific_constant = TParticle::SPECIFIC_CONSTANT;
+    Vector3D position(s.random_draw->uniform(0, s.enclosure_.width()),
+                      s.random_draw->uniform(0, s.enclosure_.height()),
+                      s.random_draw->uniform(0, s.enclosure_.length()));
+    Vector3D velocity(
+        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)),
+        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)),
+        s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)));
+    s.add_particle(TParticle(position, velocity, 10.0));
+  }
 };

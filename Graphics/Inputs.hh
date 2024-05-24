@@ -46,5 +46,6 @@ enum CONTROL_KEY {
   RESET_VIEW = Qt::Key::Key_R,
   SAVE_FILE = Qt::Key::Key_P,
   LOAD_FILE = Qt::Key::Key_I,
+  SLOW_DOWN_SIMULATION = Qt::Key::Key_Z,
 };
 } // namespace Inputs

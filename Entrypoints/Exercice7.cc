@@ -1,9 +1,9 @@
-#include "Enclosure.hh"
-#include "Particles/Argon.hh"
-#include "Particles/Helium.hh"
-#include "Particles/Neon.hh"
-#include "Text/TextViewer.hh"
-#include "Vector3D.hh"
+#include "../Enclosure.hh"
+#include "../Particles/Argon.hh"
+#include "../Particles/Helium.hh"
+#include "../Particles/Neon.hh"
+#include "../Text/TextViewer.hh"
+#include "../Vector3D.hh"
 #include <iostream>
 
 int main() {

@@ -1,8 +1,8 @@
-#include "Particles/Argon.hh"
-#include "Particles/Helium.hh"
-#include "Particles/Neon.hh"
-#include "Particles/Particle.hh"
-#include "System.hh"
+#include "../Particles/Argon.hh"
+#include "../Particles/Helium.hh"
+#include "../Particles/Neon.hh"
+#include "../Particles/Particle.hh"
+#include "../System.hh"
 #include <iostream>
 
 using namespace std;

@@ -11,6 +11,9 @@ void System::print(ostream &out) const {
 }
 
 void System::printRaw(std::ostream &out) const {
+  // epsilon temp encounter evolve
+  out << epsilon_ << " " << temperature_ << " " << encounterMethod << " "
+      << evolveMethod << std::endl;
   enclosure_.printRaw(out);
   for (auto const &p : particles) {
     p->printRaw(out);
@@ -23,17 +26,50 @@ void System::add_particle(Particle const &particle) {
 
 void System::delete_particles() { particles.clear(); }
 
+struct BoxPos {
+  size_t x = 0;
+  size_t y = 0;
+  size_t z = 0;
+
+  bool operator==(BoxPos const &p) const {
+    return x == p.x && y == p.y && z == p.z;
+  }
+};
+
+struct BoxPosHash {
+  size_t operator()(BoxPos const &p) const {
+    return (std::hash<int>()(p.x) ^ //
+            std::hash<int>()(p.y) ^ //
+            std::hash<int>()(p.z));
+  }
+};
+
+BoxPos getBoxPos(Particle const &p, double epsilon) {
+  return {
+      (size_t)std::floor(p.position().x() / epsilon),
+      (size_t)std::floor(p.position().y() / epsilon),
+      (size_t)std::floor(p.position().z() / epsilon),
+  };
+}
+
 void System::evolve_multiple(System &s, double dt) {
+  // setup maps
+  std::unordered_map<BoxPos, vector<Particle *>, BoxPosHash> particleMap;
+  std::unordered_map<Particle *, bool> collided;
+
+  // evolve the particles
   for (auto &p : s.particles) {
     p->evolve(dt);
     p->collide(s.enclosure_);
+    particleMap[getBoxPos(*p, s.epsilon_)].push_back(p.get());
   }
-  for (auto i(s.particles.rbegin()); i != s.particles.rend(); ++i) {
-    auto &p(*i);
-    for (auto j(i + 1); j != s.particles.rend(); ++i) {
-      auto &q(*j);
-      if (s.encounter(*p, *q)) {
-        p->collide(*q, s.random_draw);
+
+  // Loop through boxes
+  for (auto it = particleMap.begin(); it != particleMap.end(); ++it) {
+    auto &box(it->second);
+    for (size_t i(0); i < box.size(); ++i) {
+      for (size_t j(i + 1); j < box.size(); ++j) {
+        box[i]->collide(*box[j], s.random_draw);
       }
     }
   }
@@ -85,28 +121,6 @@ bool System::encounter_center_of_mass(const Particle &p, const Particle &q,
   return (p.position() - q.position()).norm() < EPSILON;
 }
 
-void System::setEncounterMethod(ENCOUNTER_METHOD method) {
-  switch (method) {
-  case ENCOUNTER_METHOD_PAVING:
-    encounter_method = encounter_paving;
-    break;
-  case ENCOUNTER_METHOD_CENTER_OF_MASS:
-    encounter_method = encounter_center_of_mass;
-    break;
-  }
-}
-
-void System::setEvolveMethod(EVOLVE_METHOD method) {
-  switch (method) {
-  case EVOLVE_METHOD_SINGLE:
-    evolve_method = evolve_single;
-    break;
-  case EVOLVE_METHOD_MULTIPLE:
-    evolve_method = evolve_multiple;
-    break;
-  }
-}
-
 void System::draw_on(DrawingFrame &support) {
   support.draw(*this);
   enclosure_.draw_on(support);
@@ -142,9 +156,33 @@ double System::averageKineticEnergy() const {
     return 0.0;
   double energy = 0.0;
   for (auto const &p : particles) {
-    energy += ((1 / 2) * p->mass() * p->velocity().norm2());
+    energy += ((1.0 / 2.0) * p->mass() * p->velocity().norm2());
   }
   energy /= particles.size();
 
   return energy;
+}
+
+void System::evolve(double dt) {
+  switch (evolveMethod) {
+  case EVOLVE_METHOD_ADVANCED:
+    evolve_multiple(*this, dt);
+    break;
+  case EVOLVE_METHOD_SIMPLE:
+    evolve_single(*this, dt);
+    break;
+  }
+}
+bool System::encounter(const Particle &p, const Particle &q) {
+  switch (encounterMethod) {
+  case ENCOUNTER_METHOD_CENTER_OF_MASS:
+    return encounter_center_of_mass(p, q, epsilon_);
+    break;
+  case ENCOUNTER_METHOD_PAVING:
+    return encounter_paving(p, q, epsilon_);
+    break;
+  default:
+    return false;
+    break;
+  }
 }

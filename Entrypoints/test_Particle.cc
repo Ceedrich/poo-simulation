@@ -1,5 +1,5 @@
-#include "Particles/Neon.hh"
-#include "Particles/Particle.hh"
+#include "../Particles/Neon.hh"
+#include "../Particles/Particle.hh"
 #include <iostream>
 
 using namespace std;

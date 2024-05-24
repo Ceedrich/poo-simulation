@@ -129,6 +129,9 @@ void GLWidget::keyPressEvent(QKeyEvent *event) {
   case Inputs::LOAD_FILE:
     loadFromFile();
     break;
+  case Inputs::SLOW_DOWN_SIMULATION:
+    slowDown = !slowDown;
+    break;
   }
 }
 
@@ -181,7 +184,8 @@ void GLWidget::timerEvent(QTimerEvent *event) {
 }
 
 void GLWidget::updateSystemTimer() {
-  double dt = stopwatch.restart() / 1000.0;
+  double dt =
+      stopwatch.restart() / 1000.0 * (slowDown ? slowDownMultiplier : 1.0);
 
   system.evolve(dt);
 }
@@ -255,9 +259,18 @@ void GLWidget::saveToFile() const {
 
 void GLWidget::loadFromFile() {
   std::ifstream file(FILE_NAME);
+  // epsilon temp encounter evolve
+  double epsilon, temperature;
+  int encounterMethod, evolveMethod;
   double w, h, l;
+  file >> epsilon >> temperature;
+  file >> evolveMethod >> encounterMethod;
   file >> w >> h >> l;
   System s(w, h, l);
+  s.setEpsilon(epsilon);
+  s.setTemperature(temperature);
+  s.setEncounterMethod((System::ENCOUNTER_METHOD)encounterMethod);
+  s.setEvolveMethod((System::EVOLVE_METHOD)evolveMethod);
   while (!file.fail() && !file.eof()) {
     std::string type;
     double rx, ry, rz, vx, vy, vz, m;
@@ -279,4 +292,12 @@ void GLWidget::loadFromFile() {
   cMovementSpeed =
       std::max({system.enclosure().width(), system.enclosure().height(),
                 system.enclosure().length()});
+}
+
+System::Info GLWidget::systemInfo() const {
+  return {
+      .averageKineticEnergy = system.averageKineticEnergy(),
+      .epsilon = system.epsilon(),
+      .temperature = system.temperature(),
+  };
 }
