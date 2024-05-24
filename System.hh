@@ -211,8 +211,8 @@ private:
   static bool encounter_center_of_mass(Particle const &p, Particle const &q,
                                        double EPSILON);
   // Evolve Method
-  static void evolve_single(System &s, double dt);
-  static void evolve_multiple(System &s, double dt);
+  static void evolveSimple(System &s, double dt);
+  static void evolveAdvanced(System &s, double dt);
 
   template <typename TParticle>
   static void addParticleAtRandomPlace(System &s) {
