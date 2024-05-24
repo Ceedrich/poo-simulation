@@ -78,6 +78,11 @@ public:
    */
   virtual void print(std::ostream &out) const override;
 
+  /**
+   * @brief Prints representation from enclosure to outstream to save the state of the Enclosure
+   *
+   * @param Stream which is used to print
+   */
   virtual void printRaw(std::ostream &out) const override;
 
   /**
@@ -127,6 +132,10 @@ public:
    */
   virtual std::unique_ptr<Particle> copyAsUniqueParticlePtr() const = 0;
 
+  /**
+   * @brief color of the particle
+   * @return (r, g, b) in a vector as (x, y, z)
+   */
   virtual Vector3D color() const {
     return (1 / 255.0) * Vector3D(0x59, 0x88, 0xc2);
   }
