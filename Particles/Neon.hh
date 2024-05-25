@@ -20,6 +20,6 @@ public:
   };
 
   Vector3D color() const override {
-    return (1 / 255.0) * Vector3D(0xd9, 0x82, 0xe8);
+    return (1 / 255.0) * Vector3D(0x44, 0xb7, 0xf0);
   }
 };

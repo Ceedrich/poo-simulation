@@ -10,13 +10,15 @@
 
 /**
  * COLOR Vectors obtained from
- * https://colorkit.co/palette/5988c2-566acf-ad6ad9-d982e8-f297d9/
+ * https://colorkit.co/palette/fc3041-ffdb3b-00cc25-44b7f0-525df2-9c45f2/
  *
- * Color 1: (Default)  	#5988c2
- * Color 2: (Helium)		#f297d9
- * Color 3: (Neon)	    #d982e8
- * Color 4: (Argon)			#ad6ad9
- * Color 5: (TracePart)	#566acf
+ * #9c45f3 -> Default
+ * #525df2 -> Helium
+ * #44b7f0 -> Neon
+ * #00cc25 -> Argon
+ * #ffdb3b -> Trace
+ * #fc3041
+ *
  */
 
 /**
@@ -137,7 +139,7 @@ public:
    * @return (r, g, b) in a vector as (x, y, z)
    */
   virtual Vector3D color() const {
-    return (1 / 255.0) * Vector3D(0x59, 0x88, 0xc2);
+    return (1 / 255.0) * Vector3D(0x9c, 0x45, 0xf3);
   }
 
 private:
