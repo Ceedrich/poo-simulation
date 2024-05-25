@@ -56,7 +56,6 @@ BoxPos getBoxPos(Particle const &p, double epsilon) {
 void System::evolveAdvanced(System &s, double dt) {
   // setup maps
   std::unordered_map<BoxPos, vector<Particle *>, BoxPosHash> particleMap;
-  std::unordered_map<Particle *, bool> collided;
 
   // evolve the particles
   for (auto &p : s.particles) {
