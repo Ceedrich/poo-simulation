@@ -225,6 +225,6 @@ private:
         s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)),
         s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)),
         s.random_draw->gaussian(0.0, sqrt(specific_constant * s.temperature_)));
-    s.add_particle(TParticle(position, velocity, 10.0));
+    s.add_particle(TParticle(position, velocity, TParticle::MOLAR_MASS));
   }
 };
