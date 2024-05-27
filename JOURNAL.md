@@ -39,7 +39,7 @@ On a deja implementé une premier version de `Vector3D` qu'on va augmenter la se
 
 
 ## Semaine 2
-On a fini la classe `Vecteur3D` avec tous les surcharges d'opérateurs et constructeurs. Donc déjà au niveau de semaine quatre.
+On a fini la classe `Vecteur3D` avec tous les surcharges d'opérateurs et constructeurs. Donc déjà au niveau de semaine quatre. Nous avons décidé de laisser la fonction `normalize` et de ne pas la replacé par le surcharge de signe ~, car il nous a semblé plus intuitive d'utiliser la fonction normalize, ce qui nous allons utilisé pour le projet.
 
 ## Semaine 4
 Nous avons decider comment avancer d'ici et avons distribuer les taches des semaines 5 et 6. (Cedric va faire l'Enceinte et les Différents Gaz et Anna va faire les particules et le système). 
@@ -87,6 +87,9 @@ Car les extensions ne sont pas encore online, on a encore améliorer notre Journ
 ...
 
 ##Semaine 13
+On a fait les extensions et on a amélioré le code. De plus on a commenter le code et on a testé tous les exercises. 
+
 
 ##Semaine 14
+
 

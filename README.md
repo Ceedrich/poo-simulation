@@ -2,7 +2,7 @@
 
 ## Introduction
 En principe, on a fait tout et aussi pas mal d'extensions. Pour la version graphique, on a utiliser Qt6.
-TODO: combien d'heures par personne par semaine
+On a travaillé environ 3 heures en moyenne par personne par semaine.
 
 Içi une liste des suppléments:
 - TODO
@@ -15,7 +15,10 @@ cmake --build bin --config Release
 ```
 La compilation prendra environ une minute.
 
-Ainsi, on trouve des executables de la forme "Exercice\*", "Test_\*" et l'executable principale "Simulation"
+Ainsi, on trouve des executables de la forme "Exercice\*", "Test_\*" et l'executable principale "Simulation". Pour les compiler on peut utiliser cette commande:
+```sh
+.debug/graphisme
+```
 
 ## Commandes clavier / souris
 
