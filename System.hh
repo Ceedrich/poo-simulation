@@ -29,6 +29,8 @@ public:
     double averageKineticEnergy;
     double epsilon;
     double temperature;
+    double particleCollisionsPerTime;
+    double enclosureCollisionsPerTime;
   };
 
   /**
@@ -171,6 +173,13 @@ public:
    */
   double temperature() const { return temperature_; }
 
+  double enclosureCollisionsPerTime() const {
+    return timeElapsed == 0.0 ? 0.0 : numberOfEnclosureCollisions / timeElapsed;
+  }
+  double particleCollisionsPerTime() const {
+    return timeElapsed == 0.0 ? 0.0 : numberOfParticleCollisions / timeElapsed;
+  }
+
   void reduceEnclosure() { enclosure_.reduce(); }
   void augmentEnclosure() { enclosure_.augment(); }
 
@@ -201,6 +210,9 @@ public:
 
 private:
   // Atriburtes
+  double timeElapsed = 0;
+  unsigned long int numberOfEnclosureCollisions;
+  unsigned long int numberOfParticleCollisions;
   double epsilon_ = 0.5;
   double temperature_ = 0.1;
   ENCOUNTER_METHOD encounterMethod = ENCOUNTER_METHOD_PAVING;

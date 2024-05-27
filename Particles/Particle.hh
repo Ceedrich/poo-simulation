@@ -127,8 +127,10 @@ public:
    * enclosure.
    *
    * @param enclosure The enclosure to collide with.
+   *
+   * @return The number of collisions with the enclosure
    */
-  void collide(Enclosure const &enclosure);
+  unsigned int collide(Enclosure const &enclosure);
 
   /**
    * @brief Creates a copy of the particle as a unique pointer.

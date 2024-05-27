@@ -37,29 +37,38 @@ void Particle::collide(Particle &other,
   other.velocity_ = vg - (mass_ / other.mass_) * v0;
 }
 
-void Particle::collide(const Enclosure &enclosure) {
+unsigned int Particle::collide(const Enclosure &enclosure) {
+  unsigned int collisions(0);
   if (position_.x() > enclosure.width()) {
     position_ -= 2 * Vector3D(position_.x() - enclosure.width(), 0, 0);
     velocity_ = Vector3D(-velocity_.x(), velocity_.y(), velocity_.z());
+    ++collisions;
   }
   if (position_.x() < 0) {
     position_ -= 2 * Vector3D(position_.x(), 0, 0);
     velocity_ = Vector3D(-velocity_.x(), velocity_.y(), velocity_.z());
+    ++collisions;
   }
   if (position_.y() > enclosure.height()) {
     position_ -= 2 * Vector3D(0, position_.y() - enclosure.height(), 0);
     velocity_ = Vector3D(velocity_.x(), -velocity_.y(), velocity_.z());
+    ++collisions;
   }
   if (position_.y() < 0) {
     position_ -= 2 * Vector3D(0, position_.y(), 0);
     velocity_ = Vector3D(velocity_.x(), -velocity_.y(), velocity_.z());
+    ++collisions;
   }
   if (position_.z() > enclosure.length()) {
     position_ -= 2 * Vector3D(0, 0, position_.z() - enclosure.length());
     velocity_ = Vector3D(velocity_.x(), velocity_.y(), -velocity_.z());
+    ++collisions;
   }
   if (position_.z() < 0) {
     position_ -= 2 * Vector3D(0, 0, position_.z());
     velocity_ = Vector3D(velocity_.x(), velocity_.y(), -velocity_.z());
+    ++collisions;
   }
+
+  return collisions;
 }

@@ -47,9 +47,12 @@ private:
   }
 
   void updateSystemInfo() {
-    info.setEpsilon(scene_.systemInfo().epsilon);
-    info.setTemperature(scene_.systemInfo().temperature);
-    info.setAverageKineticEnergy(scene_.systemInfo().averageKineticEnergy);
+    auto systemInfo(scene().systemInfo());
+    info.setEpsilon(systemInfo.epsilon);
+    info.setTemperature(systemInfo.temperature);
+    info.setAverageKineticEnergy(systemInfo.averageKineticEnergy);
+    info.setEnclosureCollisions(systemInfo.enclosureCollisionsPerTime);
+    info.setParticleCollisions(systemInfo.particleCollisionsPerTime);
   }
 
   static auto constexpr CONTROLS = {

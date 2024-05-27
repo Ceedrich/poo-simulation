@@ -323,5 +323,7 @@ System::Info GLWidget::systemInfo() const {
       .averageKineticEnergy = system.averageKineticEnergy(),
       .epsilon = system.epsilon(),
       .temperature = system.temperature(),
+      .particleCollisionsPerTime = system.particleCollisionsPerTime(),
+      .enclosureCollisionsPerTime = system.enclosureCollisionsPerTime(),
   };
 }

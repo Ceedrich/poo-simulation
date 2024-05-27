@@ -57,7 +57,7 @@ void System::evolveAdvanced(System &s, double dt) {
   // evolve the particles
   for (auto &p : s.particles) {
     p->evolve(dt);
-    p->collide(s.enclosure_);
+    s.numberOfEnclosureCollisions += p->collide(s.enclosure_);
     particleMap[getBoxPos(*p, s.epsilon_)].push_back(p.get());
   }
 
@@ -67,6 +67,7 @@ void System::evolveAdvanced(System &s, double dt) {
     for (size_t i(0); i < box.size(); ++i) {
       for (size_t j(i + 1); j < box.size(); ++j) {
         box[i]->collide(*box[j], s.random_draw);
+        ++s.numberOfParticleCollisions;
       }
     }
   }
@@ -75,7 +76,7 @@ void System::evolveAdvanced(System &s, double dt) {
 void System::evolveSimple(System &s, double dt) {
   for (auto &p : s.particles) {
     p->evolve(dt);
-    p->collide(s.enclosure_);
+    s.numberOfEnclosureCollisions += p->collide(s.enclosure_);
   }
   vector<bool> collided(s.particles.size(), false);
   for (size_t _i(s.particles.size()); _i > 0; --_i) {
@@ -93,6 +94,7 @@ void System::evolveSimple(System &s, double dt) {
 
       if (s.encounter(*p, *q)) {
         p->collide(*q, s.random_draw);
+        ++s.numberOfParticleCollisions;
         collided[i] = true;
         collided[j] = true;
         break;
@@ -169,6 +171,7 @@ void System::evolve(double dt) {
     evolveSimple(*this, dt);
     break;
   }
+  timeElapsed += dt;
 }
 bool System::encounter(const Particle &p, const Particle &q) {
   switch (encounterMethod) {
