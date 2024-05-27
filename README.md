@@ -34,7 +34,9 @@ Ainsi, on trouve des executables de la forme "Exercice\*", "Test_\*" et l'execut
 - <kbd>P</kbd><kbd>I</kbd>: sauvegarder/charger l'état du système en un fichier (appelé `Simulation.csv`)
 - <kbd>Z</kbd>: ralentir le mouvement des particules dans le système
 
+## Remerciments
+Merci beacoup à Valentina Frei pour la palette de couleurs pour les particules.
 
 
-# Unitées:
+## Unitées:
 1u = 0.1nm

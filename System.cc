@@ -13,12 +13,8 @@ void System::print(ostream &out) const {
 
 void System::printRaw(std::ostream &out) const {
   // epsilon temp encounter evolve
-  out << epsilon_ << " " << temperature_ << " " << encounterMethod << " "
-      << evolveMethod << std::endl;
-  enclosure_.printRaw(out);
-  for (auto const &p : particles) {
-    p->printRaw(out);
-  }
+  out << "System " << epsilon_ << " " << temperature_ << " " << encounterMethod
+      << " " << evolveMethod;
 }
 
 void System::add_particle(Particle const &particle) {
@@ -56,7 +52,6 @@ BoxPos getBoxPos(Particle const &p, double epsilon) {
 void System::evolveAdvanced(System &s, double dt) {
   // setup maps
   std::unordered_map<BoxPos, vector<Particle *>, BoxPosHash> particleMap;
-  std::unordered_map<Particle *, bool> collided;
 
   // evolve the particles
   for (auto &p : s.particles) {

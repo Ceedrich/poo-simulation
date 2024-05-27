@@ -117,6 +117,8 @@ public:
 
   void print(std::ostream &out) const override;
 
+  void printRaw(std::ostream &out) const override;
+
   // Operator overloads
   /**
    * @brief Adds another vector to the vector.

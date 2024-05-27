@@ -1,10 +1,15 @@
 #pragma once
+#include "Helium.hh"
 #include "MotionTrace.hh"
 #include "Particle.hh"
 
 class TraceParticle : public Particle {
 public:
-    /**
+  // TraceParticle is in fact acutally a Helium Particle.
+  static constexpr double MOLAR_MASS = Helium::MOLAR_MASS;
+  static constexpr double SPECIFIC_CONSTANT = Helium::SPECIFIC_CONSTANT;
+
+  /**
    * @brief Constructor of TraceParticle
    *
    * @param Position vector
@@ -35,14 +40,13 @@ public:
     return copy();
   }
 
-
   virtual void draw_on(DrawingFrame &support) override {
     support.draw(*this);
     motionTrace.draw_on(support);
   }
 
   Vector3D color() const override {
-    return (1 / 255.0) * Vector3D(0x56, 0x6a, 0xcf);
+    return (1 / 255.0) * Vector3D(0xff, 0xdb, 0x3b);
   }
 
 private:
