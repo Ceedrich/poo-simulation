@@ -6,6 +6,7 @@
 template <typename TParticle> class TraceParticle : public TParticle {
 public:
   using TParticle::TParticle;
+  TraceParticle(std::unique_ptr<Particle> ptr) : TParticle(*ptr) {}
 
   /**
    * @brief Evolves position of the particle.

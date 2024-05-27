@@ -194,6 +194,8 @@ public:
    */
   void setTemperature(double temp) { temperature_ = temp; }
 
+  void makeTraceParticle(size_t index);
+
 private:
   // Atriburtes
   double epsilon_ = 0.5;

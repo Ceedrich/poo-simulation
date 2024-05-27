@@ -8,6 +8,8 @@
 #include <iostream>
 #include <memory>
 
+template <typename TParticle> class TraceParticle;
+
 /**
  * COLOR Vectors obtained from
  * https://colorkit.co/palette/fc3041-ffdb3b-00cc25-44b7f0-525df2-9c45f2/
@@ -81,7 +83,8 @@ public:
   virtual void print(std::ostream &out) const override;
 
   /**
-   * @brief Prints representation from enclosure to outstream to save the state of the Enclosure
+   * @brief Prints representation from enclosure to outstream to save the state
+   * of the Enclosure
    *
    * @param Stream which is used to print
    */

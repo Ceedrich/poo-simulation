@@ -1,4 +1,5 @@
 #include "System.hh"
+#include "Particles/TraceParticle.hh"
 #include <unordered_map>
 
 using namespace std;
@@ -181,4 +182,15 @@ bool System::encounter(const Particle &p, const Particle &q) {
     return false;
     break;
   }
+}
+
+void System::makeTraceParticle(size_t index) {
+  if (index >= particles.size()) {
+    return;
+  }
+  auto x(particles[index]->copyAsUniqueParticlePtr());
+  std::unique_ptr<TraceParticle<Particle>> y(
+      std::make_unique<TraceParticle<Particle>>(std::move(x)));
+
+  particles[index] = std::move(y);
 }
