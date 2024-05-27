@@ -1,10 +1,8 @@
 #include "../Graphics/MainWindow.hh"
 #include "../Particles/TraceParticle.hh"
 #include <QApplication>
-#include <QLabel>
-#include <QMainWindow>
-#include <QTableWidget>
-#include <QVBoxLayout>
+
+
 
 int main(int argc, char *argv[]) {
   QApplication app(argc, argv);

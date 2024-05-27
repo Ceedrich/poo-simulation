@@ -1,4 +1,4 @@
-#include "../Graphics/GLWidget.hh"
+#include "../Graphics/MainWindow.hh"
 #include "../Particles/TraceParticle.hh"
 #include "../System.hh"
 #include <QApplication>
@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
   s.fill(100);
   s.add_particle(TraceParticle(Vector3D(14.5, 17.1, 5.0),
                                Vector3D(13.827, 6.09123, 23.2392), 1.0));
-  GLWidget window(std::move(s));
+  MainWindow window(std::move(s));
 
   window.show();
 

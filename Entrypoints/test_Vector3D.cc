@@ -31,6 +31,13 @@ int main() {
     cout << "The vectors does not equal themselves or equal each other" << endl;
   }
 
+  //Vector addition commutative
+  if(v1+v2==v2+v1){
+      cout<<"V1+V2=V2+V1, Vector addition is commutative."<<endl;
+  } else{
+    cout<<"V1+V2!=V2+V1, Vector addition is not commutative."<<endl;
+  }
+
   // norm
   cout << "Norm of (" << v1 << "): " << v1.norm() << endl;
   // norm2
