@@ -43,11 +43,6 @@ public:
    * @brief Resets the widget to initial status.
    */
   void reset();
-  /**
-   * @brief Sets the camera movement speed.
-   * @param Camera movement speed.
-   */
-  void setCameraMovementSpeed(double v) { cMovementSpeed = v; }
   System::Info systemInfo() const;
 
 private:

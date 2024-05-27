@@ -38,6 +38,7 @@ public:
    */
   static System exercice9() {
     System system;
+    system.setEpsilon(1.0);
     system.random_draw = std::make_unique<Ex9NumberGenerator>();
     system.add_particle(Helium(Vector3D(1, 1, 1), Vector3D(), 4.002602));
     system.add_particle(
@@ -195,7 +196,7 @@ public:
 
 private:
   // Atriburtes
-  double epsilon_ = 1;
+  double epsilon_ = 0.5;
   double temperature_ = 0.1;
   ENCOUNTER_METHOD encounterMethod = ENCOUNTER_METHOD_PAVING;
   EVOLVE_METHOD evolveMethod = EVOLVE_METHOD_SIMPLE;

@@ -162,21 +162,20 @@ add_executable(Exercice13 Entrypoints/Exercice13.cc
 )
 target_link_libraries(Exercice13 Qt5::Widgets OpenGL::GL)
 
-add_executable(Graphisme Entrypoints/graphisme.cc
+add_executable(Simulation Entrypoints/Simulation.cc
     ${HEADERS_DRAWINGS}
 
     System.hh System.cc
     Enclosure.hh Enclosure.cc
     Vector3D.hh Vector3D.cc
     Printable.cc Printable.hh
-    Particles/MotionTrace.cc Particles/MotionTrace.hh
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 
     ${SOURCES_GRAPHICS} ${HEADERS_GRAPHICS}
 
     ${RESOURCE_FILES}
 )
-target_link_libraries(Graphisme Qt5::Widgets OpenGL::GL)
+target_link_libraries(Simulation Qt5::Widgets OpenGL::GL)
 
 
 
