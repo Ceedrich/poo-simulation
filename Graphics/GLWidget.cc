@@ -1,4 +1,5 @@
 #include "GLWidget.hh"
+#include "../Particles/TraceParticle.hh"
 #include "Inputs.hh"
 #include <QKeyEvent>
 #include <QMatrix4x4>
@@ -249,20 +250,19 @@ void GLWidget::pause() {
   }
 }
 
-constexpr auto FILE_NAME = "Simulation.csv";
-void GLWidget::saveToFile() const {
-  std::ofstream file;
-  file.open(FILE_NAME);
-  system.printRaw(file);
-  file.close();
+constexpr auto SAVE_FILE_NAME = "Simulation.csv";
+void GLWidget::saveToFile() {
+  FileSaver saver(SAVE_FILE_NAME);
+  system.draw_on(saver);
 }
 
 void GLWidget::loadFromFile() {
-  std::ifstream file(FILE_NAME);
-  // epsilon temp encounter evolve
+  std::ifstream file(SAVE_FILE_NAME);
+  std::string delimiter;
   double epsilon, temperature;
   int encounterMethod, evolveMethod;
   double w, h, l;
+  file >> delimiter;
   file >> epsilon >> temperature;
   file >> evolveMethod >> encounterMethod;
   file >> w >> h >> l;
@@ -272,17 +272,26 @@ void GLWidget::loadFromFile() {
   s.setEncounterMethod((System::ENCOUNTER_METHOD)encounterMethod);
   s.setEvolveMethod((System::EVOLVE_METHOD)evolveMethod);
   while (!file.fail() && !file.eof()) {
-    std::string type;
+    std::string delimiter;
+    if (delimiter == "M") {
+      // discard Trace
+      getline(file, delimiter);
+      continue;
+    }
     double rx, ry, rz, vx, vy, vz, m;
-    file >> type >> rx >> ry >> rz >> vx >> vy >> vz >> m;
-    if (type == "Helium") {
+    file >> delimiter >> rx >> ry >> rz >> vx >> vy >> vz >> m;
+    if (delimiter == "Helium") {
       s.add_particle(Helium(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
     }
-    if (type == "Neon") {
+    if (delimiter == "Neon") {
       s.add_particle(Neon(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
     }
-    if (type == "Argon") {
+    if (delimiter == "Argon") {
       s.add_particle(Argon(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+    }
+    if (delimiter == "Trace") {
+      s.add_particle(
+          TraceParticle(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
     }
   }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../FileSaver/FileSaver.hh"
 #include "../System.hh"
 #include "OpenGLViewer.hh"
 #include <QElapsedTimer>
@@ -8,7 +9,7 @@
 
 class GLWidget : public QOpenGLWidget {
 public:
-    /**
+  /**
    * @brief Constructor of the class GLWidget.
    * @param Parent widget
    * @param System
@@ -57,7 +58,7 @@ private:
 
   void initCamera();
   void initLight();
-  void saveToFile() const;
+  void saveToFile();
   void loadFromFile();
 
   // Events

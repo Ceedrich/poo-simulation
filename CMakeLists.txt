@@ -20,12 +20,16 @@ set(SOURCES_PARTICLES
     Particles/Helium.cc
     Particles/Neon.cc
     Particles/Argon.cc
+    Particles/MotionTrace.cc
+    Particles/TraceParticle.cc
 )
 set(HEADERS_PARTICLES
     Particles/Particle.hh
     Particles/Helium.hh
     Particles/Neon.hh
     Particles/Argon.hh
+    Particles/MotionTrace.hh
+    Particles/TraceParticle.hh
 )
 
 set(HEADERS_DRAWINGS
@@ -44,6 +48,7 @@ set(SOURCES_GRAPHICS
     Graphics/GLSphere.cc
     Graphics/GLWidget.cc
     Graphics/OpenGLViewer.cc
+    FileSaver/FileSaver.cc
 )
 
 set(HEADERS_GRAPHICS
@@ -57,6 +62,7 @@ set(HEADERS_GRAPHICS
     Graphics/ControlsWidget.hh
     Graphics/InfoWidget.hh
     Graphics/MainWindow.hh
+    FileSaver/FileSaver.hh
 )
 
 set(SOURCES_TEXT Text/TextViewer.cc)
@@ -163,6 +169,7 @@ add_executable(Graphisme Entrypoints/graphisme.cc
     Enclosure.hh Enclosure.cc
     Vector3D.hh Vector3D.cc
     Printable.cc Printable.hh
+    Particles/MotionTrace.cc Particles/MotionTrace.hh
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
 
     ${SOURCES_GRAPHICS} ${HEADERS_GRAPHICS}
