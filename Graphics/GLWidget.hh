@@ -78,7 +78,6 @@ private:
   static constexpr double cSpeedMultiplier = 2.0;
   static constexpr double dt = 0.1;
   static constexpr double slowDownMultiplier = 0.2;
-  bool cSpeedUp = false;
   QElapsedTimer stopwatch, cstopwatch;
 
   QPoint lastMousePosition;

@@ -92,7 +92,7 @@ void GLWidget::keyPressEvent(QKeyEvent *event) {
     keys_pressed |= FLAGS::STRAVE_UP;
     break;
   case Inputs::SPEED_MODIFIER:
-    cSpeedUp = true;
+    keys_pressed |= FLAGS::SPEED_UP;
     break;
   case Inputs::PAUSE:
     pause();
@@ -175,7 +175,7 @@ void GLWidget::keyReleaseEvent(QKeyEvent *event) {
     keys_pressed &= ~FLAGS::STRAVE_UP;
     break;
   case Inputs::SPEED_MODIFIER:
-    cSpeedUp = false;
+    keys_pressed &= ~FLAGS::SPEED_UP;
     break;
   }
 }
@@ -212,7 +212,8 @@ void GLWidget::updateCameraTimer() {
   if (keys_pressed & FLAGS::ROTATE_DOWN)
     viewer.camera().rotatePitch(-panSpeed * dt);
 
-  const double speed = cMovementSpeed * (cSpeedUp ? cSpeedMultiplier : 1);
+  const double speed =
+      cMovementSpeed * (keys_pressed & FLAGS::SPEED_UP ? cSpeedMultiplier : 1);
 
   if (keys_pressed & FLAGS::STRAVE_FORWARD)
     viewer.camera().move(0.0, 0.0, +speed * dt);

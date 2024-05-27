@@ -14,6 +14,8 @@ enum FLAGS {
   ROTATE_LEFT = 1 << 7,
   ROTATE_UP = 1 << 8,
   ROTATE_DOWN = 1 << 9,
+
+  SPEED_UP = 1 << 10,
 };
 }
 
