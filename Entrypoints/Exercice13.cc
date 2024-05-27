@@ -8,8 +8,8 @@ int main(int argc, char *argv[]) {
 
   System s;
   s.fill(100);
-  s.add_particle(TraceParticle(Vector3D(14.5, 17.1, 5.0),
-                               Vector3D(13.827, 6.09123, 23.2392), 1.0));
+  s.add_particle(TraceParticle<Neon>(Vector3D(14.5, 17.1, 5.0),
+                                     Vector3D(13.827, 6.09123, 23.2392), 1.0));
   MainWindow window(std::move(s));
 
   window.show();

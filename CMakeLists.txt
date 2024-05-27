@@ -21,7 +21,6 @@ set(SOURCES_PARTICLES
     Particles/Neon.cc
     Particles/Argon.cc
     Particles/MotionTrace.cc
-    Particles/TraceParticle.cc
 )
 set(HEADERS_PARTICLES
     Particles/Particle.hh
@@ -136,8 +135,6 @@ add_executable(Exercice12 Entrypoints/Exercice12.cc
     Vector3D.hh Vector3D.cc
     Printable.hh Printable.cc
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
-    Particles/TraceParticle.cc Particles/TraceParticle.hh
-    Particles/MotionTrace.cc Particles/MotionTrace.hh
 
     ${SOURCES_GRAPHICS} ${HEADERS_GRAPHICS}
 
@@ -153,8 +150,6 @@ add_executable(Exercice13 Entrypoints/Exercice13.cc
     Vector3D.hh Vector3D.cc
     Printable.hh Printable.cc
     ${SOURCES_PARTICLES} ${HEADERS_PARTICLES}
-    Particles/TraceParticle.cc Particles/TraceParticle.hh
-    Particles/MotionTrace.cc Particles/MotionTrace.hh
 
     ${SOURCES_GRAPHICS} ${HEADERS_GRAPHICS}
 
@@ -176,7 +171,5 @@ add_executable(Simulation Entrypoints/Simulation.cc
     ${RESOURCE_FILES}
 )
 target_link_libraries(Simulation Qt5::Widgets OpenGL::GL)
-
-
 
 include(GNUInstallDirs)

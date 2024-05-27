@@ -88,7 +88,8 @@ int main(int argc, char *argv[]) {
   s.setTemperature(temperature);
 
   s.fill(number_of_particles);
-  s.add_particle(TraceParticle(Vector3D(), Vector3D(4.0, 1.0, 7.0), 10.0));
+  s.add_particle(
+      TraceParticle<Helium>(Vector3D(), Vector3D(4.0, 1.0, 7.0), 10.0));
 
   MainWindow window(std::move(s));
   window.scene().setGraphicsLevel(graphicsLevel);

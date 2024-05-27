@@ -3,27 +3,22 @@
 #include "MotionTrace.hh"
 #include "Particle.hh"
 
-class TraceParticle : public Particle {
+template <typename TParticle> class TraceParticle : public TParticle {
 public:
-  // TraceParticle is in fact acutally a Helium Particle.
-  static constexpr double MOLAR_MASS = Helium::MOLAR_MASS;
-  static constexpr double SPECIFIC_CONSTANT = Helium::SPECIFIC_CONSTANT;
-
-  /**
-   * @brief Constructor of TraceParticle
-   *
-   * @param Position vector
-   * @param Speed vector
-   * @param Mass
-   */
-  TraceParticle(Vector3D r, Vector3D v, double m) : Particle(r, v, m) {}
+  using TParticle::TParticle;
 
   /**
    * @brief Evolves position of the particle.
    * @param Time which has passed.
    */
-  void evolve(double dt) override;
-  void printRaw(std::ostream &out) const override;
+  void evolve(double dt) override {
+    motionTrace.addPoint(TParticle::position());
+    TParticle::evolve(dt);
+  };
+  void printRaw(std::ostream &out) const override {
+    out << "Trace";
+    TParticle::printRaw(out);
+  }
 
   /**
    * @brief copies trace particle

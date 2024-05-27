@@ -289,9 +289,17 @@ void GLWidget::loadFromFile() {
     if (delimiter == "Argon") {
       s.add_particle(Argon(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
     }
-    if (delimiter == "Trace") {
+    if (delimiter == "TraceHelium") {
       s.add_particle(
-          TraceParticle(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+          TraceParticle<Helium>(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+    }
+    if (delimiter == "TraceNeon") {
+      s.add_particle(
+          TraceParticle<Neon>(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+    }
+    if (delimiter == "TraceArgon") {
+      s.add_particle(
+          TraceParticle<Argon>(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
     }
   }
 
