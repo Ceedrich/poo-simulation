@@ -133,6 +133,12 @@ void GLWidget::keyPressEvent(QKeyEvent *event) {
   case Inputs::SLOW_DOWN_SIMULATION:
     slowDown = !slowDown;
     break;
+  case Inputs::REDUCE_ENCLOSURE_SIZE:
+    system.reduceEnclosure();
+    break;
+  case Inputs::AUGMENT_ENCLOSURE_SIZE:
+    system.augmentEnclosure();
+    break;
   }
 }
 

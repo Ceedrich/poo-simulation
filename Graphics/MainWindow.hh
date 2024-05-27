@@ -75,7 +75,10 @@ private:
       "Save/Load the current status to a file (not working for "
       "TraceParticle)", //
       "Z",
-      "Slow down the simulation"};
+      "Slow down the simulation", //
+      "N, M",
+      "Reduce/Augment the size of the enclosure", //
+  };
   ControlsWidget controls;
   InfoWidget info;
   GLWidget scene_;

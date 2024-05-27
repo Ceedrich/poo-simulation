@@ -171,6 +171,9 @@ public:
    */
   double temperature() const { return temperature_; }
 
+  void reduceEnclosure() { enclosure_.reduce(); }
+  void augmentEnclosure() { enclosure_.augment(); }
+
   /**
    * @brief sets the maximum distance two particles need to have in order to
    * collide or the length of the cubes in the paving of the enclosure. This

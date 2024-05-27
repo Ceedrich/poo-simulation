@@ -54,6 +54,9 @@ public:
    */
   double height() const { return height_; }
 
+  void augment();
+  void reduce();
+
   /**
    * @brief Draws the enclosure on the given DrawingFrame.
    *

@@ -47,5 +47,7 @@ enum CONTROL_KEY {
   SAVE_FILE = Qt::Key::Key_P,
   LOAD_FILE = Qt::Key::Key_I,
   SLOW_DOWN_SIMULATION = Qt::Key::Key_Z,
+  REDUCE_ENCLOSURE_SIZE = Qt::Key::Key_N,
+  AUGMENT_ENCLOSURE_SIZE = Qt::Key::Key_M,
 };
 } // namespace Inputs
