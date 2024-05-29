@@ -39,7 +39,7 @@ void GLWidget::initLight() {
                              system.enclosure().length() * LIGHT_OFFSET);
 }
 
-void GLWidget::reset() {
+void GLWidget::resetView() {
   initCamera();
   initLight();
 }
@@ -122,7 +122,7 @@ void GLWidget::keyPressEvent(QKeyEvent *event) {
     viewer.light().toggleSpecular();
     break;
   case Inputs::RESET_VIEW:
-    reset();
+    resetView();
     break;
   case Inputs::SAVE_FILE:
     saveToFile();
@@ -271,7 +271,7 @@ void GLWidget::loadFromFile() {
   double w, h, l;
   file >> delimiter;
   file >> epsilon >> temperature;
-  file >> evolveMethod >> encounterMethod;
+  file >> encounterMethod >> evolveMethod;
   file >> w >> h >> l;
   System s(w, h, l);
   s.setEpsilon(epsilon);
@@ -280,13 +280,14 @@ void GLWidget::loadFromFile() {
   s.setEvolveMethod((System::EVOLVE_METHOD)evolveMethod);
   while (!file.fail() && !file.eof()) {
     std::string delimiter;
+    file >> delimiter;
     if (delimiter == "M") {
       // discard Trace
       getline(file, delimiter);
       continue;
     }
     double rx, ry, rz, vx, vy, vz, m;
-    file >> delimiter >> rx >> ry >> rz >> vx >> vy >> vz >> m;
+    file >> rx >> ry >> rz >> vx >> vy >> vz >> m;
     if (delimiter == "Helium") {
       s.add_particle(Helium(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
     }

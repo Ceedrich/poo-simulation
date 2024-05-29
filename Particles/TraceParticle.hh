@@ -1,24 +1,30 @@
 #pragma once
-#include "Helium.hh"
 #include "MotionTrace.hh"
 #include "Particle.hh"
 
-template <typename TParticle> class TraceParticle : public TParticle {
+template <typename TParticle> class TraceParticle : public Particle {
 public:
-  using TParticle::TParticle;
-  TraceParticle(std::unique_ptr<Particle> ptr) : TParticle(*ptr) {}
+  TraceParticle(Vector3D const &p, Vector3D const &v, double m)
+      : Particle(p, v, m) {}
+  TraceParticle(std::unique_ptr<Particle> &ptr) : Particle(*ptr) {}
 
   /**
    * @brief Evolves position of the particle.
    * @param Time which has passed.
    */
   void evolve(double dt) override {
-    motionTrace.addPoint(TParticle::position());
-    TParticle::evolve(dt);
+    motionTrace.addPoint(position());
+    Particle::evolve(dt);
   };
+
+  void print(std::ostream &out) const override {
+    out << "particule " << name() << TParticle::NAME << " : ";
+    Particle::print(out);
+  }
+
   void printRaw(std::ostream &out) const override {
-    out << "Trace";
-    TParticle::printRaw(out);
+    out << name() << TParticle::NAME << " ";
+    Particle::printRaw(out);
   }
 
   /**
@@ -35,6 +41,8 @@ public:
   std::unique_ptr<Particle> copyAsUniqueParticlePtr() const override {
     return copy();
   }
+
+  std::string name() const override { return "Trace"; }
 
   virtual void draw_on(DrawingFrame &support) override {
     support.draw(*this);

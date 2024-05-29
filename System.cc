@@ -189,11 +189,25 @@ bool System::encounter(const Particle &p, const Particle &q) {
 
 void System::makeTraceParticle(size_t index) {
   if (index >= particles.size()) {
+    cerr << "Particle at position " << index << "does not exist" << endl;
     return;
   }
-  auto x(particles[index]->copyAsUniqueParticlePtr());
-  std::unique_ptr<TraceParticle<Particle>> y(
-      std::make_unique<TraceParticle<Particle>>(std::move(x)));
+  std::unique_ptr<Particle> x(particles[index]->copyAsUniqueParticlePtr());
+  // I have to make a forbidden thing here and explicitly check for the type of
+  // the particle because templates don't work with polymorphism. I can't have
+  // `TraceParticle<Particle> x(TraceParticle<Helium>(...));`
+  if (x->name() == "Helium") {
+    std::unique_ptr<TraceParticle<Helium>> y(
+        std::make_unique<TraceParticle<Helium>>(x));
+    particles[index] = std::move(y);
+  } else if (x->name() == "Neon") {
+    std::unique_ptr<TraceParticle<Neon>> y(
+        std::make_unique<TraceParticle<Neon>>(x));
 
-  particles[index] = std::move(y);
+    particles[index] = std::move(y);
+  } else if (x->name() == "Argon") {
+    std::unique_ptr<TraceParticle<Argon>> y(
+        std::make_unique<TraceParticle<Argon>>(x));
+    particles[index] = std::move(y);
+  }
 }

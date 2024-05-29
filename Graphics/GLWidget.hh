@@ -39,10 +39,13 @@ public:
   void setGraphicsLevel(OpenGLViewer::GRAPHICS_LEVEL level) {
     viewer.setGraphicsLevel(level);
   }
+
+  void init();
+
   /**
    * @brief Resets the widget to initial status.
    */
-  void reset();
+  void resetView();
   System::Info systemInfo() const;
 
 private:

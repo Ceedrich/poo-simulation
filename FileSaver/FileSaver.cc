@@ -21,8 +21,9 @@ void FileSaver::draw(const MotionTrace &t) {
     p.printRaw(file_);
     file_ << " ";
   }
+  file_ << std::endl;
 }
 void FileSaver::draw(const System &s) {
   s.printRaw(file_);
-  file_ << " ";
+  file_ << std::endl;
 };

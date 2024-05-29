@@ -5,6 +5,7 @@
 
 class Neon : public Particle {
 public:
+  static constexpr auto NAME = "Neon";
   static constexpr double MOLAR_MASS = 20.1797;
   static constexpr double SPECIFIC_CONSTANT =
       1000 * IDEAL_GAS_CONSTANT / MOLAR_MASS;
@@ -12,6 +13,8 @@ public:
   Neon(Vector3D r, Vector3D p, double m) : Particle(r, p, m) {}
   void print(std::ostream &out) const override;
   void printRaw(std::ostream &out) const override;
+
+  std::string name() const override { return NAME; }
 
   std::unique_ptr<Neon> copy() const { return std::make_unique<Neon>(*this); }
 

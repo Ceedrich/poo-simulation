@@ -1,5 +1,4 @@
 #include "../Graphics/MainWindow.hh"
-#include "../Particles/TraceParticle.hh"
 #include <QApplication>
 
 /*

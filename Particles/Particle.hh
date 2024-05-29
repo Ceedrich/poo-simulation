@@ -53,6 +53,7 @@ public:
   Particle(Particle const &other) = default;
 
   virtual ~Particle() = default;
+  virtual std::string name() const = 0;
 
   /**
    * @brief Returns the position of the particle.
