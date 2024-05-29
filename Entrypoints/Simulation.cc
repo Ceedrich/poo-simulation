@@ -3,6 +3,15 @@
 #include <QApplication>
 
 /*
+ * ENCLOSURE DIMENSIONS
+ *
+ * Set the dimensions of the enclosure (1 unit corresponds to 0.1 nm).
+ */
+constexpr double DIMENSION_X = 50.0;
+constexpr double DIMENSION_Y = 50.0;
+constexpr double DIMENSION_Z = 50.0;
+
+/*
  * ENCOUNTER METHOD
  *
  * Choose the method used to determine whether two particles are close enough to
@@ -34,8 +43,8 @@ constexpr System::ENCOUNTER_METHOD encounterMethod = //
  *
  */
 constexpr System::EVOLVE_METHOD evolveMethod = //
-    System::EVOLVE_METHOD_SIMPLE;
-//  System::EVOLVE_METHOD_ADVANCED;
+    System::EVOLVE_METHOD_ADVANCED;
+//  System::EVOLVE_METHOD_SIMPLE;
 
 /*
  * EPSILON
@@ -59,7 +68,7 @@ constexpr double temperature(0.1);
  * Set the number of particles in the simulation
  *
  */
-constexpr size_t number_of_particles(100);
+constexpr size_t number_of_particles(1000);
 
 /*
  * GRAPHICS LEVEL
@@ -81,7 +90,7 @@ constexpr OpenGLViewer::GRAPHICS_LEVEL graphicsLevel = //
 
 int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
-  System s;
+  System s(DIMENSION_X, DIMENSION_Y, DIMENSION_Z);
   s.setEncounterMethod(encounterMethod);
   s.setEvolveMethod(evolveMethod);
   s.setEpsilon(epsilon);
