@@ -12,9 +12,7 @@ void Particle::print(ostream &out) const {
 }
 
 void Particle::printRaw(std::ostream &out) const {
-  out << position().x() << " " << position().y() << " " << position().z() << " "
-      << velocity().x() << " " << velocity().y() << " " << position().z() << " "
-      << mass_ << std::endl;
+  out << position() << " " << velocity() << " " << mass_ << std::endl;
 }
 
 void Particle::collide(Particle &other,

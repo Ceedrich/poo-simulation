@@ -31,11 +31,11 @@ int main() {
     cout << "The vectors does not equal themselves or equal each other" << endl;
   }
 
-  //Vector addition commutative
-  if(v1+v2==v2+v1){
-      cout<<"V1+V2=V2+V1, Vector addition is commutative."<<endl;
-  } else{
-    cout<<"V1+V2!=V2+V1, Vector addition is not commutative."<<endl;
+  // Vector addition commutative
+  if (v1 + v2 == v2 + v1) {
+    cout << "V1+V2=V2+V1, Vector addition is commutative." << endl;
+  } else {
+    cout << "V1+V2!=V2+V1, Vector addition is not commutative." << endl;
   }
 
   // norm
@@ -45,8 +45,7 @@ int main() {
 
   // normalize
   Vector3D v3(v1.normalize());
-  cout << "Normalized vector of (" << v1 << "): "
-       << "(" << v3 << ")" << endl;
+  cout << "Normalized vector of (" << v1 << "): " << "(" << v3 << ")" << endl;
 
   // Addition
   cout << "V1(" << v1 << ") + V2(" << v2 << ") = (" << v1 + v2 << ")" << endl;
@@ -67,4 +66,7 @@ int main() {
 
   // Inverse
   cout << "Inverse of V1(" << v1 << "): (" << -v1 << ")" << endl;
+
+  cout << "Print operation" << endl;
+  cout << v2 << " == " << v2.x() << " " << v2.y() << " " << v2.z() << endl;
 }

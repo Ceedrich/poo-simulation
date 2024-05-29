@@ -4,12 +4,6 @@
 #include <iostream>
 #include <sstream>
 
-std::string Vector3D::to_string() const {
-  std::ostringstream strs;
-  strs << x_ << " " << y_ << " " << z_;
-  return strs.str();
-}
-
 void Vector3D::set_coords(double x, double y, double z) {
   this->x_ = x;
   this->y_ = y;
@@ -62,9 +56,11 @@ Vector3D &Vector3D::operator^=(Vector3D const &other) {
   return *this;
 }
 
-void Vector3D::print(std::ostream &out) const { out << to_string(); }
+void Vector3D::print(std::ostream &out) const {
+  out << x_ << " " << y_ << " " << z_;
+}
 
-void Vector3D::printRaw(std::ostream &out) const { out << to_string(); }
+void Vector3D::printRaw(std::ostream &out) const { print(out); }
 
 double operator*(Vector3D const &vec1, Vector3D const &vec2) {
   return vec1.dot_prod(vec2);

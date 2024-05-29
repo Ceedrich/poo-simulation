@@ -63,12 +63,6 @@ public:
   void set_coords(double x, double y, double z);
 
   // Readonly Methods
-  /**
-   * @brief Returns a string representation of the vector.
-   *
-   * @return A string representation of the vector.
-   */
-  std::string to_string() const;
 
   /**
    * @brief Checks if the vector is equal to another vector.
