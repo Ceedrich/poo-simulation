@@ -53,6 +53,7 @@ private:
     info.setAverageKineticEnergy(systemInfo.averageKineticEnergy);
     info.setEnclosureCollisions(systemInfo.enclosureCollisionsPerTime);
     info.setParticleCollisions(systemInfo.particleCollisionsPerTime);
+    info.setNumberOfParticles(systemInfo.numberOfParticles);
   }
 
   static auto constexpr CONTROLS = {

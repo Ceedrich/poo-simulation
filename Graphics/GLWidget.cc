@@ -280,5 +280,6 @@ System::Info GLWidget::systemInfo() const {
       .temperature = system.temperature(),
       .particleCollisionsPerTime = system.particleCollisionsPerTime(),
       .enclosureCollisionsPerTime = system.enclosureCollisionsPerTime(),
+      .numberOfParticles = system.numberOfParticles(),
   };
 }

@@ -46,6 +46,8 @@ Les modifications qu'on peut faire sont les suivantes: Plus d'information sur le
 - Modifier la nombre des particules dans la simulation: Changer la valeur de `number_of_particles`
 - Choisir le niveau du graphisme (soit simple sans lumière soit avec "Phong lighting"): décommenter/commenter les lignes suivant `graphicsLevel`
 
+Pour l'executer il faut taper:
+
 ```sh
 ./bin/Simulation
 ```

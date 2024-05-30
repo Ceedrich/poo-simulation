@@ -31,6 +31,7 @@ public:
     double temperature;
     double particleCollisionsPerTime;
     double enclosureCollisionsPerTime;
+    size_t numberOfParticles;
   };
 
   /**
@@ -181,6 +182,8 @@ public:
   double particleCollisionsPerTime() const {
     return timeElapsed == 0.0 ? 0.0 : numberOfParticleCollisions / timeElapsed;
   }
+
+  size_t numberOfParticles() const { return particles.size(); }
 
   void reduceEnclosure() { enclosure_.reduce(); }
   void augmentEnclosure() { enclosure_.augment(); }

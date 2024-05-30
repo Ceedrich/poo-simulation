@@ -8,8 +8,6 @@
 #include <iostream>
 #include <memory>
 
-template <typename TParticle> class TraceParticle;
-
 /**
  * COLOR Vectors obtained from
  * https://colorkit.co/palette/fc3041-ffdb3b-00cc25-44b7f0-525df2-9c45f2/
