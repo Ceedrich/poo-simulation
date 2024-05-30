@@ -1,23 +1,29 @@
 # POO: Simulation des particules
 
 ## Introduction
+
 En principe, on a fait tout et aussi pas mal d'extensions. Pour la version graphique, on a utiliser Qt6.
 On a travaillé environ 3 heures en moyenne par personne par semaine.
 
 Içi une liste des suppléments:
+
 - TODO
 
 ## Structure du projet / comment rentrer
+
 Pour compiler tous les executables (dans un dossier supplémentaire, il y'en a beacoup), exécuter ces commandes:
+
 ```sh
 cmake -B bin -DCMAKE_BUILD_TYPE=Release
 cmake --build bin --config Release
 ```
+
 La compilation prendra environ une minute.
 
-Ainsi, on trouve des executables de la forme "Exercice\*", "Test_\*" et l'executable principale "Simulation". Pour les compiler on peut utiliser cette commande:
+Ainsi, on trouve des executables de la forme "Exercice\*", "Test\_\*" et l'executable principale "Simulation". Pour les executer on peut utiliser cette commande:
+
 ```sh
-.debug/graphisme
+./debug/Simulation
 ```
 
 ## Commandes clavier / souris
@@ -35,8 +41,9 @@ Ainsi, on trouve des executables de la forme "Exercice\*", "Test_\*" et l'execut
 - <kbd>Z</kbd>: ralentir le mouvement des particules dans le système
 
 ## Remerciments
+
 Merci beacoup à Valentina Frei pour la palette de couleurs pour les particules.
 
-
 ## Unitées:
+
 1u = 0.1nm
