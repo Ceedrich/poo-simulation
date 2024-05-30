@@ -121,38 +121,7 @@ void OpenGLViewer::draw(const Enclosure &e) {
   shaderProgram.setAttributeValue(VertexShader::VertexID, +0.0, +1.0, +1.0);
   glEnd();
 }
-void OpenGLViewer::draw(const System &) { // TODO
-  drawAxes();
-}
-
-void OpenGLViewer::drawAxes(const QMatrix4x4 &point_of_view, bool colored) {
-  shaderProgram.setUniformValue("model", point_of_view);
-  glBegin(GL_LINES);
-
-  if (colored) {
-    shaderProgram.setAttributeValue(VertexShader::ColorID, 1.0, 0.0, 0.0);
-  } else {
-    shaderProgram.setAttributeValue(VertexShader::ColorID, 1.0, 1.0,
-                                    1.0); // white
-  }
-  // x
-  shaderProgram.setAttributeValue(VertexShader::VertexID, 0.0, 0.0, 0.0);
-  shaderProgram.setAttributeValue(VertexShader::VertexID, 1.0, 0.0, 0.0);
-  // y
-  if (colored) {
-    shaderProgram.setAttributeValue(VertexShader::ColorID, 0.0, 1.0, 0.0);
-  }
-  shaderProgram.setAttributeValue(VertexShader::VertexID, 0.0, 0.0, 0.0);
-  shaderProgram.setAttributeValue(VertexShader::VertexID, 0.0, 1.0, 0.0);
-  // z
-  if (colored) {
-    shaderProgram.setAttributeValue(VertexShader::ColorID, 0.0, 0.0, 1.0);
-  }
-  shaderProgram.setAttributeValue(VertexShader::VertexID, 0.0, 0.0, 0.0);
-  shaderProgram.setAttributeValue(VertexShader::VertexID, 0.0, 0.0, 1.0);
-
-  glEnd();
-}
+void OpenGLViewer::draw(const System &) {}
 
 void OpenGLViewer::drawSphere(const QMatrix4x4 &point_of_view, double red,
                               double green, double blue) {

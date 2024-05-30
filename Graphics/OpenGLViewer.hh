@@ -9,7 +9,7 @@
 
 class OpenGLViewer : public DrawingFrame {
 public:
-    /**
+  /**
    * @brief The graphics level can either be high or low.
    */
   enum GRAPHICS_LEVEL {
@@ -62,15 +62,6 @@ public:
   void updateShaderUniformValues();
 
 private:
-  /**
-   * @brief Draws coordinate axes
-   *
-   * @param Point of view
-   * @param bool if it is colored
-   */
-  void drawAxes(QMatrix4x4 const &point_of_view = QMatrix4x4(),
-                bool colored = true);
-
   /**
    * @brief Draws a sphere
    *
