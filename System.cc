@@ -59,13 +59,13 @@ System System::fromFile(std::ifstream &file) {
     }
     double rx, ry, rz, vx, vy, vz, m;
     file >> rx >> ry >> rz >> vx >> vy >> vz >> m;
-    if (delimiter == "Helium") {
+    if (delimiter == Helium::NAME) {
       s.add_particle(Helium(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
     }
-    if (delimiter == "Neon") {
+    if (delimiter == Neon::NAME) {
       s.add_particle(Neon(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
     }
-    if (delimiter == "Argon") {
+    if (delimiter == Argon::NAME) {
       s.add_particle(Argon(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
     }
     if (delimiter == "TraceHelium") {
@@ -256,16 +256,16 @@ void System::makeTraceParticle(size_t index) {
   // I have to make a forbidden thing here and explicitly check for the type of
   // the particle because templates don't work with polymorphism. I can't have
   // `TraceParticle<Particle> x(TraceParticle<Helium>(...));`
-  if (x->name() == "Helium") {
+  if (x->name() == Helium::NAME) {
     std::unique_ptr<TraceParticle<Helium>> y(
         std::make_unique<TraceParticle<Helium>>(x));
     particles[index] = std::move(y);
-  } else if (x->name() == "Neon") {
+  } else if (x->name() == Neon::NAME) {
     std::unique_ptr<TraceParticle<Neon>> y(
         std::make_unique<TraceParticle<Neon>>(x));
 
     particles[index] = std::move(y);
-  } else if (x->name() == "Argon") {
+  } else if (x->name() == Argon::NAME) {
     std::unique_ptr<TraceParticle<Argon>> y(
         std::make_unique<TraceParticle<Argon>>(x));
     particles[index] = std::move(y);
