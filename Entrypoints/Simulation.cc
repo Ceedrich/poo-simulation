@@ -89,7 +89,7 @@ constexpr OpenGLViewer::GRAPHICS_LEVEL graphicsLevel = //
 
 int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
-  System s(DIMENSION_X, DIMENSION_Y, DIMENSION_Z, 432153141);
+  System s(DIMENSION_X, DIMENSION_Y, DIMENSION_Z);
   s.setEncounterMethod(encounterMethod);
   s.setEvolveMethod(evolveMethod);
   s.setEpsilon(epsilon);
