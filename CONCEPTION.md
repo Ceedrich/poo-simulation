@@ -6,6 +6,10 @@
 - `System`: Le cœur de la simulation, contient tous les particules et fait evoluer la simulation.
 - `Enclosure`: Une enceinte qui définie les bords de la simulation
 - `Argon`, `Helium`, `Neon`: des particules differentes (héritent de la super-classe `Particle`)
+- `RandomGenerator`
+- `MotionTrace`
+- `Filesaver`
+- `TraceParticle`
 
 ## Classes abstraites
 - `Drawable`: Un objet qui peut être dessiné sur un `DrawingFrame`. Les objets suivantes sont des `Drawable`:
@@ -13,4 +17,22 @@
   - `Enclosure`
 - `DrawingFrame`: Un support sur lequel un `Drawable` peut dessiner. Les objets suivantes son des `DrawingFrame`
   - `TextViewer`
+  - `NumberGenerator`
+- `Printable`
+- 
+
+## Classes Graphics
+- `Camera`
+- `QWidget`
+- `ControlsWidget`
+- `GLSphere`
+- `GLWidget`
+- `QOpenGLWidget`
+- `InfoWidget`
+- `Light`
+- `MainWindow`
+- `OpenGLViewer`
+- //Drawing frame?, Textviewer
+- 
+
 

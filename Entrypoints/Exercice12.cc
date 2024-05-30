@@ -1,4 +1,4 @@
-#include "../Graphics/GLWidget.hh"
+#include "../Graphics/MainWindow.hh"
 #include "../Particles/TraceParticle.hh"
 #include "../System.hh"
 #include <QApplication>
@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
 
   System s;
   s.fill(100);
-  GLWidget window(std::move(s));
+  MainWindow window(std::move(s));
 
   window.show();
 

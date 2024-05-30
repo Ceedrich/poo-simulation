@@ -17,19 +17,6 @@
 **Cedric**
 - Overview technique
 
-### Tâches
-
-| Tâche                                             | Durée | fait? |
-| ------------------------------------------------- | ----- | ----- |
-| créé le JOURNAL                                   | 00:10 |  oui  |
-| mis en place QTCreator et CMakeLists.txt          | 00:30 |  oui  | 
-| crée `Vector3D`                                   | 03:00 |  oui  |
-| crée `Particle`                                   | 01:00 |  oui  |
-| crée `Enclosure`                                  | 00:10 |  oui  |
-| fait "Différents gaz"                             | 01:30 |  oui  |
-| crée `System`                                     | 01:30 |  oui  |
-| introduit un interface graphique                  | 08:00 |  oui  |
-
 
 
 ## Semaine 1
@@ -61,9 +48,7 @@ En plus on a fait la number generator abstract class.
 
 
 ## Semaine 7
-On a lu la tutoriel sur le graphisme, et on a crée une interface graphique. A ce point on a aussi fini le mooc et a donc pu ce concentrer sur le projet.
-
-Einschaffen, verstehen, erste Simulation  bereits funktioniert
+On a lu la tutoriel sur le graphisme, et on a crée une interface graphique.  A ce point on a aussi fini le mooc et a donc pu ce concentrer sur le projet.
 
 
 ##Semaine 8
@@ -80,16 +65,17 @@ Pour le "phong model", on a implementé "ambient & diffuse lighing" mais pas enc
 On a amélioré la simulation. On a fixé le style de présentation et les possibilités du mouvement de la camera. En plus on a...
 
 ##Semaine 11
-On a encore plus travailler sur le phong model et l'a améliorer....
+On a encore plus travailler sur le phong model et l'a améliorer
+TODO
 
 ##Semaine 12
 Car les extensions ne sont pas encore online, on a encore améliorer notre Journal, les reponses et le projet.
-...
+TODO
 
 ##Semaine 13
 On a fait les extensions et on a amélioré le code. De plus on a commenter le code et on a testé tous les exercises. 
 
 
 ##Semaine 14
-
+On a encore travailler sur ameliorer le projet et on a fini P14, maintenant le system fontionne bien aussi avec 1000 particules. De plus on a complété les fichiers de conception, de responses, et le readme.
 

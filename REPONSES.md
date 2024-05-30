@@ -89,7 +89,9 @@ La mise à jour des particules est fait dans la méthode `void System::evolve(do
 
 En utilisant cet algorithme, il faut itérer sur tous les particules pour chaqu'une des particules. Il faut donc faire deux boucles "for". Cette méthode ajoute donc la complexité temporale $\Theta(n^2)$ où n est la nombre des particules.
 
-##Semaine 9 ###[Question P11.1] Si vous souhaitez voir l'enceinte, c.-à-d. la faire dessiner, comment devez vous modifier (ou pas) votre conception/votre code ?
+##Semaine 9
+
+###[Question P11.1] Si vous souhaitez voir l'enceinte, c.-à-d. la faire dessiner, comment devez vous modifier (ou pas) votre conception/votre code ?
 Il ne faut rien faire. On voit déja l'enceinte sur l'écran puisqu'on a implementé la méthode `OpenGLViwer::draw(Enclosure const&)` et la méthode `System::draw_on(DrawingFrame &support)` dessine déjà l'enceinte.
 
 ## Semaine 12
