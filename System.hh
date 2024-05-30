@@ -57,6 +57,8 @@ public:
     return system;
   }
 
+  static System fromFile(std::ifstream &file);
+
   /**
    * @brief Default constructor.
    */
