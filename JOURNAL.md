@@ -1,24 +1,5 @@
 # Journal
 
-## A faire:
-
-- Anna: reponses week 4 Particules, particules, Système, reponses Système, journal updaten
-- Cedric: Reponses différents gaz, journal updaten
-  - Particle should not be drawable. The different kinds of particles should be.
-  - Tâches ergänzen
-  - Masse des particles
-
-### Responsabilités
-
-**Anna**
-
-- JOURNAL, REPONSES, README, CONCEPTION
-- Overview générale
-
-**Cedric**
-
-- Overview technique
-
 ## Semaine 1
 
 Cette semaine, on a commancé a apprendre les concepts du programmation orienté objet. On a aussi mis en place le "toolchain" (Git, QTCreator, Cmake).

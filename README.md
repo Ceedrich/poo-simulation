@@ -69,7 +69,3 @@ Pour l'executer il faut taper:
 ## Remerciments
 
 Merci beacoup à Valentina Frei pour la palette de couleurs pour les particules.
-
-## Unitées:
-
-1u = 0.1nm
