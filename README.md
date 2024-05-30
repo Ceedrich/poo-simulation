@@ -2,7 +2,7 @@
 
 ## Introduction
 
-En principe, on a fait tout et aussi pas mal d'extensions. Pour la version graphique, on a utiliser Qt6.
+On a fait tous les exercices donnés (P1-P14, (P2) n'est pas dans le projet) et aussi pas mal d'extensions. Pour la version graphique, on a utiliser Qt5.
 On a travaillé environ 3 heures en moyenne par personne par semaine.
 
 Içi une liste des suppléments:
