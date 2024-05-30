@@ -11,7 +11,7 @@ Içi une liste des suppléments:
 
 ## Structure du projet / comment rentrer
 
-Pour compiler tous les executables (dans un dossier supplémentaire, il y'en a beacoup), exécuter ces commandes:
+Pour compiler tous les executables (dans un dossier supplémentaire, "bin" içi, il y'en a beacoup), exécuter ces commandes:
 
 ```sh
 cmake -B bin -DCMAKE_BUILD_TYPE=Release
@@ -23,7 +23,7 @@ La compilation prendra environ une minute.
 Ainsi, on trouve des executables de la forme "Exercice\*", "Test\_\*" et l'executable principale "Simulation". Pour les executer on peut utiliser cette commande:
 
 ```sh
-./debug/Simulation
+./bin/Simulation
 ```
 
 ## Commandes clavier / souris
