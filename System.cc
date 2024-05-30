@@ -48,6 +48,7 @@ System System::fromFile(std::ifstream &file) {
   s.setEvolveMethod((System::EVOLVE_METHOD)evolveMethod);
   s.numberOfParticleCollisions = particleCollisions;
   s.numberOfEnclosureCollisions = enclosureCollisions;
+  s.timeElapsed = elapsed;
   while (!file.fail() && !file.eof()) {
     std::string delimiter;
     file >> delimiter;
