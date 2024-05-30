@@ -7,7 +7,13 @@ On a travaillé environ 3 heures en moyenne par personne par semaine.
 
 Içi une liste des suppléments:
 
-- TODO
+- Lumière (Phong Lighting)
+- Posibilité de modifier la taille de l'enceinte
+- Charger/sauvegarder la simulation depuis/vers un fichier
+- Ralentir la simulation
+- Afficher des informations sur le système sur l'ecran
+- Avoir multiple façons de fair evoluer/rencontre le système/les particules
+- Modifier les paramètres de la simulation
 
 ## Structure du projet / comment rentrer
 
@@ -21,6 +27,24 @@ cmake --build bin --config Release
 La compilation prendra environ une minute.
 
 Ainsi, on trouve des executables de la forme "Exercice\*", "Test\_\*" et l'executable principale "Simulation". Pour les executer on peut utiliser cette commande:
+
+### L'executable Principal
+
+Dans le fichier de l'executable principal (`Entrypoints/Simulation.cc`), on trouve beacoups des options a modifier pour changer le fonctionnement du programme. Après d'avoir modifié le code dans `Entrypoints/Simulation.cc`, il faut re-compiler le programme comme ceci:
+
+```sh
+cmake --build bin --config Release --target Simulation
+```
+
+Les modifications qu'on peut faire sont les suivantes: Plus d'information sur les options se trouve dans le fichier lui-même.
+
+- Changer la dimensions d'Enceinte: Changer les valeurs de `DIMENSION_X`, `DIMENSION_Y` et `DIMENSION_Z`
+- Changer le méthode de rencontre entre les particules: décommenter/commenter les lignes suivant `encounterMethod`
+- Changer le méthode d'evolution (Soit en $\Theta(n)$ soit en $\Theta(n^2)$): décommenter/commenter les lignes suivant `evolveMethod`
+- Modifier le "epsilon" de la simulation: Changer la valeur de `epsilon`
+- Modifier la temperature de la simulation: Changer la valeur de `temperature`
+- Modifier la nombre des particules dans la simulation: Changer la valeur de `number_of_particles`
+- Choisir le niveau du graphisme (soit simple sans lumière soit avec "Phong lighting"): décommenter/commenter les lignes suivant `graphicsLevel`
 
 ```sh
 ./bin/Simulation
