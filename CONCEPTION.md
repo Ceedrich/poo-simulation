@@ -29,8 +29,8 @@ Les classes indentés sont les sous-classes de les classes non-indentés au dess
   - `Enclosure`
   - `System`
 - `DrawingFrame`: Un support sur lequel un `Drawable` peut dessiner
-  - `TextViewer`
-  - `FileSaver`
+  - `TextViewer`: Permet d'afficher dans un text
+  - `FileSaver`: Permet d'afficher dans un fichier
   - `OpenGLViewer`
 - `Printable`: Implémente la méthode `vritual void print(std::ofstream &) const` et la méthode `virtual void printRaw(std::ofstream &) const` et peut être affiché en utilisant l'opérateur `<<`
   - `System`
