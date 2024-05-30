@@ -96,7 +96,7 @@ Il ne faut rien faire. On voit déja l'enceinte sur l'écran puisqu'on a impleme
 
 ### [Question P13.1] Comment représentez-vous cette/ces nouvelle(s) particule(s) ? Où s'incri(ven)t-elle(s) dans votre conception ?
 
-Ce particule peut être representé comme une sous-classe d'un des particules déjà existents.
+Ce particule est implementé par une classe template TraceParticle qui agit comme une enveloppe pour la particule et qui est une particule lui-même. La particule a aussi un objet `MotionTrace` qui permet de dessiner le chemin parcouru.
 
 ### [Question P14.1] Avant de préciser les détails d'implémentation, quelle est la complexité temporelle pire cas de cette solution en fonction du nombre de particules ? [Attention : on suppose, par hypothèse même du modèle de gaz parfait, que les particules sont équiréparties dans l'enceinte. On suppose de plus que la taille d'une case est petite par rapport à la taille de l'enceinte. Ainsi on peut raisonnablement faire l'hypothèse que le nombre de particules par case est négligeable (O(1)) devant le nombre total de particules (c.-à-d. toutes les particules ne se retrouvent pas en même temps dans la même case). Quel(s) inconvénient(s) présente cependant cette solution ?
 
