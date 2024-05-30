@@ -52,7 +52,7 @@ constexpr System::EVOLVE_METHOD evolveMethod = //
  * each other.
  *
  */
-constexpr double epsilon(1.0);
+constexpr double epsilon(0.2);
 /*
  * TEMPERATURE
  *
