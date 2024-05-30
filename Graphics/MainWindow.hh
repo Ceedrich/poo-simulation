@@ -75,8 +75,7 @@ private:
       "7,8,9",
       "toggle ambient, diffuse and specular lighting", //
       "P, I",
-      "Save/Load the current status to a file (not working for "
-      "TraceParticle)", //
+      "Save/Load the current status to a file", //
       "Z",
       "Slow down the simulation", //
       "N, M",

@@ -265,53 +265,7 @@ void GLWidget::saveToFile() {
 
 void GLWidget::loadFromFile() {
   std::ifstream file(SAVE_FILE_NAME);
-  std::string delimiter;
-  double epsilon, temperature;
-  int encounterMethod, evolveMethod;
-  double w, h, l;
-  file >> delimiter;
-  file >> epsilon >> temperature;
-  file >> encounterMethod >> evolveMethod;
-  file >> w >> h >> l;
-  System s(w, h, l);
-  s.setEpsilon(epsilon);
-  s.setTemperature(temperature);
-  s.setEncounterMethod((System::ENCOUNTER_METHOD)encounterMethod);
-  s.setEvolveMethod((System::EVOLVE_METHOD)evolveMethod);
-  while (!file.fail() && !file.eof()) {
-    std::string delimiter;
-    file >> delimiter;
-    if (delimiter == "M") {
-      // discard Trace
-      getline(file, delimiter);
-      continue;
-    }
-    double rx, ry, rz, vx, vy, vz, m;
-    file >> rx >> ry >> rz >> vx >> vy >> vz >> m;
-    if (delimiter == "Helium") {
-      s.add_particle(Helium(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
-    }
-    if (delimiter == "Neon") {
-      s.add_particle(Neon(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
-    }
-    if (delimiter == "Argon") {
-      s.add_particle(Argon(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
-    }
-    if (delimiter == "TraceHelium") {
-      s.add_particle(
-          TraceParticle<Helium>(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
-    }
-    if (delimiter == "TraceNeon") {
-      s.add_particle(
-          TraceParticle<Neon>(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
-    }
-    if (delimiter == "TraceArgon") {
-      s.add_particle(
-          TraceParticle<Argon>(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
-    }
-  }
-
-  system = std::move(s);
+  system = System::fromFile(file);
   initCamera();
   initLight();
   cMovementSpeed =

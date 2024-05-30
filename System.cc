@@ -1,5 +1,6 @@
 #include "System.hh"
 #include "Particles/TraceParticle.hh"
+#include <fstream>
 #include <unordered_map>
 
 using namespace std;
@@ -13,9 +14,13 @@ void System::print(ostream &out) const {
 }
 
 void System::printRaw(std::ostream &out) const {
-  // epsilon temp encounter evolve
-  out << "System " << epsilon_ << " " << temperature_ << " " << encounterMethod
-      << " " << evolveMethod;
+  // epsilon temp
+  // encounterMethod evolveMethod
+  // particleCollisions enclosureCollisions timeElapsed
+  out << "System " << epsilon_ << " " << temperature_ << " " //
+      << encounterMethod << " " << evolveMethod << " "       //
+      << numberOfParticleCollisions << " " << numberOfEnclosureCollisions << " "
+      << timeElapsed;
 }
 
 void System::add_particle(Particle const &particle) {
@@ -23,6 +28,61 @@ void System::add_particle(Particle const &particle) {
 }
 
 void System::delete_particles() { particles.clear(); }
+
+System System::fromFile(std::ifstream &file) {
+  std::string delimiter;
+  double epsilon, temperature;
+  int encounterMethod, evolveMethod;
+  double w, h, l;
+  unsigned long int particleCollisions, enclosureCollisions;
+  double elapsed;
+  file >> delimiter;
+  file >> epsilon >> temperature;
+  file >> encounterMethod >> evolveMethod;
+  file >> particleCollisions >> enclosureCollisions >> elapsed;
+  file >> w >> h >> l;
+  System s(w, h, l);
+  s.setEpsilon(epsilon);
+  s.setTemperature(temperature);
+  s.setEncounterMethod((System::ENCOUNTER_METHOD)encounterMethod);
+  s.setEvolveMethod((System::EVOLVE_METHOD)evolveMethod);
+  s.numberOfParticleCollisions = particleCollisions;
+  s.numberOfEnclosureCollisions = enclosureCollisions;
+  s.timeElapsed = elapsed;
+  while (!file.fail() && !file.eof()) {
+    std::string delimiter;
+    file >> delimiter;
+    if (delimiter == "M") {
+      // discard Trace
+      getline(file, delimiter);
+      continue;
+    }
+    double rx, ry, rz, vx, vy, vz, m;
+    file >> rx >> ry >> rz >> vx >> vy >> vz >> m;
+    if (delimiter == "Helium") {
+      s.add_particle(Helium(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+    }
+    if (delimiter == "Neon") {
+      s.add_particle(Neon(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+    }
+    if (delimiter == "Argon") {
+      s.add_particle(Argon(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+    }
+    if (delimiter == "TraceHelium") {
+      s.add_particle(
+          TraceParticle<Helium>(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+    }
+    if (delimiter == "TraceNeon") {
+      s.add_particle(
+          TraceParticle<Neon>(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+    }
+    if (delimiter == "TraceArgon") {
+      s.add_particle(
+          TraceParticle<Argon>(Vector3D(rx, ry, rz), Vector3D(vx, vy, vz), m));
+    }
+  }
+  return s;
+}
 
 struct BoxPos {
   size_t x = 0;
