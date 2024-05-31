@@ -5,7 +5,7 @@
 
 class Helium : public Particle {
 public:
-  static constexpr auto NAME = "Helim";
+  static constexpr auto NAME = "Helium";
   static constexpr double MOLAR_MASS = 4.002602;
   static constexpr double SPECIFIC_CONSTANT =
       1000 * IDEAL_GAS_CONSTANT / MOLAR_MASS;
